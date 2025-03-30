@@ -37,4 +37,6 @@ yarn dev  # ou npm run dev
 ```
 Accédez ensuite à `http://localhost:3000/deposit`.
 
+Enjoy :)
+
 ```
