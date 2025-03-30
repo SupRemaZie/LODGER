@@ -1,0 +1,12 @@
+{
+    "PropertydepositPage": {
+      "sidebar": {
+        "title": "DÉPOSEZ VOTRE BIEN",
+        "steps":{
+            "stepOne": "Étape 1",
+            "stepTwo" : "Étape 2",
+            "stepThree" : "Étape 3"
+        }
+      }
+    }
+}

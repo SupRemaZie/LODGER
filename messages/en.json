@@ -1,0 +1,12 @@
+{
+    "PropertydepositPage": {
+      "sidebar": {
+        "title": "PLACE YOUR PROPERTY",
+        "steps":{
+            "stepOne": "Step 1",
+            "stepTwo" : "Step 2",
+            "stepThree" : "Step 3"
+        }
+      }
+    }
+}

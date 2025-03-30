@@ -1,10 +1,12 @@
 import type { Config } from 'tailwindcss';
+import { heroui } from '@heroui/react';
 
 const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -17,6 +19,8 @@ const config: Config = {
           500: '#0070F3',
           600: '#2F6FEB',
         },
+        'dashboard': '#FAFAFA',
+        'dashboard-separator': '#E3E3E3'
       },
     },
     keyframes: {
@@ -27,6 +31,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  darkMode: "class",
+  plugins: [require('@tailwindcss/forms'), heroui()],
+ 
 };
 export default config;
