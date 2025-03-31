@@ -16,7 +16,6 @@ export default function Page() {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, []);
     return (
