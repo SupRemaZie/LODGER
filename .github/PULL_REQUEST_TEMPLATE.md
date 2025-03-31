@@ -14,3 +14,4 @@ Description des tests effectués
 - [ ] Mon code suit les bonnes pratiques du projet
 - [ ] J'ai ajouté des tests pour ma fonctionnalité
 - [ ] Tous les tests passent
+- [ ] j'ai pris une douche ? 
