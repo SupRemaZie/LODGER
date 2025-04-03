@@ -34,7 +34,7 @@ export default function Page() {
                 </div>
             ) : (
                 // Contenu final après chargement
-                <div className="text-center">
+                <div className="text-center font-ninetea">
                     <h1 className="text-2xl font-bold">Bienvenue sur mon site !</h1>
                     <p className="text-gray-600">Le contenu est maintenant affiché.</p>
                 </div>

@@ -1,0 +1,4 @@
+ignoredBuiltDependencies:
+  - '@heroui/shared-utils'
+  - bcrypt
+  - sharp
