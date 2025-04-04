@@ -3,7 +3,10 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "prepare": "husky",
+    "check-lockfile": "pnpm install --frozen-lockfile --lockfile-only",
+    "precommit-check": "git diff --quiet pnpm-lock.yaml || (echo '⚠️ Run pnpm install to sync lockfile with package.json' && exit 1)"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -19,6 +22,7 @@
     "bcrypt": "^5.1.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.6.3",
+    "grunt-contrib-uglify": "^5.2.2",
     "next": "latest",
     "next-auth": "5.0.0-beta.25",
     "next-intl": "^4.0.2",
@@ -36,6 +40,9 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "22.10.7",
     "@types/react": "19.0.7",
-    "@types/react-dom": "19.0.3"
+    "@types/react-dom": "19.0.3",
+    "grunt": "^1.6.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0"
   }
 }
