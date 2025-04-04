@@ -35,7 +35,7 @@ export default function Page() {
             ) : (
                 // Contenu final après chargement
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold">Bienvenue sur mon site !</h1>
+                    <h1 className="text-2xl font-bold">Bienvenue sur Lodger !</h1>
                     <p className="text-gray-600">Le contenu est maintenant affiché.</p>
                 </div>
             )}
