@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { RadioGroup, Radio } from "@heroui/react";
 
-export default function FormEntry({ title, description, logo, type }) {
+export default function FormEntry({ title, description, logo, type }: { title: string, description: string, logo: string, type: string }) {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
 
   return (
@@ -96,7 +96,7 @@ export default function FormEntry({ title, description, logo, type }) {
   );
 }
 
-export const CustomRadio = (props) => {
+export const CustomRadio = (props: any) => {
   const {children, ...otherProps} = props;
 
   return (
