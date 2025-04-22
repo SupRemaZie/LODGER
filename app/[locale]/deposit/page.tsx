@@ -36,15 +36,33 @@ export default function Page() {
                 </div>
             ) : (
                 // Contenu final après chargement
-                <div className="text-center w-full">
+                <div className="text-center w-full flex flex-col">
                     <h1 className="text-2xl font-bold">Bienvenue sur Lodger !</h1>
                     <p className="text-gray-600">Le contenu est maintenant affiché.</p>
                     <FormEntry
                         title="Superficie"
                         description="Renseigner la superficie de votre bien :"
                         logo="/icons/superficie-icon.svg"
+                        type="count"
                     />
-
+                    <FormEntry
+                        title="Superficie"
+                        description="Renseigner la superficie de votre bien :"
+                        logo="/icons/superficie-icon.svg"
+                        type="number"
+                    />
+                    <FormEntry
+                        title="Superficie"
+                        description="Renseigner la superficie de votre bien :"
+                        logo="/icons/superficie-icon.svg"
+                        type="dropdown"
+                    />
+                    <FormEntry
+                        title="Superficie"
+                        description="Renseigner la superficie de votre bien :"
+                        logo="/icons/superficie-icon.svg"
+                        type="yesno"
+                    />
                 </div>
             )}
 
