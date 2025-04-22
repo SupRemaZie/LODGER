@@ -13,10 +13,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@latest
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@latest
         with:
           node-version: '18'
 
@@ -42,7 +42,7 @@ jobs:
 
       - name: Upload Playwright report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@latest
         with:
           name: playwright-report
           path: playwright-report/
