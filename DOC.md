@@ -8,7 +8,7 @@
 - Pour la traduction anglais / français, on utilise la librairie **i18n**.
 - Pour les composants, on utilise la librairie **HeroUI**.
 - Pour le déploiement, on utilise **Vercel**.
-- Pour la documentation, on utilise **Doxygen**.
+- Pour la documentation, on utilise **TypeDoc**.
 
 ## Nom des branches
 
