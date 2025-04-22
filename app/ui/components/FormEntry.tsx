@@ -54,7 +54,7 @@ export default function FormEntry({ title, description, logo, type }) {
             <Button isIconOnly className="rounded-full mx-2">
               <img
                 src="/icons/add-icon.svg"
-                alt="Retirer"
+                alt="Ajouter"
                 width={24}
                 height={24}
               />
