@@ -14,7 +14,7 @@ export default function FormEntry({ title, description, logo, type }: { title: s
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
 
   return (
-    <div className="flex flex-col items-center justify-center py-1 w-full bg-red-400">
+    <div className="flex flex-col items-center justify-center py-1 w-full">
       <div className="flex flex-row items-start justify-center w-full max-w-6xl bg-white rounded-3xl shadow-md p-3 h-30">
         <div className="flex flex-col items-start justify-center w-full">
           <div className="flex flex-col items-start">
@@ -35,7 +35,7 @@ export default function FormEntry({ title, description, logo, type }: { title: s
         </div>
         {type === "number" && (
           <div className="flex flex-row justify-end w-full max-w-lg">
-            <NumberInput type="number" placeholder="0 m²" className="w-2/6" classNames={{input: ["border-transparent"]}} />
+            <NumberInput type="number" placeholder="0 m²" className="w-2/6" />
           </div>
         )}
         {type === "count" && (
