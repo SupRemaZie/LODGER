@@ -1,0 +1,33 @@
+version: "3.3"
+services:
+  nextjs-app:
+    image: node:18
+    container_name: nextjs-app
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mysql://lodger:f69MDu4gLf4Pd8@lodger-bd:3306/lodger_db
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - lodger-bd
+
+  lodger-bd:
+    image: mysql:8.0
+    container_name: lodger-bd
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    environment:
+      - MYSQL_ROOT_PASSWORD=UTi4sB7472vBby
+      - MYSQL_DATABASE=lodger_db
+      - MYSQL_USER=lodger
+      - MYSQL_PASSWORD=f69MDu4gLf4Pd8
+    ports:
+      - "3306:3306"

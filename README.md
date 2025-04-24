@@ -37,6 +37,16 @@ yarn dev  # ou npm run dev
 ```
 Accédez ensuite à `http://localhost:3000/deposit`.
 
+### 4️⃣ Lancer une mise à jour de la base de données
+```sh
+npx prisma migrate dev --name init
+```
+Supprimer toutes les donnée de la base de données
+```sh
+npx prisma migrate reset
+```
+
+
 Enjoy :)
 
 ```
