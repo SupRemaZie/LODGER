@@ -1,7 +1,9 @@
 {
     "PropertydepositPage": {
       "actions" : {
-        "saveAndQuit": "Enregistrer & Quitter"
+        "saveAndQuit": "Enregistrer & Quitter",
+        "back": "Retour",
+        "next": "Suivant"
       },
       "header": {
         "title" : "Étape 1 - Type de bien",

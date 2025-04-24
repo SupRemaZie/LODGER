@@ -27,8 +27,8 @@ export default function Page() {
     };
 
     return (
-        <div className="max-h-screen w-full">
-            <div className="font-[500] flex flex-col  min-h-screen py-2 scrollbar-hide">
+        <div className="w-full">
+            <div className="font-[500] flex flex-col  min-h-content p-20 scrollbar-hide">
                 <div id="header" className="w-full flex flex-row justify-between  items-center">
                     <div className="flex flex-col">
                    <span id="page-title" className="text-[#02504D] font-">
@@ -53,7 +53,7 @@ export default function Page() {
                             <Image src="/appartment_choice_picture.png" alt="appartment choice" width={174} height={174}
                                    className="w-2/3"/>
                             <span className="text-[#02504D] font-bold text-base mb-6 ">
-                            Appartement
+                            {trans('propertyType.apartment')}
                         </span>
                         </Button>
                         <Button onPress={() => handleUpdate("choosed", "house")} variant="bordered" color="primary"
@@ -62,17 +62,19 @@ export default function Page() {
                             <Image src="/house_choice_picture.png" alt="house choice" width={174} height={174}
                                    className="w-2/3"/>
                             <span className="text-[#02504D] font-bold text-base mb-6">
-                            Maison
+                            {trans('propertyType.house')}
                         </span>
                         </Button>
                     </div>
                 </section>
             </div>
             <footer
-                className="flex flex-row justify-between  w-full bg-white ">
-                <LodgerButton onPress={() => handleSubmit()} isDisabled={!formData.choosed} label="retour"
-                              type={"default"}></LodgerButton>
-                <LodgerButton onPress={() => handleSubmit()} isDisabled={!formData.choosed} label="suivant"
+                className=" bottom-0 flex flex-row  justify-center justify-around h-28 items-center  w-full bg-white ">
+                <LodgerButton onPress={() => handleSubmit()}
+                              isDisabled={!formData.choosed} label={trans("actions.back")}
+                              className={"text-[#02504D} bg-white stroke-1  stroke-[#CAC6C6} font-[700]"}
+                              type="no-border"></LodgerButton>
+                <LodgerButton onPress={() => handleSubmit()} isDisabled={!formData.choosed} label={trans('actions.next')}
                               type={"full-success"}></LodgerButton>
             </footer>
         </div>
