@@ -20,6 +20,14 @@ class Deposit {
                 return { status: 'ERROR', message: "Aucun compte trouvé avec cet email." };
             }
 
+            let logement = await prisma.logementType.findUnique({
+                where: {type: data.typeOfLogement},
+            });
+
+            let property = await prisma.propertyType.findUnique({
+                where: {type: data.typeOfProperty},
+            });
+
 
             await prisma.logement.create({
                 data: {
@@ -35,12 +43,14 @@ class Deposit {
                     roomNumber: data.roomNumber,
                     bedroomNumber: data.bedroomNumber,
                     furnished: data.furnished,
-                    bathRoomSpace: data.bathroomSpace,
+                    bathRoomSpace: data.bathRoomSpace,
                     powderRoomSpace: data.powderRoomSpace,
                     appartmentFloor: data.appartmentFloor,
                     kWhEP: data.kWhEP,
                     kgCO2: data.kgCO2,
                     accountId: account.id,
+                    logementTypeId: logement.id,
+                    propertyTypeId: property.id
                 }
             });
 

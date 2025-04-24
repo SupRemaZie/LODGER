@@ -17,13 +17,13 @@ model Account {
 
 model PropertyType {
   id   Int    @id @default(autoincrement())
-  type String?
+  type String @unique
   logements   Logement[]
 }
 
 model LogementType {
   id   Int    @id @default(autoincrement())
-  type String?
+  type String @unique
   logements   Logement[]
 }
 
