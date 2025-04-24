@@ -60,9 +60,9 @@ export default function Page() {
                     <h1 className="text-2xl font-bold">Bienvenue sur Lodger !</h1>
                     <p className="text-gray-600">Le contenu est maintenant affiché.</p>
                     <FormEntry
-                        title="Superficie"
-                        description="Renseigner la superficie de votre bien :"
-                        logo="/icons/superficie-icon.svg"
+                        title="Nombre de chambres"
+                        description="Renseigner le nombre de chambres :"
+                        logo="/icons/bed-icon.svg"
                         type="count"
                         onUpdate={(value) => handleUpdate("count", value)}
                     />
@@ -74,16 +74,16 @@ export default function Page() {
                         onUpdate={(value) => handleUpdate("number", value)}
                     />
                     <FormEntry
-                        title="Superficie"
-                        description="Renseigner la superficie de votre bien :"
-                        logo="/icons/superficie-icon.svg"
+                        title="Espaces Partagés"
+                        description="Sélectionner les espaces partagés :"
+                        logo="/icons/matter-icon.svg"
                         type="dropdown"
                         onUpdate={(value) => handleUpdate("dropdown", value)}
                     />
                     <FormEntry
-                        title="Superficie"
-                        description="Renseigner la superficie de votre bien :"
-                        logo="/icons/superficie-icon.svg"
+                        title="Meublé"
+                        description="Le bien est-il meublé ?"
+                        logo="/icons/sofa-icon.svg"
                         type="yesno"
                         onUpdate={(value) => handleUpdate("yesno", value)}
                     />
