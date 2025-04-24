@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@heroui/react";
 import FormEntry from "@/app/ui/components/FormEntry";
 import LodgerButton from "@/app/ui/components/LodgerButton";
+import AddressMap from "@/app/ui/components/AddressMap";
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
@@ -60,6 +61,7 @@ export default function Page() {
           <div className="text-center w-full flex flex-col">
             <h1 className="text-2xl font-bold">Bienvenue sur Lodger !</h1>
             <p className="text-gray-600">Le contenu est maintenant affiché.</p>
+            <AddressMap/>
             <FormEntry
               title="Nombre de chambres"
               description="Renseigner le nombre de chambres :"
