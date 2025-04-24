@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@heroui/react";
 import FormEntry from "@/app/ui/components/FormEntry";
+import LodgerButton from "@/app/ui/components/LodgerButton";
 
 export default function Page() {
     const [loading, setLoading] = useState(true);
@@ -90,6 +91,11 @@ export default function Page() {
                     <Button onPress={handleSubmit} className="mt-4">
                         Soumettre
                     </Button>
+                    <div id="button-mock" className="flex flex-row justify-center space-x-3 mt-4">
+                        <LodgerButton type="default" label="Enregistrer et Quitter" />
+                        <LodgerButton type="full-success" label="Suivant" />
+                        <LodgerButton type="no-border" label="Retour" />
+                    </div>
                 </div>
             )}
         </div>
