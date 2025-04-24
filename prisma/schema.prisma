@@ -11,4 +11,66 @@ model Account {
   id      Int      @id @default(autoincrement())
   fisrtName String
   lastName  String
+  logements Logement[]
+}
+
+model PropertyType {
+  id   Int    @id @default(autoincrement())
+  type String
+  logements   Logement[]
+}
+
+model LogementType {
+  id   Int    @id @default(autoincrement())
+  type String
+  logements   Logement[]
+}
+
+model Adress {
+  id      Int    @id @default(autoincrement())
+  postalCode    Int
+  city String
+  street  String
+  numero String
+  addressComplement String
+  logements           Logement[]
+}
+
+model Logement {
+  id                   Int          @id @default(autoincrement())
+  draft                Boolean
+  displayPreciseAddress Boolean
+  superficie           Int
+  roomNumber           Int
+  bedroomNumber        Int
+  furnished            Boolean
+  bathRoomSpace        Int
+  powderRoomSpace      Int
+  appartmentFloor      Int
+  kWhEP                Int
+  kgCO2                Int
+  accountId            Int
+  propertyTypeId       Int
+  logementTypeId       Int
+  adressId             Int
+  account              Account      @relation(fields: [accountId], references: [id])
+  propertyType         PropertyType @relation(fields: [propertyTypeId], references: [id])
+  logementType         LogementType @relation(fields: [logementTypeId], references: [id])
+  adress               Adress       @relation(fields: [adressId], references: [id])
+  roomAreas            RoomArea[]
+  spaceShares          SpaceShare[]
+}
+
+model RoomArea {
+  id        Int       @id @default(autoincrement())
+  area      String
+  logement  Logement? @relation(fields: [logementId], references: [id])
+  logementId Int?
+}
+
+model SpaceShare {
+  id        Int       @id @default(autoincrement())
+  type      String
+  logement  Logement? @relation(fields: [logementId], references: [id])
+  logementId Int?
 }
