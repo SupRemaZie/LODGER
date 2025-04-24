@@ -27,20 +27,15 @@ model LogementType {
   logements   Logement[]
 }
 
-model Adress {
-  id      Int    @id @default(autoincrement())
-  postalCode    Int?
-  city String?
-  street  String?
-  numero String?
-  addressComplement String?
-  logements           Logement[]
-}
-
 model Logement {
   id                   Int          @id @default(autoincrement())
   draft                Boolean?
   displayPreciseAddress Boolean?
+  postalCode    Int?
+  city String?
+  street  String?
+  numero Int?
+  addressComplement String?
   stopProcess          String?
   superficie           Int?
   roomNumber           Int?
@@ -54,11 +49,9 @@ model Logement {
   accountId            Int?
   propertyTypeId       Int?
   logementTypeId       Int?
-  adressId             Int?
   account              Account?     @relation(fields: [accountId], references: [id])
   propertyType         PropertyType? @relation(fields: [propertyTypeId], references: [id])
   logementType         LogementType? @relation(fields: [logementTypeId], references: [id])
-  adress               Adress?       @relation(fields: [adressId], references: [id])
   roomAreas            RoomArea[]
   spaceShares          SpaceShare[]
 }
