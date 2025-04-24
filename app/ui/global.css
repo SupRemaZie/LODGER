@@ -7,6 +7,10 @@ input[type='number'] {
   appearance: textfield;
 }
 
+input {
+  border: transparent;
+}
+
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;

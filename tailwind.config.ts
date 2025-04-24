@@ -20,7 +20,10 @@ const config: Config = {
           600: '#2F6FEB',
         },
         'dashboard': '#FAFAFA',
-        'dashboard-separator': '#E3E3E3'
+        'dashboard-separator': '#E3E3E3',
+        primary: {
+          100: "#02504D"
+        }
       },
     },
     keyframes: {
