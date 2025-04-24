@@ -12,6 +12,9 @@ import { RadioGroup, Radio } from "@heroui/react";
 
 export default function FormEntry({ title, description, logo, type }: { title: string, description: string, logo: string, type: string }) {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
+  const [isYesNo, setIsYesNo] = React.useState(false);
+  const [counting, setCounting] = React.useState(0);
+  const [number, setNumber] = React.useState(0);
 
   return (
     <div className="flex flex-col items-center justify-center py-1 w-full">
@@ -34,13 +37,18 @@ export default function FormEntry({ title, description, logo, type }: { title: s
           </div>
         </div>
         {type === "number" && (
-          <div className="flex flex-row justify-end w-full max-w-lg">
-            <NumberInput type="number" placeholder="0 m²" className="w-2/6" />
-          </div>
+            <div className="flex flex-row justify-end w-full max-w-lg">
+            <NumberInput
+              type="number"
+              placeholder="0 m²"
+              className="w-2/6"
+              onChange={(value) => setNumber(Number(value))}
+            />
+            </div>
         )}
         {type === "count" && (
           <div className="flex flex-row justify-end w-full max-w-lg self-center">
-            <Button isIconOnly className="rounded-full mx-2">
+            <Button isIconOnly className="rounded-full mx-2" onPress={() => setCounting(counting == 0 ? 0 : counting - 1)}>
               <img
                 src="/icons/minus-icon.svg"
                 alt="Retirer"
@@ -49,9 +57,9 @@ export default function FormEntry({ title, description, logo, type }: { title: s
               />
             </Button>
             <div className="text-primary-100 font-bold text-center align-middle m-2">
-              0
+              {counting}
             </div>
-            <Button isIconOnly className="rounded-full mx-2">
+            <Button isIconOnly className="rounded-full mx-2" onPress={() => setCounting(counting + 1)}>
               <img
                 src="/icons/add-icon.svg"
                 alt="Ajouter"
@@ -86,8 +94,22 @@ export default function FormEntry({ title, description, logo, type }: { title: s
         {type === "yesno" && (
           <div className="flex flex-row justify-end w-full max-w-lg self-center">
             <RadioGroup orientation="horizontal">
-              <CustomRadio value="yes" className="data-[selected=true]:border-success" color="success">Oui</CustomRadio>
-              <CustomRadio value="no" className="data-[selected=true]:border-danger" color="danger">Non</CustomRadio>
+                <CustomRadio
+                value="yes"
+                className="data-[selected=true]:border-success"
+                color="success"
+                onChange={() => setIsYesNo(true)}
+                >
+                Oui
+                </CustomRadio>
+                <CustomRadio
+                value="no"
+                className="data-[selected=true]:border-danger"
+                color="danger"
+                onChange={() => setIsYesNo(false)}
+                >
+                Non
+                </CustomRadio>
             </RadioGroup>
           </div>
         )}
