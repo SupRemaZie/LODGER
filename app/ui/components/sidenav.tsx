@@ -23,14 +23,20 @@ export default function SideNav() {
   const trans = useTranslations("PropertydepositPage");
 
   const setLanguage = (locale: string) => {
-    window.location.href = `/${locale}`;
+    if (typeof window !== "undefined") {
+      window.location.href = `/${locale}`;
+    }
+
   };
 
   // fonction pour récupérer la langue actuelle
   const getCurrentLanguage = () => {
-    const path = window.location.pathname;
-    const segments = path.split("/");
-    return segments[1]; // La langue est le premier segment après le "/"
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      const segments = path.split("/");
+      return segments[1]; // La langue est le premier segment après le "/"
+    }
+
   };
 
   return (

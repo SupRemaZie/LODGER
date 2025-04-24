@@ -5,47 +5,22 @@ export default function LodgerButton({
   label,
   onPress,
   className,
-  children,
+  isDisabled,
 }: {
   type?: "default" | "full-success" | "no-border";
   onPress?: () => void;
-  label?: string;
+  label: string;
   className?: string;
-  children?: React.ReactNode;
+  isDisabled?: boolean;
 }) {
   return (
     <>
       {type === "full-success" ? (
-        <Button
-          onPress={onPress}
-          color="success"
-          variant="shadow"
-          className={"text-white font-semibold " + className}
-        >
-          {children || label}
-        </Button>
+        <Button onPress={onPress} isDisabled={isDisabled} color="success" variant="shadow" className={"text-white font-semibold" + className}>{label}</Button>
       ) : type === "no-border" ? (
-        <Button
-          onPress={onPress}
-          variant="shadow"
-          className={
-            "border-1 border-gray-200 font-semibold text-primary-100 bg-white " +
-            className
-          }
-        >
-          {children || label}
-        </Button>
+        <Button onPress={onPress} isDisabled={isDisabled} variant="shadow" className={"border-1 border-gray-200 font-semibold text-primary-100 bg-white" + className}>{label}</Button>
       ) : (
-        <Button
-          onPress={onPress}
-          variant="shadow"
-          className={
-            "border-2 border-primary-100 text-primary-100 bg-white font-semibold " +
-            className
-          }
-        >
-          {children || label}
-        </Button>
+        <Button onPress={onPress} isDisabled={isDisabled} variant="shadow" className={"border-2 border-primary-100 text-primary-100 bg-white font-semibold " + className}>{label}</Button>
       )}
     </>
   );

@@ -1,5 +1,19 @@
 {
     "PropertydepositPage": {
+      "actions" : {
+        "saveAndQuit": "Enregistrer & Quitter"
+      },
+      "header": {
+        "title" : "Étape 1 - Type de bien",
+        "question" : "Quel bien louez vous ?"
+      },
+      "content": {
+        "title": "Type de biens"
+      },
+      "propertyType": {
+        "house" : "Maison",
+        "apartment" : "Appartement"
+      },
       "sidebar": {
         "title": "DÉPOSEZ VOTRE BIEN",
         "steps":{
