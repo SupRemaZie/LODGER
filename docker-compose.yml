@@ -1,17 +1,12 @@
 version: "3.3"
 services:
   nextjs-app:
-    image: node:18
+    build: .
     container_name: nextjs-app
-    working_dir: /app
-    volumes:
-      - .:/app
-      - /app/node_modules
     ports:
       - "3000:3000"
     environment:
       - DATABASE_URL=mysql://lodger:f69MDu4gLf4Pd8@lodger-bd:3306/lodger_db
-    command: sh -c "npm install && npm run dev"
     depends_on:
       - lodger-bd
 
