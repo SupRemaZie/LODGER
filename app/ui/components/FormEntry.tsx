@@ -55,6 +55,8 @@ export default function FormEntry({ title, description, logo, type, onUpdate }: 
                             type="number"
                             placeholder="0 m²"
                             className="w-2/6"
+                            min={0}
+                            max={999}
                             onChange={(value) => setNumber(Number(value))}
                         />
                     </div>
