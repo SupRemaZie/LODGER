@@ -6,6 +6,16 @@
             "stepOne": "Étape 1",
             "stepTwo" : "Étape 2",
             "stepThree" : "Étape 3"
+        },
+        "language": "Langue",
+        "languageSelect": {
+            "en": "Anglais",
+            "fr": "Français"
+        },
+        "footer": {
+          "title": "Besoin d'aide ?",
+          "description": "Veuillez nous contacter via le mail de l'équipe support.",
+          "help-button": "Nous Contacter"
         }
       }
     }
