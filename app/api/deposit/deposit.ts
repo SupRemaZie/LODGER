@@ -50,8 +50,15 @@ class Deposit {
                     kgCO2: data.kgCO2,
                     accountId: account.id,
                     logementTypeId: logement.id,
-                    propertyTypeId: property.id
-                }
+                    propertyTypeId: property.id,
+                    roomAreas: {
+                        create: [
+                            { area: 10 },
+                            { area: 5 },
+                            { area: 9 },
+                        ],
+                    },
+                },
             });
 
             return { status: 'SUCCESS', message: 'Save Informations' };

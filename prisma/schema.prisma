@@ -58,7 +58,7 @@ model Logement {
 
 model RoomArea {
   id        Int       @id @default(autoincrement())
-  area      String?
+  area      Int?
   logement  Logement? @relation(fields: [logementId], references: [id])
   logementId Int?
 }
