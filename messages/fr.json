@@ -1,10 +1,12 @@
 {
     "PropertydepositPage": {
       "actions" : {
-        "saveAndQuit": "Enregistrer & Quitter"
+        "saveAndQuit": "Enregistrer & Quitter",
+        "back": "Retour",
+        "next": "Suivant"
       },
       "header": {
-        "title" : "Étape 1 - Type de bien",
+        "title" : "Étape 1 - Type de biens",
         "question" : "Quel bien louez vous ?"
       },
       "content": {

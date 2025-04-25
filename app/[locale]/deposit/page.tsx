@@ -27,8 +27,8 @@ export default function Page() {
     };
 
     return (
-        <div className="max-h-screen w-full">
-            <div className="font-[500] flex flex-col  min-h-screen py-2 scrollbar-hide">
+        <div className="w-full">
+            <div className="font-[500] flex flex-col  min-h-content p-14 scrollbar-hide">
                 <div id="header" className="w-full flex flex-row justify-between  items-center">
                     <div className="flex flex-col">
                    <span id="page-title" className="text-[#02504D] font-">
@@ -44,16 +44,16 @@ export default function Page() {
                 <span className="font-[700] text-sm">
                     {trans('content.title')}
                 </span>
-                    <div className="flex flex-row gap-4 mt-4 font-[600]">
+                    <div className="flex flex-row gap-4 mt-4 font-[600] ">
                         <Button onPress={() => handleUpdate("choosed", "appartement")}
                                 variant="bordered" color="primary"
-                                className={`flex flex-col w-1/4 h-1/4 bg-white text-[#02504D] ${
+                                className={`flex flex-col w-1/4 h-1/4 bg-white text-[#02504D]  ${
                                     formData.choosed === "appartement" ? "border-2 border-[#02DB82]" : ""
                                 }`}>
                             <Image src="/appartment_choice_picture.png" alt="appartment choice" width={174} height={174}
                                    className="w-2/3"/>
                             <span className="text-[#02504D] font-bold text-base mb-6 ">
-                            Appartement
+                            {trans('propertyType.apartment')}
                         </span>
                         </Button>
                         <Button onPress={() => handleUpdate("choosed", "house")} variant="bordered" color="primary"
@@ -62,18 +62,36 @@ export default function Page() {
                             <Image src="/house_choice_picture.png" alt="house choice" width={174} height={174}
                                    className="w-2/3"/>
                             <span className="text-[#02504D] font-bold text-base mb-6">
-                            Maison
+                            {trans('propertyType.house')}
                         </span>
                         </Button>
                     </div>
                 </section>
             </div>
-            <footer
-                className="flex flex-row justify-between  w-full bg-white ">
-                <LodgerButton onPress={() => handleSubmit()} isDisabled={!formData.choosed} label="retour"
-                              type={"default"}></LodgerButton>
-                <LodgerButton onPress={() => handleSubmit()} isDisabled={!formData.choosed} label="suivant"
-                              type={"full-success"}></LodgerButton>
+
+            <footer className=" fixed bottom-0 w-4/5 bg-white ">
+                <div className="flex flex-row items-center gap-x-2 ">
+                    <Image src="/images/line-full.svg" alt="line full" width={100} height={0} className="w-1/3"/>
+                    <Image src="/images/line-empty.svg" alt="line empty" width={100} height={50} className="w-1/3"/>
+                    <Image src="/images/line-empty.svg" alt="line empty" width={100} height={50} className="w-1/3"/>
+                </div>
+
+                <div className="flex justify-between items-center w-full px-14 py-9">
+                    <LodgerButton
+                        onPress={() => handleSubmit()}
+                        label={trans("actions.back")}
+                        className="text-[#02504D] bg-white stroke-1 stroke-[#CAC6C6] font-[700]"
+                        type="no-border"
+                    />
+
+                    <LodgerButton
+                        onPress={() => handleSubmit()}
+                        isDisabled={!formData.choosed}
+                        label={trans("actions.next")}
+                        className="text-white bg-[#02DB82] stroke-1 stroke-[#CAC6C6] font-[700]"
+                        type="full-success"
+                    />
+                </div>
             </footer>
         </div>
 
