@@ -66,7 +66,7 @@ export default function SideNav() {
             }}
             itemClasses={{
               item: [
-                `flex rounded-large w-[244px] h-[46px] px-2 py-0.5 ${albert_sans.className} text-[#02504D]`,
+                `flex rounded-large w-full h-10 px-2 py-0.5 ${albert_sans.className} text-[#02504D]`,
                 "data-[current=true]:border-small data-[current=true]:border-[#02DB82] data-[current=true]:bg-[#EFFDF3]",
                 "data-[disabled=true]:bg-wite data-[disabled=true]:border-none ",
               ],
@@ -154,7 +154,7 @@ export default function SideNav() {
         </Dropdown>
         <div className="mt-4 flex flex-col">
           <Divider className="" />
-          <div className="flex flex-col items-left mt-4">
+          <div className="flex flex-col items-left mt-4 gap-y-2">
             <Image
               src="/icons/support-icon.svg"
               width={40}
@@ -172,7 +172,7 @@ export default function SideNav() {
             >
               {trans("sidebar.footer.description")}
             </p>
-            <LodgerButton className="my-4 w-2/3" label={trans("sidebar.footer.help-button")}></LodgerButton>
+            <LodgerButton type="no-border" className="m-2 w-4/5" label={trans("sidebar.footer.help-button")}></LodgerButton>
           </div>
         </div>
       </div>
