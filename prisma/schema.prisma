@@ -9,7 +9,7 @@ generator client {
 
 model Account {
   id      Int      @id @default(autoincrement())
-  fisrtName String?
+  firstName String?
   lastName  String?
   email String   @unique
   logements Logement[]
@@ -69,3 +69,4 @@ model SpaceShare {
   logement  Logement? @relation(fields: [logementId], references: [id])
   logementId Int?
 }
+
