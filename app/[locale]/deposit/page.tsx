@@ -50,7 +50,7 @@ export default function Page() {
                                 className={`flex flex-col w-1/4 h-1/4 bg-white text-[#02504D]  ${
                                     formData.choosed === "appartement" ? "border-2 border-[#02DB82]" : ""
                                 }`}>
-                            <Image src="/appartment_choice_picture.png" alt="appartment choice" width={174} height={174}
+                            <Image src="/images/appartment_choice_picture.png" alt="appartment choice" width={174} height={174}
                                    className="w-2/3"/>
                             <span className="text-[#02504D] font-bold text-base mb-6 ">
                             {trans('propertyType.apartment')}
@@ -59,7 +59,7 @@ export default function Page() {
                         <Button onPress={() => handleUpdate("choosed", "house")} variant="bordered" color="primary"
                                 className={`flex flex-col w-1/4 h-1/4 bg-white text-[#02504D] ${formData.choosed === "house" ? "border-2 border-[#02DB82]" : ""}`}>
 
-                            <Image src="/house_choice_picture.png" alt="house choice" width={174} height={174}
+                            <Image src="/images/house_choice_picture.png" alt="house choice" width={174} height={174}
                                    className="w-2/3"/>
                             <span className="text-[#02504D] font-bold text-base mb-6">
                             {trans('propertyType.house')}
