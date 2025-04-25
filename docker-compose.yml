@@ -1,12 +1,15 @@
 version: "3.3"
 services:
   nextjs-app:
-    build: .
+    build:
+      context: .
+      args:
+        DATABASE_URL: mysql://root:UTi4sB7472vBby@lodger-bd:3306/lodger_db
     container_name: nextjs-app
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=mysql://lodger:f69MDu4gLf4Pd8@lodger-bd:3306/lodger_db
+      - DATABASE_URL=mysql://root:UTi4sB7472vBby@lodger-bd:3306/lodger_db
     depends_on:
       - lodger-bd
 
