@@ -28,6 +28,18 @@ class Deposit {
                 where: {type: data.typeOfProperty},
             });
 
+            let roomAreas = {
+                create: data.roomAreas.map((roomArea) => ({
+                    area: roomArea,
+                })),
+            }
+
+            let spaceShares = {
+                create: data.spaceShare.map((spaceShare) => ({
+                    type: spaceShare,
+                })),
+            }
+
 
             await prisma.logement.create({
                 data: {
@@ -51,13 +63,8 @@ class Deposit {
                     accountId: account.id,
                     logementTypeId: logement.id,
                     propertyTypeId: property.id,
-                    roomAreas: {
-                        create: [
-                            { area: 10 },
-                            { area: 5 },
-                            { area: 9 },
-                        ],
-                    },
+                    roomAreas: roomAreas,
+                    spaceShares: spaceShares,
                 },
             });
 

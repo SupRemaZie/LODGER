@@ -21,4 +21,6 @@ export interface LogementData {
     appartmentFloor: bigint;
     kWhEP: bigint;
     kgCO2: bigint;
+    roomAreas: { area: number }[];
+    spaceShare: { type: string }[];
 }
