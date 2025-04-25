@@ -17,5 +17,12 @@ RUN npm run build
 # Expose the port
 EXPOSE 3000
 
+# Create Database
+RUN npx prisma migrate dev --name init
+
+# Add infos to the database
+RUN npx ts-node .\prisma\addinfos.ts
+
+
 # Start the application
 CMD ["npm", "run", "start"] 
