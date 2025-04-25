@@ -56,10 +56,10 @@ export default function SideNav() {
         </p>
 
         <div className="pt-5">
-          <Accordion variant="splitted" defaultSelectedKeys={["1"]}>
+          <Accordion variant="splitted" defaultSelectedKeys={["1"]} disabledKeys={["2", "3"]}>
             <AccordionItem key="1" aria-label="Accordion 1" title="Etape 1" startContent={<HiOutlineHome />} classNames={{base: "bg-green-50 border-1 border-green-400", title: "text-primary-100 font-semibold"}}>
               <div className="flex flex-col gap-2">
-                <ValidateSubstep label="Type de Bien" />
+                <ValidateSubstep label="Type de Bien"/>
                 <ValidateSubstep label="Localisation" isDisabled />
                 <ValidateSubstep label="Informations sur le bien" isDisabled />
                 <ValidateSubstep label="Diagnostic" isDisabled />
