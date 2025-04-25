@@ -17,6 +17,8 @@ import {
 } from "@heroui/react";
 import { Button } from "@heroui/react";
 import LodgerButton from "./LodgerButton";
+import { Accordion, AccordionItem } from "@heroui/react";
+import { Link as HeroLink } from "@heroui/react";
 
 export default function SideNav() {
   const { currentStep, setCurrentStep } = useBreadcrumb(); // Utiliser le contexte
@@ -60,42 +62,28 @@ export default function SideNav() {
         </p>
 
         <div className="pt-5">
-          <Breadcrumbs
-            classNames={{
-              list: "gap-1 flex flex-col text-center",
-            }}
-            itemClasses={{
-              item: [
-                `flex rounded-large w-full h-10 px-2 py-0.5 ${albert_sans.className} text-[#02504D]`,
-                "data-[current=true]:border-small data-[current=true]:border-[#02DB82] data-[current=true]:bg-[#EFFDF3]",
-                "data-[disabled=true]:bg-wite data-[disabled=true]:border-none ",
-              ],
-              separator: "hidden",
-            }}
-            size="lg"
-          >
-            <BreadcrumbItem
-              startContent={<HiOutlineHome />}
-              key="Etape1"
-              isCurrent={currentStep === "Etape1"}
-            >
-              {trans("sidebar.steps.stepOne")}
-            </BreadcrumbItem>
-            <BreadcrumbItem
+          <Accordion variant="splitted" defaultSelectedKeys={["1"]} disabledKeys={["2", "3"]}>
+            <AccordionItem key="1" aria-label="Accordion 1" title="Etape 1" startContent={<HiOutlineHome />} classNames={{base: "bg-green-50 border-1 border-green-400", title: "text-primary-100 font-semibold"}}>
+              <div className="flex flex-col gap-2">
+                <ValidateSubstep label="Type de Bien"/>
+                <ValidateSubstep label="Localisation" isDisabled />
+                <ValidateSubstep label="Informations sur le bien" isDisabled />
+                <ValidateSubstep label="Diagnostic" isDisabled />
+              </div>
+            </AccordionItem>
+            <AccordionItem
+              key="2"
+              aria-label="Accordion 2"
+              title="Etape 2"
               startContent={<LuBookmark />}
-              key="Etape2"
-              isCurrent={currentStep === "Etape2"}
-            >
-              {trans("sidebar.steps.stepTwo")}
-            </BreadcrumbItem>
-            <BreadcrumbItem
+            ></AccordionItem>
+            <AccordionItem
+              key="3"
+              aria-label="Accordion 3"
+              title="Etape 3"
               startContent={<LuBookmark />}
-              key="Etape3"
-              isCurrent={currentStep === "Etape3"}
-            >
-              {trans("sidebar.steps.stepThree")}
-            </BreadcrumbItem>
-          </Breadcrumbs>
+            ></AccordionItem>
+          </Accordion>
         </div>
       </div>
       <div
@@ -177,5 +165,22 @@ export default function SideNav() {
         </div>
       </div>
     </div>
+  );
+}
+
+export function ValidateSubstep({ isValid, label, isDisabled }: { isValid?: boolean, label?: string, isDisabled?: boolean }) {
+  return (
+    <>
+      <HeroLink isDisabled={isDisabled} className="text-primary-100">
+        <Image
+          src={"/icons/" + (isValid || false ? "filled" : "empty") + "-circle-icon.svg"}
+          width={16}
+          height={16}
+          className="mr-1"
+          alt="lodger logo"
+        />
+        {label || "Etape ?"}
+      </HeroLink>
+    </>
   );
 }
