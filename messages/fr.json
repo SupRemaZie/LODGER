@@ -1,11 +1,37 @@
 {
     "PropertydepositPage": {
+      "actions" : {
+        "saveAndQuit": "Enregistrer & Quitter",
+        "back": "Retour",
+        "next": "Suivant"
+      },
+      "header": {
+        "title" : "Étape 1 - Type de biens",
+        "question" : "Quel bien louez vous ?"
+      },
+      "content": {
+        "title": "Type de biens"
+      },
+      "propertyType": {
+        "house" : "Maison",
+        "apartment" : "Appartement"
+      },
       "sidebar": {
         "title": "DÉPOSEZ VOTRE BIEN",
         "steps":{
             "stepOne": "Étape 1",
             "stepTwo" : "Étape 2",
             "stepThree" : "Étape 3"
+        },
+        "language": "Langue",
+        "languageSelect": {
+            "en": "Anglais",
+            "fr": "Français"
+        },
+        "footer": {
+          "title": "Besoin d'aide ?",
+          "description": "Veuillez nous contacter via le mail de l'équipe support.",
+          "help-button": "Nous Contacter"
         }
       }
     }

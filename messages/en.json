@@ -1,12 +1,38 @@
 {
-    "PropertydepositPage": {
-      "sidebar": {
-        "title": "PLACE YOUR PROPERTY",
-        "steps":{
-            "stepOne": "Step 1",
-            "stepTwo" : "Step 2",
-            "stepThree" : "Step 3"
-        }
+  "PropertydepositPage": {
+    "actions": {
+      "saveAndQuit": "Save & Quit",
+      "back": "Back",
+      "next": "Next"
+    },
+    "header": {
+      "title": "Step 1 - Property Type",
+      "question": "What type of property are you renting?"
+    },
+    "content": {
+      "title": "Property Types"
+    },
+    "propertyType": {
+      "house": "House",
+      "apartment": "Apartment"
+    },
+    "sidebar": {
+      "title": "LIST YOUR PROPERTY",
+      "steps": {
+        "stepOne": "Step 1",
+        "stepTwo": "Step 2",
+        "stepThree": "Step 3"
+      },
+      "language": "Language",
+      "languageSelect": {
+        "en": "English",
+        "fr": "French"
+      },
+      "footer": {
+        "title": "Need help?",
+        "description": "Please contact us via the support team's email.",
+        "help-button": "Contact Us"
       }
     }
+  }
 }

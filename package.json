@@ -4,10 +4,7 @@
     "build": "next build",
     "doc": "npx typedoc",
     "dev": "next dev --turbopack",
-    "start": "next start",
-    "prepare": "husky",
-    "check-lockfile": "pnpm install --frozen-lockfile --lockfile-only",
-    "precommit-check": "git diff --quiet pnpm-lock.yaml || (echo '⚠️ Run pnpm install to sync lockfile with package.json' && exit 1)"
+    "start": "next start"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -34,7 +31,6 @@
     "react-dom": "latest",
     "react-icons": "^5.5.0",
     "tailwindcss": "3.4.17",
-    "typescript": "5.7.3",
     "use-debounce": "^10.0.4",
     "zod": "^3.24.2"
   },
@@ -45,8 +41,9 @@
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
     "grunt": "^1.6.1",
-    "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
-    "typedoc": "^0.28.3"
+    "ts-node": "^10.9.2",
+    "typedoc": "^0.28.3",
+    "typescript": "^5.8.3"
   }
 }

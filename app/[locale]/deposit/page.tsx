@@ -1,112 +1,100 @@
 "use client";
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import Image from "next/image";
-import { Button } from "@heroui/react";
 import FormEntry from "@/app/ui/components/FormEntry";
 import LodgerButton from "@/app/ui/components/LodgerButton";
+import {useTranslations} from "next-intl";
+import {Button} from "@heroui/react";
 
 export default function Page() {
-  const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    count: 0,
-    number: 0,
-    dropdown: new Set<string>(),
-    yesno: null,
-  });
+    const trans = useTranslations('PropertydepositPage')
+    const [formData, setFormData] = useState({
+        count: 0,
+        number: 0,
+        dropdown: new Set<string>(),
+        yesno: null,
+        choosed: "",
+    });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // ici on va recupérer les données dont on a besoin
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setLoading(false);
-      } catch (error) {
-        console.error("Erreur lors du chargement:", error);
-        setLoading(false);
-      }
+
+    const handleUpdate = (key: string, value: any) => {
+        setFormData((prev) => ({...prev, [key]: value}));
     };
-    fetchData();
-  }, []);
 
-  const handleUpdate = (key: string, value: any) => {
-    setFormData((prev) => ({ ...prev, [key]: value }));
-  };
+    const handleSubmit = () => {
 
-  const handleSubmit = () => {
-    console.log("Form Data:", formData);
-    // Vous pouvez envoyer les données au serveur ici
-    // fais un mock de l'envoi de données en affichant les données dans la console
-    alert("Données envoyées avec succès !");
-    console.log("Données envoyées:", formData);
-  };
+        console.log("Données envoyées:", formData);
+    };
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      {loading ? (
-        // Logo scintillant (loader)
-        <div className={"flex flex-col loader-animation text-center"}>
-          <Image
-            src="/logo_lodger.png"
-            width={147}
-            height={32}
-            className=""
-            alt="lodger logo"
-          />
-          <p>Loading ... </p>
-        </div>
-      ) : (
-        // Contenu final après chargement
-        <>
-          <div className="text-center w-full flex flex-col">
-            <h1 className="text-2xl font-bold">Bienvenue sur Lodger !</h1>
-            <p className="text-gray-600">Le contenu est maintenant affiché.</p>
-            <FormEntry
-              title="Nombre de chambres"
-              description="Renseigner le nombre de chambres :"
-              logo="/icons/bed-icon.svg"
-              type="count"
-              onUpdate={(value) => handleUpdate("count", value)}
-            />
-            <FormEntry
-              title="Superficie"
-              description="Renseigner la superficie de votre bien :"
-              logo="/icons/superficie-icon.svg"
-              type="number"
-              onUpdate={(value) => handleUpdate("number", value)}
-            />
-            <FormEntry
-              title="Espaces Partagés"
-              description="Sélectionner les espaces partagés :"
-              logo="/icons/matter-icon.svg"
-              type="dropdown"
-              onUpdate={(value) => handleUpdate("dropdown", value)}
-            />
-            <FormEntry
-              title="Meublé"
-              description="Le bien est-il meublé ?"
-              logo="/icons/sofa-icon.svg"
-              type="yesno"
-              onUpdate={(value) => handleUpdate("yesno", value)}
-            />
-          </div>
-          <div className="flex flex-row justify-center space-x-3 mt-4 self-end">
-          <LodgerButton
-              onPress={handleSubmit}
-              className="mt-4"
-              label="Soumettre"
-              type="full-success"
-            />
-          </div>
-          <div
-              id="button-mock"
-              className="flex flex-row justify-center space-x-3 mt-4"
-            >
-              <LodgerButton type="default" label="Enregistrer et Quitter" />
-              <LodgerButton type="full-success" label="Suivant" />
-              <LodgerButton type="no-border" label="Retour" />
+    return (
+        <div className="w-full">
+            <div className="font-[500] flex flex-col  min-h-content p-14 scrollbar-hide">
+                <div id="header" className="w-full flex flex-row justify-between  items-center">
+                    <div className="flex flex-col">
+                   <span id="page-title" className="text-[#02504D] font-">
+                     {trans('header.title')}
+                   </span>
+                        <span className="font-bold text-xl">
+                     {trans('header.question')}
+                   </span>
+                    </div>
+                    <LodgerButton type="default" label={trans("actions.saveAndQuit")}></LodgerButton>
+                </div>
+                <section id="content" className="pt-8 text-[#02504D]">
+                <span className="font-[700] text-sm">
+                    {trans('content.title')}
+                </span>
+                    <div className="flex flex-row gap-4 mt-4 font-[600] ">
+                        <Button onPress={() => handleUpdate("choosed", "appartement")}
+                                variant="bordered" color="primary"
+                                className={`flex flex-col w-1/4 h-1/4 bg-white text-[#02504D]  ${
+                                    formData.choosed === "appartement" ? "border-2 border-[#02DB82]" : ""
+                                }`}>
+                            <Image src="/images/appartment_choice_picture.png" alt="appartment choice" width={174} height={174}
+                                   className="w-2/3"/>
+                            <span className="text-[#02504D] font-bold text-base mb-6 ">
+                            {trans('propertyType.apartment')}
+                        </span>
+                        </Button>
+                        <Button onPress={() => handleUpdate("choosed", "house")} variant="bordered" color="primary"
+                                className={`flex flex-col w-1/4 h-1/4 bg-white text-[#02504D] ${formData.choosed === "house" ? "border-2 border-[#02DB82]" : ""}`}>
+
+                            <Image src="/images/house_choice_picture.png" alt="house choice" width={174} height={174}
+                                   className="w-2/3"/>
+                            <span className="text-[#02504D] font-bold text-base mb-6">
+                            {trans('propertyType.house')}
+                        </span>
+                        </Button>
+                    </div>
+                </section>
             </div>
-        </>
-      )}
-    </div>
-  );
+
+            <footer className=" fixed bottom-0 w-4/5 bg-white ">
+                <div className="flex flex-row items-center gap-x-2 ">
+                    <Image src="/images/line-full.svg" alt="line full" width={100} height={0} className="w-1/3"/>
+                    <Image src="/images/line-empty.svg" alt="line empty" width={100} height={50} className="w-1/3"/>
+                    <Image src="/images/line-empty.svg" alt="line empty" width={100} height={50} className="w-1/3"/>
+                </div>
+
+                <div className="flex justify-between items-center w-full px-14 py-9">
+                    <LodgerButton
+                        onPress={() => handleSubmit()}
+                        label={trans("actions.back")}
+                        className="text-[#02504D] bg-white stroke-1 stroke-[#CAC6C6] font-[700]"
+                        type="no-border"
+                    />
+
+                    <LodgerButton
+                        onPress={() => handleSubmit()}
+                        isDisabled={!formData.choosed}
+                        label={trans("actions.next")}
+                        className="text-white bg-[#02DB82] stroke-1 stroke-[#CAC6C6] font-[700]"
+                        type="full-success"
+                    />
+                </div>
+            </footer>
+        </div>
+
+
+    );
 }

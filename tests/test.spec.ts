@@ -1,6 +1,12 @@
 import { test, expect } from '@playwright/test';
 
 test('homepage has expected title', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.locator("body > div > div > div.flex-grow.p-6.md\\:overflow-y-auto.md\\:p-12 > div > div > h1")).toContainText("Lodger");
+    await page.goto('/fr');
+    await page.waitForLoadState('networkidle')
+    await expect(page.getByText("Type de biens").first()).toBeVisible()
+});
+test('Next button should be disabled if no type is choosen', async ({ page }) => {
+    await page.goto('/fr');
+    await page.waitForLoadState('networkidle')
+    await expect(page.getByRole("button", { name: "Suivant" })).toBeDisabled()
 });
