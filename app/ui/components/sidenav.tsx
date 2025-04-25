@@ -25,14 +25,20 @@ export default function SideNav() {
   const trans = useTranslations("PropertydepositPage");
 
   const setLanguage = (locale: string) => {
-    window.location.href = `/${locale}`;
+    if (typeof window !== "undefined") {
+      window.location.href = `/${locale}`;
+    }
+
   };
 
   // fonction pour récupérer la langue actuelle
   const getCurrentLanguage = () => {
-    const path = window.location.pathname;
-    const segments = path.split("/");
-    return segments[1]; // La langue est le premier segment après le "/"
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      const segments = path.split("/");
+      return segments[1]; // La langue est le premier segment après le "/"
+    }
+
   };
 
   return (
@@ -136,7 +142,7 @@ export default function SideNav() {
         </Dropdown>
         <div className="mt-4 flex flex-col">
           <Divider className="" />
-          <div className="flex flex-col items-left mt-4">
+          <div className="flex flex-col items-left mt-4 gap-y-2">
             <Image
               src="/icons/support-icon.svg"
               width={40}
@@ -154,10 +160,7 @@ export default function SideNav() {
             >
               {trans("sidebar.footer.description")}
             </p>
-            <LodgerButton
-              className="my-4 w-2/3"
-              label={trans("sidebar.footer.help-button")}
-            ></LodgerButton>
+            <LodgerButton type="no-border" className="m-2 w-4/5" label={trans("sidebar.footer.help-button")}></LodgerButton>
           </div>
         </div>
       </div>
