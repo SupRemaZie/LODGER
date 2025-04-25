@@ -28,17 +28,17 @@ class Deposit {
                 where: {type: data.typeOfProperty},
             });
 
-            let roomAreas = {
+            let roomAreas = data.roomAreas && data.roomAreas.length > 0 ? {
                 create: data.roomAreas.map((roomArea) => ({
-                    area: roomArea,
+                    area: roomArea.area,
                 })),
-            }
+            } : undefined;
 
-            let spaceShares = {
+            let spaceShares = data.spaceShare && data.spaceShare.length > 0 ? {
                 create: data.spaceShare.map((spaceShare) => ({
                     type: spaceShare,
                 })),
-            }
+            } : undefined;
 
 
             await prisma.logement.create({
