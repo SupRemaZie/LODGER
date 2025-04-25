@@ -68,9 +68,15 @@ export default function Page() {
                     </div>
                 </section>
             </div>
-            <footer
-                className=" fixed bottom-0 w-4/5 bg-white py-9 ">
-                <div className="flex justify-between items-center w-full px-14">
+
+            <footer className=" fixed bottom-0 w-4/5 bg-white ">
+                <div className="flex flex-row items-center gap-x-2 ">
+                    <Image src="/images/line-full.svg" alt="line full" width={100} height={0} className="w-1/3"/>
+                    <Image src="/images/line-empty.svg" alt="line empty" width={100} height={50} className="w-1/3"/>
+                    <Image src="/images/line-empty.svg" alt="line empty" width={100} height={50} className="w-1/3"/>
+                </div>
+
+                <div className="flex justify-between items-center w-full px-14 py-9">
                     <LodgerButton
                         onPress={() => handleSubmit()}
                         label={trans("actions.back")}
