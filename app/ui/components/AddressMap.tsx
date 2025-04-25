@@ -46,7 +46,7 @@ const AddressMap = () => {
         }
 
         const timeout = setTimeout(async ()=> {
-            const res = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(value)}&lang=fr`);
+            const res = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(value)}&lang=fr&limit=5`);
             const data = await res.json();
             console.log(data);
             setSuggestions(data.features);
@@ -66,8 +66,41 @@ const AddressMap = () => {
     };
 
     const formatSelectedAddress = (data: any): string => {
-        return `${data.properties.housenumber} ${data.properties.street} ${data.properties.postcode} ${(data.properties.city ? ', ' + data.properties.city : '')}`;
+        if (data.properties.type === "city") {
+            return handleSelectedCity(data);
+        } else if (data.properties.type === "house") {
+            return handleSelectedHouse(data);
+        } else if (data.properties.type === "street") {
+            return handleSelectedStreet(data);
+        }
+
+        console.error("Error when formatting selected address");
+        return "Error";
     };
+
+    const handleSelectedCity = (data: any): string => {
+        return [
+        data.properties.postcode ? data.properties.postcode + ',' : '',
+        data.properties.name,
+        ' - ',
+        data.properties.country].filter(Boolean).join(' ');
+    }
+
+    const handleSelectedHouse = (data: any): string => {
+        return [
+        data.properties.housenumber ?? '',
+        data.properties.street + ',',
+        data.properties.postcode ?? '',
+        data.properties.city].filter(Boolean).join(' ');
+    }
+
+    const handleSelectedStreet = (data: any): string => {
+
+        return [
+            (data.properties.name ?? '') + ',',
+            data.properties.postcode,
+            data.properties.city].filter(Boolean).join(' ');
+    }
 
     return (
         <div>
