@@ -5,16 +5,18 @@
       "back": "Back",
       "next": "Next"
     },
-    "header": {
-      "title": "Step 1 - Property Type",
-      "question": "What type of property are you renting?"
-    },
-    "content": {
-      "title": "Property Types"
-    },
-    "propertyType": {
-      "house": "House",
-      "apartment": "Apartment"
+    "stepOne": {
+      "header": {
+        "title": "Step 1 - Property Type",
+        "question": "What type of property are you renting?"
+      },
+      "content": {
+        "title": "Property Type",
+        "propertyType": {
+          "house": "House",
+          "apartment": "Apartment"
+        }
+      }
     },
     "sidebar": {
       "title": "LIST YOUR PROPERTY",
@@ -23,7 +25,7 @@
         "stepOneSubOne": "Property Type",
         "stepOneSubTwo": "Location",
         "stepOneSubThree": "Property Information",
-        "stepOneSubFour": "Diagnostics",
+        "stepOneSubFour": "Diagnostic",
         "stepTwo": "Step 2",
         "stepThree": "Step 3"
       },
@@ -34,7 +36,7 @@
       },
       "footer": {
         "title": "Need help?",
-        "description": "Please contact us via the support team's email.",
+        "description": "Please contact us via the support team email.",
         "help-button": "Contact Us"
       }
     }
