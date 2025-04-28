@@ -1,34 +1,32 @@
 "use client";
 import {useState, useEffect} from "react";
 import Image from "next/image";
+import FormEntry from "@/app/ui/components/FormEntry";
+import LodgerButton from "@/app/ui/components/LodgerButton";
 import {useTranslations} from "next-intl";
 import {Button} from "@heroui/react";
 import Footer from "@/app/ui/components/Footer";
 import Header from "@/app/ui/components/Header";
-
+import { useFormData } from '../../context/FormDataContext';
 import {usePathname, useRouter} from "next/navigation";
-
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage')
     const router = useRouter();
     const pathname = usePathname();
-    const [formData, setFormData] = useState({
-        count: 0,
-        number: 0,
-        dropdown: new Set<string>(),
-        yesno: null,
-        choosed: "",
-    });
+    const {formData, setFormData} = useFormData()
+
 
 
     const handleUpdate = (key: string, value: any) => {
         setFormData((prev) => ({...prev, [key]: value}));
     };
+
     const handleSubmit = () => {
-       if(formData.choosed){
-           router.push(`${pathname}/${formData.choosed}`);
-       }
+
+        if(formData.choosed){
+            router.push(`${pathname}/${formData.choosed}`);
+        }
     };
 
 
