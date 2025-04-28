@@ -5,15 +5,17 @@ import { BreadcrumbProvider } from '../context/BreadcrumbContext';
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
+import {FormDataProvider} from "@/app/context/FormDataContext";
+
  
 export default async function RootLayout({
   children,
   params
 }: {
   children: React.ReactNode;
-  params: Promise<{locale: string}>;
+  params: {locale: string};
 }) {
-  const {locale} = await params;
+  const {locale} = params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -23,7 +25,9 @@ export default async function RootLayout({
         <NextIntlClientProvider>
           <Providers>
             <BreadcrumbProvider>
-              {children}
+              <FormDataProvider>
+                {children}
+              </FormDataProvider>
             </BreadcrumbProvider>
           </Providers>
         </NextIntlClientProvider>

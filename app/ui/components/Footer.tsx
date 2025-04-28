@@ -27,7 +27,7 @@ export default function Footer({onSubmit, formData}:{
 
                 <LodgerButton
                     onPress={() => onSubmit()}
-                    isDisabled={!formData.choosed}
+                    isDisabled={!formData.typeOfLogement}
                     label={trans("actions.next")}
                     className="text-white bg-[#02DB82] stroke-1 stroke-[#CAC6C6] font-[700]"
                     type="full-success"
