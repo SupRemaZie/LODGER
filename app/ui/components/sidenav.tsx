@@ -57,7 +57,7 @@ export default function SideNav() {
           href="/"
         >
           <Image
-            src="/logo_lodger.png"
+            src="/images/logo_lodger.png"
             width={147}
             height={32}
             className="md:block mb-4"
