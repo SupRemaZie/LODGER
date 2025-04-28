@@ -21,8 +21,10 @@ export default function Page() {
     const handleUpdate = (key: string, value: any) => {
         setFormData((prev) => ({...prev, [key]: value}));
     };
-
-    const handleSubmit = () => {
+    const handlePrevious = () =>{
+        router.push(`${pathname}`)
+    }
+    const handleNext = () => {
 
         if(formData.typeOfLogement == "MAISON"){
             router.push(`${pathname}/localisation`);
@@ -66,7 +68,7 @@ export default function Page() {
                     </div>
                 </section>
             </div>
-        <Footer onSubmit={handleSubmit} formData={formData} />
+        <Footer onPrevious={handlePrevious} onNext={handleNext} formData={formData} />
         </div>
 
 

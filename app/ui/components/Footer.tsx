@@ -3,8 +3,9 @@ import LodgerButton from "@/app/ui/components/LodgerButton";
 import {useTranslations} from "next-intl";
 import {useState} from "react";
 
-export default function Footer({onSubmit, formData}:{
-    onSubmit: () => void
+export default function Footer({onPrevious,onNext, formData}:{
+    onPrevious: ()=>void
+    onNext: () => void
     formData: any
 }) {
     const trans = useTranslations('PropertydepositPage')
@@ -19,14 +20,14 @@ export default function Footer({onSubmit, formData}:{
 
             <div className="flex justify-between items-center w-full px-14 py-9">
                 <LodgerButton
-                    onPress={() => onSubmit()}
+                    onPress={() => onPrevious()}
                     label={trans("actions.back")}
                     className="text-[#02504D] bg-white stroke-1 stroke-[#CAC6C6] font-[700]"
                     type="no-border"
                 />
 
                 <LodgerButton
-                    onPress={() => onSubmit()}
+                    onPress={() => onNext()}
                     isDisabled={!formData.typeOfLogement}
                     label={trans("actions.next")}
                     className="text-white bg-[#02DB82] stroke-1 stroke-[#CAC6C6] font-[700]"
