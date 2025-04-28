@@ -19,16 +19,24 @@ import { Button } from "@heroui/react";
 import LodgerButton from "./LodgerButton";
 import { Accordion, AccordionItem } from "@heroui/react";
 import { Link as HeroLink } from "@heroui/react";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function SideNav() {
   const { currentStep, setCurrentStep } = useBreadcrumb(); // Utiliser le contexte
+  const router = useRouter();
+  const pathname = usePathname();
   const trans = useTranslations("PropertydepositPage");
 
-  const setLanguage = (locale: string) => {
-    if (typeof window !== "undefined") {
-      window.location.href = `/${locale}`;
-    }
 
+
+  const setLanguage = (locale: string) => {
+    const segments = pathname.split("/");
+
+    if (segments.length > 1) {
+      segments[1] = locale; // changer la langue dans l'URL
+      const newPath = segments.join("/") || "/";
+      router.replace(newPath); // remplace l'URL sans reload
+    }
   };
 
   // fonction pour récupérer la langue actuelle
@@ -115,28 +123,12 @@ export default function SideNav() {
           </DropdownTrigger>
           <DropdownMenu>
             <DropdownItem key="fr" onPress={() => setLanguage("fr")}>
-              <Image
-                src="/icons/flag_fr.svg"
-                alt="French Flag"
-                width={20}
-                height={15}
-                className="inline-block mr-2"
-              />
-              <Link href="/" locale="fr">
-                {trans("sidebar.languageSelect.fr")}
-              </Link>
+              <Image src="/icons/flag_fr.svg" alt="French Flag" width={20} height={15} className="inline-block mr-2" />
+              {trans("sidebar.languageSelect.fr")}
             </DropdownItem>
             <DropdownItem key="en" onPress={() => setLanguage("en")}>
-              <Image
-                src="/icons/flag_en.svg"
-                alt="English Flag"
-                width={20}
-                height={15}
-                className="inline-block mr-2"
-              />
-              <Link href="/" locale="en">
-                {trans("sidebar.languageSelect.en")}
-              </Link>
+              <Image src="/icons/flag_en.svg" alt="English Flag" width={20} height={15} className="inline-block mr-2" />
+              {trans("sidebar.languageSelect.en")}
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
