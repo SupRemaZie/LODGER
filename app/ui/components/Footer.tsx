@@ -3,10 +3,10 @@ import LodgerButton from "@/app/ui/components/LodgerButton";
 import {useTranslations} from "next-intl";
 import {useState} from "react";
 
-export default function Footer({onPrevious,onNext, formData}:{
+export default function Footer({onPrevious,onNext, requiredField}:{
     onPrevious: ()=>void
     onNext: () => void
-    formData: any
+    requiredField: string
 }) {
     const trans = useTranslations('PropertydepositPage')
 
@@ -28,7 +28,7 @@ export default function Footer({onPrevious,onNext, formData}:{
 
                 <LodgerButton
                     onPress={() => onNext()}
-                    isDisabled={!formData.typeOfLogement}
+                    isDisabled={!requiredField}
                     label={trans("actions.next")}
                     className="text-white bg-[#02DB82] stroke-1 stroke-[#CAC6C6] font-[700]"
                     type="full-success"

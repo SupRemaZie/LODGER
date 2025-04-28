@@ -38,7 +38,7 @@ export default function Page() {
 
     return (
         <div className="w-full">
-            <div className="font-[500] flex flex-col  min-h-content p-14 scrollbar-hide">
+            <div className="font-[500] flex flex-col  min-h-content p-12 scrollbar-hide">
                 <Header title={trans("stepOne.header.title")} question={trans("stepOne.header.question")} />
                 <section id="content" className="pt-8 text-[#02504D]">
                 <span className="font-[700] text-sm">
@@ -68,7 +68,7 @@ export default function Page() {
                     </div>
                 </section>
             </div>
-        <Footer onPrevious={handlePrevious} onNext={handleNext} formData={formData} />
+        <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfLogement} />
         </div>
 
 
