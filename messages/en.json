@@ -107,5 +107,8 @@
         "help-button": "Contact Us"
       }
     }
+  },
+  "AddressMap": {
+    "inputPlaceholder": "Enter an address"
   }
 }
