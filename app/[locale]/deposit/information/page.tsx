@@ -14,11 +14,11 @@ export default function Page() {
     const pathName = usePathname()
 
     const handleNext =() =>{
-        router.push(`${pathName}/DPE`)
+        router.push(`dpe`)
         console.log(formData)
     }
     const handlePrevious=()=>{
-        router.push(`/`)
+        router.push(`localisation`)
     }
     const handleUpdate = (key: string, value: any) => {
         setFormData((prev) => ({...prev, [key]: value}));
