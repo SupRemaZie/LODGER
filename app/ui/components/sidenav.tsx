@@ -19,16 +19,30 @@ import { Button } from "@heroui/react";
 import LodgerButton from "./LodgerButton";
 import { Accordion, AccordionItem } from "@heroui/react";
 import { Link as HeroLink } from "@heroui/react";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function SideNav() {
   const { currentStep, setCurrentStep } = useBreadcrumb(); // Utiliser le contexte
+  const router = useRouter();
+  const pathname = usePathname();
   const trans = useTranslations("PropertydepositPage");
 
-  const setLanguage = (locale: string) => {
-    if (typeof window !== "undefined") {
-      window.location.href = `/${locale}`;
-    }
+  const validatedSubSteps = [
+    { step: "home", values: [0, 0, 0, 0] },
+    { step: "apartment", values: [0, 0, 0, 0] },
+    { step: "localisation", values: [1, 0, 0, 0] },
+    { step: "information", values: [1, 1, 0, 0] },
+    { step: "dpe", values: [1, 1, 1, 0] }
+  ]
 
+  const setLanguage = (locale: string) => {
+    const segments = pathname.split("/");
+
+    if (segments.length > 1) {
+      segments[1] = locale; // changer la langue dans l'URL
+      const newPath = segments.join("/") || "/";
+      router.replace(newPath); // remplace l'URL sans reload
+    }
   };
 
   // fonction pour récupérer la langue actuelle
@@ -41,15 +55,34 @@ export default function SideNav() {
 
   };
 
+  // fonction pour l'étape sélectionnée
+  const actualStep = () => {
+    var segments = pathname.split("/");
+    // on vérifie si le dernier segment est /feature et si oui, on retourne ["2"] sinon on retourne ["1"]
+    if (segments[segments.length - 1] === "features") {
+      return ["2"];
+    } else {
+      return ["1"];
+    }
+  };
+
+  // fonction pour lock les autres étapes
+  const otherSteps = () => {
+    var steps = ["1", "2", "3"];
+    var currentStep = actualStep();
+    var otherSteps = steps.filter((step) => !currentStep.includes(step));
+    return otherSteps;
+  };
+
   return (
-    <div className="flex flex-col h-full">
+    <div className="hidden md:flex flex-col h-full">
       <div className="flex h-full flex-col m-4  md:px-2">
         <Link
           className="flex flex-col h-fit items-start pt-8 pb-4 rounded-md   "
           href="/"
         >
           <Image
-            src="/logo_lodger.png"
+            src="/images/logo_lodger.png"
             width={147}
             height={32}
             className="md:block mb-4"
@@ -62,25 +95,42 @@ export default function SideNav() {
         </p>
 
         <div className="pt-5">
-          <Accordion variant="splitted" defaultSelectedKeys={["1"]} disabledKeys={["2", "3"]}>
-            <AccordionItem key="1" aria-label="Accordion 1" title="Etape 1" startContent={<HiOutlineHome />} classNames={{base: "bg-green-50 border-1 border-green-400", title: "text-primary-100 font-semibold"}}>
-              <div className="flex flex-col gap-2">
-                <ValidateSubstep label="Type de Bien"/>
-                <ValidateSubstep label="Localisation" isDisabled />
-                <ValidateSubstep label="Informations sur le bien" isDisabled />
-                <ValidateSubstep label="Diagnostic" isDisabled />
-              </div>
+          <Accordion variant="splitted" defaultSelectedKeys={actualStep()} disabledKeys={otherSteps()}>
+            <AccordionItem key="1" aria-label="Accordion 1" title={trans("sidebar.steps.stepOne")} startContent={<HiOutlineHome />} classNames={{base: "bg-green-50 border-1 border-green-400", title: "text-primary-100 font-semibold"}}>
+                <div className="flex flex-col gap-2">
+                  {validatedSubSteps.map((step) => {
+                  const segments = pathname.split("/");
+                  const lastSegment = segments[segments.length - 1];
+                  if (lastSegment === step.step) {
+                    return step.values.map((value, index) => (
+                    <ValidateSubstep
+                      key={index}
+                      label={trans(`sidebar.steps.stepOneSub${index + 1}`)}
+                      isDisabled={value === 0}
+                      isValid={value === 1}
+                    />
+                    ));
+                  }
+                  return null;
+                  })}
+                </div>
             </AccordionItem>
             <AccordionItem
               key="2"
               aria-label="Accordion 2"
-              title="Etape 2"
+              title={trans("sidebar.steps.stepTwo")}
               startContent={<LuBookmark />}
-            ></AccordionItem>
+            >
+              <div className="flex flex-col gap-2">
+                <ValidateSubstep label={trans("sidebar.steps.stepTwoSubOne")} isValid={false} />
+                <ValidateSubstep label={trans("sidebar.steps.stepTwoSubTwo")} isDisabled isValid={false} />
+                <ValidateSubstep label={trans("sidebar.steps.stepTwoSubThree")} isDisabled isValid={false} />
+              </div>
+            </AccordionItem>
             <AccordionItem
               key="3"
               aria-label="Accordion 3"
-              title="Etape 3"
+              title={trans("sidebar.steps.stepThree")}
               startContent={<LuBookmark />}
             ></AccordionItem>
           </Accordion>
@@ -115,28 +165,12 @@ export default function SideNav() {
           </DropdownTrigger>
           <DropdownMenu>
             <DropdownItem key="fr" onPress={() => setLanguage("fr")}>
-              <Image
-                src="/icons/flag_fr.svg"
-                alt="French Flag"
-                width={20}
-                height={15}
-                className="inline-block mr-2"
-              />
-              <Link href="/" locale="fr">
-                {trans("sidebar.languageSelect.fr")}
-              </Link>
+              <Image src="/icons/flag_fr.svg" alt="French Flag" width={20} height={15} className="inline-block mr-2" />
+              {trans("sidebar.languageSelect.fr")}
             </DropdownItem>
             <DropdownItem key="en" onPress={() => setLanguage("en")}>
-              <Image
-                src="/icons/flag_en.svg"
-                alt="English Flag"
-                width={20}
-                height={15}
-                className="inline-block mr-2"
-              />
-              <Link href="/" locale="en">
-                {trans("sidebar.languageSelect.en")}
-              </Link>
+              <Image src="/icons/flag_en.svg" alt="English Flag" width={20} height={15} className="inline-block mr-2" />
+              {trans("sidebar.languageSelect.en")}
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
