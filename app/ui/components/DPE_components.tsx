@@ -41,7 +41,7 @@ const GradeBar = ({
         ))}
       </div>
       <div>
-        <div className="flex justify-between mt-2 text-xs text-gray-500 mt-6">
+        <div className="flex justify-between text-xs text-gray-500 mt-6">
           {leastString && <span>{leastString}</span>}
           {mostString && <span>{mostString}</span>}
         </div>
