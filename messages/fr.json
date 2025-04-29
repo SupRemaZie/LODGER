@@ -66,10 +66,10 @@
       "title": "DÉPOSEZ VOTRE BIEN",
       "steps": {
         "stepOne": "Étape 1",
-        "stepOneSubOne": "Type de biens",
-        "stepOneSubTwo": "Localisation",
-        "stepOneSubThree": "Informations sur le bien",
-        "stepOneSubFour": "Diagnostic",
+        "stepOneSub1": "Type de biens",
+        "stepOneSub2": "Localisation",
+        "stepOneSub3": "Informations sur le bien",
+        "stepOneSub4": "Diagnostic",
         "stepTwo": "Étape 2",
         "stepThree": "Étape 3"
       },

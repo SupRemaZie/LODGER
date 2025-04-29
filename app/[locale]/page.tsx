@@ -6,7 +6,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/deposit");
+    router.replace("/deposit/home"); // Redirige vers la page de dépôt
   }, []);
 
   return null; 

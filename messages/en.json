@@ -66,10 +66,10 @@
       "title": "LIST YOUR PROPERTY",
       "steps": {
         "stepOne": "Step 1",
-        "stepOneSubOne": "Type of property",
-        "stepOneSubTwo": "Location",
-        "stepOneSubThree": "Property information",
-        "stepOneSubFour": "Diagnostics",
+        "stepOneSub1": "Type of property",
+        "stepOneSub2": "Location",
+        "stepOneSub3": "Property information",
+        "stepOneSub4": "Diagnostics",
         "stepTwo": "Step 2",
         "stepThree": "Step 3"
       },

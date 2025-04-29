@@ -27,6 +27,14 @@ export default function SideNav() {
   const pathname = usePathname();
   const trans = useTranslations("PropertydepositPage");
 
+  const validatedSteps = [
+    { step: "home", values: [0, 0, 0, 0] },
+    { step: "apartment", values: [0, 0, 0, 0] },
+    { step: "localisation", values: [1, 0, 0, 0] },
+    { step: "information", values: [1, 1, 0, 0] },
+    { step: "dpe", values: [1, 1, 1, 0] },
+  ]
+
 
 
   const setLanguage = (locale: string) => {
@@ -73,10 +81,21 @@ export default function SideNav() {
           <Accordion variant="splitted" defaultSelectedKeys={["1"]} disabledKeys={["2", "3"]}>
             <AccordionItem key="1" aria-label="Accordion 1" title={trans("sidebar.steps.stepOne")} startContent={<HiOutlineHome />} classNames={{base: "bg-green-50 border-1 border-green-400", title: "text-primary-100 font-semibold"}}>
                 <div className="flex flex-col gap-2">
-                <ValidateSubstep label={trans("sidebar.steps.stepOneSubOne")} isValid={true} />
-                <ValidateSubstep label={trans("sidebar.steps.stepOneSubTwo")} isDisabled isValid={false} />
-                <ValidateSubstep label={trans("sidebar.steps.stepOneSubThree")} isDisabled isValid={false} />
-                <ValidateSubstep label={trans("sidebar.steps.stepOneSubFour")} isDisabled isValid={false} />
+                  {validatedSteps.map((step) => {
+                  const segments = pathname.split("/");
+                  const lastSegment = segments[segments.length - 1];
+                  if (lastSegment === step.step) {
+                    return step.values.map((value, index) => (
+                    <ValidateSubstep
+                      key={index}
+                      label={trans(`sidebar.steps.stepOneSub${index + 1}`)}
+                      isDisabled={value === 0}
+                      isValid={value === 1}
+                    />
+                    ));
+                  }
+                  return null;
+                  })}
                 </div>
             </AccordionItem>
             <AccordionItem
