@@ -7,7 +7,7 @@ import {useTranslations} from "next-intl";
 import {Button} from "@heroui/react";
 import Footer from "@/app/ui/components/Footer";
 import Header from "@/app/ui/components/Header";
-import { useFormData } from '../../context/FormDataContext';
+import { useFormData } from '@/app/context/FormDataContext';
 import {usePathname, useRouter} from "next/navigation";
 
 export default function Page() {
@@ -27,10 +27,10 @@ export default function Page() {
     const handleNext = () => {
 
         if(formData.typeOfLogement == "MAISON"){
-            router.push(`${pathname}/localisation`);
+            router.push(`localisation`);
         }
         else {
-            router.push(`${pathname}/apartment`);
+            router.push(`apartment`);
         }
         console.log(formData)
     };
@@ -39,7 +39,7 @@ export default function Page() {
     return (
         <div className="w-full">
             <div className="font-[500] flex flex-col  min-h-content p-12 scrollbar-hide">
-                <Header title={trans("stepOne.header.title")} question={trans("stepOne.header.question")} />
+                <Header title={trans("stepOne.stepOne-subOneLogement.title")} question={trans("stepOne.stepOne-subOneLogement.title")} />
                 <section id="content" className="pt-8 text-[#02504D]">
                 <span className="font-[700] text-sm">
                     {trans('stepOne.content.title')}
@@ -68,7 +68,7 @@ export default function Page() {
                     </div>
                 </section>
             </div>
-        <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfLogement} />
+        <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfLogement} step={1}/>
         </div>
 
 

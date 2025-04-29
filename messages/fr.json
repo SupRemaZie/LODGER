@@ -5,12 +5,50 @@
       "back": "Retour",
       "next": "Suivant"
     },
-    "stepOne": {
-      "header": {
-        "title": "Étape 1 - Type de biens",
-        "question": "Quel bien louez vous ?",
-        "typeOfPropertyQuestion": "Quel type de logement sera à la disposition des locataires ?"
+    "formEntry": {
+      "surface": {
+        "title": "Surface",
+        "description": "Veuillez entrer la surface de votre bien en m²"
       },
+      "rooms-number": {
+        "title": "Nombre de pièces",
+        "description": "Supérieur à 9m²"
+      },
+      "bedrooms-number": {
+        "title": "Nombre de chambres",
+        "description": "Supérieur à 9m²"
+      },
+      "bathrooms-number": {
+        "title": "Nombre de salles de bain",
+        "description": "Supérieur à 9m²"
+      },
+      "floor-number": {
+        "title": "Étage de l'appartement",
+        "description": "Supérieur à 9m²"
+      },
+      "shared-spaces": {
+        "title": "Espaces partagés",
+        "description": "Supérieur à 9m²"
+      }
+    },
+    "stepOne": {
+      "stepOne-subOneLogement": {
+        "title": "Etape 1 - Type de biens",
+        "question": "Quel type de bien louez-vous ?"
+      },
+      "stepOne-subOneBiens": {
+        "title": "Etape1 - Type de biens",
+        "question": "Quel type de logement sera à la disposition des locataires ?"
+      },
+      "stepOne-subTwo": {
+        "title": "Etape1 - Localisation",
+        "question": "Où est situé votre logement ?",
+        "subtitle": "Votre adresse"
+      },
+        "stepOne-subThree": {
+            "title": "Etape 1 - Information sur le bien",
+            "question": "Donner les informations principales concernant votre bien"
+        },
       "content": {
         "title": "Type de biens",
         "propertyType": {
@@ -24,15 +62,25 @@
         }
       }
     },
+    "stepTwo": {
+      "stepTwo-subOne": {
+        "title": "Etape 2 - Caractéristiques",
+        "question": "Indiquez les caractéristiques de votre bien",
+        "text" : "Développé par un autre groupe"
+      }
+    },
     "sidebar": {
       "title": "DÉPOSEZ VOTRE BIEN",
       "steps": {
         "stepOne": "Étape 1",
-        "stepOneSubOne": "Type de biens",
-        "stepOneSubTwo": "Localisation",
-        "stepOneSubThree": "Informations sur le bien",
-        "stepOneSubFour": "Diagnostic",
+        "stepOneSub1": "Type de biens",
+        "stepOneSub2": "Localisation",
+        "stepOneSub3": "Informations sur le bien",
+        "stepOneSub4": "Diagnostic",
         "stepTwo": "Étape 2",
+        "stepTwoSubOne": "Caractéristiques",
+        "stepTwoSubTwo": "Photos",
+        "stepTwoSubThree": "Titre et description",
         "stepThree": "Étape 3"
       },
       "language": "Langue",

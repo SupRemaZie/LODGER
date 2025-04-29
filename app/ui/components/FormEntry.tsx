@@ -63,8 +63,13 @@ export default function FormEntry({ title, description, logo, type, onUpdate }: 
                 )}
                 {type === "count" && (
                     <div className="flex flex-row justify-end w-full max-w-lg self-center">
-                        <Button isIconOnly className="rounded-full mx-2" onPress={() => setCounting(counting == 0 ? 0 : counting - 1)}>
-                            <img
+                        <Button isIconOnly className="rounded-full mx-2" onPress={() => {
+                            const newValue = counting === 0 ? 0 : counting - 1;
+                            setCounting(newValue);
+                            onUpdate(newValue);
+                        }}>
+
+                        <img
                                 src="/icons/minus-icon.svg"
                                 alt="Retirer"
                                 width={24}
@@ -74,7 +79,12 @@ export default function FormEntry({ title, description, logo, type, onUpdate }: 
                         <div className="text-primary-100 font-bold text-center align-middle m-2">
                             {counting}
                         </div>
-                        <Button isIconOnly className="rounded-full mx-2" onPress={() => setCounting(counting + 1)}>
+                        <Button isIconOnly className="rounded-full mx-2" onPress={() =>{
+                            const newCount = counting + 1;
+                            setCounting(newCount);
+                            onUpdate(newCount);
+                        }}>
+
                             <img
                                 src="/icons/add-icon.svg"
                                 alt="Ajouter"

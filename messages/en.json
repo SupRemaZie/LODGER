@@ -5,28 +5,82 @@
       "back": "Back",
       "next": "Next"
     },
+    "formEntry": {
+      "surface": {
+        "title": "Surface",
+        "description": "Please enter the surface area of your property in m²"
+      },
+      "rooms-number": {
+        "title": "Number of rooms",
+        "description": "Greater than 9m²"
+      },
+      "bedrooms-number": {
+        "title": "Number of bedrooms",
+        "description": "Greater than 9m²"
+      },
+      "bathrooms-number": {
+        "title": "Number of bathrooms",
+        "description": "Greater than 9m²"
+      },
+      "floor-number": {
+        "title": "Apartment floor",
+        "description": "Greater than 9m²"
+      },
+      "shared-spaces": {
+        "title": "Shared spaces",
+        "description": "Greater than 9m²"
+      }
+    },
     "stepOne": {
-      "header": {
-        "title": "Step 1 - Property Type",
+      "stepOne-subOneLogement": {
+        "title": "Step 1 - Type of property",
         "question": "What type of property are you renting?"
       },
+      "stepOne-subOneBiens": {
+        "title": "Step 1 - Type of property",
+        "question": "What kind of accommodation will be available to tenants?"
+      },
+      "stepOne-subTwo": {
+        "title": "Step 1 - Location",
+        "question": "Where is your property located?",
+        "subtitle": "Your address"
+      },
+      "stepOne-subThree": {
+        "title": "Step 1 - Property information",
+        "question": "Provide the main information about your property"
+      },
       "content": {
-        "title": "Property Type",
+        "title": "Type of property",
         "propertyType": {
           "house": "House",
           "apartment": "Apartment"
+        },
+        "logementType": {
+          "full": "Entire accommodation",
+          "shared": "Shared room",
+          "room-apart": "Room in a private home"
         }
+      }
+    },
+    "stepTwo": {
+      "stepTwo-subOne": {
+        "title": "Step 2 - Features",
+        "question": "Indicate the features of your property",
+        "text": "Developed by another group"
       }
     },
     "sidebar": {
       "title": "LIST YOUR PROPERTY",
       "steps": {
         "stepOne": "Step 1",
-        "stepOneSubOne": "Property Type",
-        "stepOneSubTwo": "Location",
-        "stepOneSubThree": "Property Information",
-        "stepOneSubFour": "Diagnostic",
+        "stepOneSub1": "Type of property",
+        "stepOneSub2": "Location",
+        "stepOneSub3": "Property information",
+        "stepOneSub4": "Diagnostics",
         "stepTwo": "Step 2",
+        "stepTwoSubOne": "Features",
+        "stepTwoSubTwo": "Photos",
+        "stepTwoSubThree": "Title and description",
         "stepThree": "Step 3"
       },
       "language": "Language",
