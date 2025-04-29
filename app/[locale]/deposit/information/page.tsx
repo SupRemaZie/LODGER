@@ -26,7 +26,10 @@ export default function Page() {
         setFormData((prev) => {
             // Cas: mise à jour d'un tableau avec index (ex: { index: 1, value: 20 })
             if (typeof value === 'object' && value !== null && 'index' in value && 'value' in value) {
-                const currentArray = Array.isArray(prev[key]) ? [...prev[key]] : [];
+                const currentArray = Array.isArray((prev as Record<string, any>)[key])
+                    ? [...(prev as Record<string, any>)[key]]
+                    : [];
+
                 const val = Number(value.value);
                 if (isNaN(val)) return prev; // ignore les valeurs non numériques
                 currentArray[value.index] = val;
@@ -73,7 +76,7 @@ export default function Page() {
         <div className="w-full">
             <div className="font-[500] flex flex-col  min-h-screen p-12 scrollbar-hide">
                 <Header title={trans("stepOne.stepOne-subThree.title")} question={trans("stepOne.stepOne-subThree.question")} />
-                <section id="content" className="flex flex-col pt-8 gap-2 text-[#02504D] overflow-y-auto min-h-fit">
+                <section id="content" className="flex flex-col pt-8 gap-2 text-[#02504D] overflow-y-auto h-96">
                     <FormEntry title={trans("formEntry.surface.title")} description={trans('formEntry.surface.description')} logo="/icons/superficie-icon.svg" type="number" onUpdate={(value : number)=>handleUpdate('superficie',value )}/>
                     {formData.typeOfProperty == "HABITANT" && (
                         <FormEntry title={trans("formEntry.bedrooms-surface.title")}
