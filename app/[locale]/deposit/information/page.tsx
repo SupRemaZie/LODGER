@@ -14,7 +14,7 @@ export default function Page() {
     const pathName = usePathname()
 
     const handleNext =() =>{
-        router.push(`${pathName}/DPE`)
+        router.push(`dpe`)
         console.log(formData)
     }
     const handlePrevious=()=>{
