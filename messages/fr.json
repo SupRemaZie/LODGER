@@ -65,7 +65,8 @@
     "stepTwo": {
       "stepTwo-subOne": {
         "title": "Etape 2 - Caractéristiques",
-        "question": "Indiquez les caractéristiques de votre bien"
+        "question": "Indiquez les caractéristiques de votre bien",
+        "text" : "Développé par un autre groupe"
       }
     },
     "sidebar": {
