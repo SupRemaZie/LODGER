@@ -102,8 +102,8 @@ export default function SideNav() {
         <div className="pt-5">
           <Accordion
             variant="splitted"
-            defaultSelectedKeys={actualStep()}
-            disabledKeys={otherSteps()}
+            selectedKeys={selectedKeys} // Utilisation des clés contrôlées
+            disabledKeys={disabledKeys} // Utilisation des clés contrôlées
           >
             <AccordionItem
               key="1"
