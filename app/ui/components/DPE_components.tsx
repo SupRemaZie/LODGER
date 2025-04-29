@@ -121,15 +121,16 @@ const DPESelector = ({handleUpdate}:{handleUpdate?:any}) => {
   const [noDPE, setNoDPE] = useState(false);
 
   const toggleNoDPE = () => {
-    setNoDPE(!noDPE);
-    if (noDPE) {
+    const newNoDPE = !noDPE;
+    setNoDPE(newNoDPE);
+    if (newNoDPE) {
       setEnergyValue(0);
       setCo2Value(0);
       setEnergyGrade(0);
       setCo2Grade(0);
     }
-    handleUpdate("kWhEP", noDPE ? 0 : energyValue);
-    handleUpdate("kgCO2", noDPE ? 0 : co2Value);
+    handleUpdate("kWhEP", newNoDPE ? 0 : energyValue);
+    handleUpdate("kgCO2", newNoDPE ? 0 : co2Value);
   }
 
   const handleEnergyValueChange = (value: number) => {
