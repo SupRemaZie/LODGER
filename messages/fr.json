@@ -5,12 +5,45 @@
       "back": "Retour",
       "next": "Suivant"
     },
-    "stepOne": {
-      "header": {
-        "title": "Étape 1 - Type de biens",
-        "question": "Quel bien louez vous ?",
-        "typeOfPropertyQuestion": "Quel type de logement sera à la disposition des locataires ?"
+    "formEntry": {
+      "surface": {
+        "title": "Surface",
+        "description": "Veuillez entrer la surface de votre bien en m²"
       },
+      "rooms-number": {
+        "title": "Nombre de pièces",
+        "description": "Supérieur à 9m²"
+      },
+      "bedrooms-number": {
+        "title": "Nombre de chambres",
+        "description": "Supérieur à 9m²"
+      },
+      "bathrooms-number": {
+        "title": "Nombre de salles de bain",
+        "description": "Supérieur à 9m²"
+      },
+      "floor-number": {
+        "title": "Étage de l'appartement",
+        "description": "Supérieur à 9m²"
+      },
+      "shared-spaces": {
+        "title": "Espaces partagés",
+        "description": "Supérieur à 9m²"
+      }
+    },
+    "stepOne": {
+      "stepOne-subOne": {
+        "title": "Etape 1 - Type de biens",
+        "question": "Quel type de bien louez-vous ?"
+      },
+      "stepOne-subTwo": {
+        "title": "Etape1 - Type de biens",
+        "question": "Quel type de logement sera à la disposition des locataires ?"
+      },
+        "stepOne-subThree": {
+            "title": "Etape 1 - Information sur le bien",
+            "question": "Donner les informations principales concernant votre bien"
+        },
       "content": {
         "title": "Type de biens",
         "propertyType": {
