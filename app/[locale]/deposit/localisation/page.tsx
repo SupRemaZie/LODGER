@@ -36,7 +36,7 @@ export default function Page() {
                     <AddressMap/>
                 </section>
             </div>
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfProperty} />
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfProperty} step={1}/>
 
         </div>
     )

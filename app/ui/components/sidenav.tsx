@@ -103,7 +103,13 @@ export default function SideNav() {
               aria-label="Accordion 2"
               title={trans("sidebar.steps.stepTwo")}
               startContent={<LuBookmark />}
-            ></AccordionItem>
+            >
+              <div className="flex flex-col gap-2">
+                <ValidateSubstep label={trans("sidebar.steps.stepTwoSubOne")} isValid={false} />
+                <ValidateSubstep label={trans("sidebar.steps.stepTwoSubTwo")} isDisabled isValid={false} />
+                <ValidateSubstep label={trans("sidebar.steps.stepTwoSubThree")} isDisabled isValid={false} />
+              </div>
+            </AccordionItem>
             <AccordionItem
               key="3"
               aria-label="Accordion 3"
