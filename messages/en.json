@@ -31,13 +31,22 @@
         "description": "Greater than 9m²"
       }
     },
+    "dpeEntry": {
+      "blank": "Blank DPE: My DPE does not show any energy classification",
+      "result": "DPE Result*",
+      "leastEfficient": "Most energy efficient",
+      "mostEfficient": "Least energy efficient",
+      "gaz": "Greenhouse Gas Emissions (GHG)*",
+      "leastGaz": "Low emissions",
+      "mostGaz": "High emissions"
+    },
     "stepOne": {
       "stepOne-subOneLogement": {
-        "title": "Step 1 - Type of property",
+        "title": "Step 1 - Property type",
         "question": "What type of property are you renting?"
       },
       "stepOne-subOneBiens": {
-        "title": "Step 1 - Type of property",
+        "title": "Step 1 - Property type",
         "question": "What kind of accommodation will be available to tenants?"
       },
       "stepOne-subTwo": {
@@ -49,14 +58,18 @@
         "title": "Step 1 - Property information",
         "question": "Provide the main information about your property"
       },
+      "stepOne-subFour": {
+        "title": "Step 1 - Energy performance diagnosis",
+        "question": "Indicate the DPE of your property"
+      },
       "content": {
-        "title": "Type of property",
+        "title": "Property type",
         "propertyType": {
           "house": "House",
           "apartment": "Apartment"
         },
         "logementType": {
-          "full": "Entire accommodation",
+          "full": "Entire property",
           "shared": "Shared room",
           "room-apart": "Room in a private home"
         }
@@ -73,10 +86,10 @@
       "title": "LIST YOUR PROPERTY",
       "steps": {
         "stepOne": "Step 1",
-        "stepOneSub1": "Type of property",
+        "stepOneSub1": "Property type",
         "stepOneSub2": "Location",
         "stepOneSub3": "Property information",
-        "stepOneSub4": "Diagnostics",
+        "stepOneSub4": "Diagnosis",
         "stepTwo": "Step 2",
         "stepTwoSubOne": "Features",
         "stepTwoSubTwo": "Photos",
@@ -90,9 +103,12 @@
       },
       "footer": {
         "title": "Need help?",
-        "description": "Please contact us via the support team email.",
+        "description": "Please contact us via the support team's email.",
         "help-button": "Contact Us"
       }
     }
+  },
+  "AddressMap": {
+    "inputPlaceholder": "Enter an address"
   }
 }

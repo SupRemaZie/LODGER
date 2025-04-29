@@ -30,7 +30,7 @@ export default function FormEntry({ title, description, logo, type, onUpdate }: 
     }, [counting, number, selectedKeys, isYesNo]);
 
     return (
-        <div className="flex flex-col items-center justify-center py-1 w-full">
+        <div className="flex flex-col items-start justify-center py-1 w-full">
             <div className="flex flex-row items-start justify-center w-full max-w-6xl bg-white rounded-3xl shadow-md p-3 h-30">
                 <div className="flex flex-col items-start justify-center w-full">
                     <div className="flex flex-col items-start">
@@ -66,7 +66,6 @@ export default function FormEntry({ title, description, logo, type, onUpdate }: 
                         <Button isIconOnly className="rounded-full mx-2" onPress={() => {
                             const newValue = counting === 0 ? 0 : counting - 1;
                             setCounting(newValue);
-                            onUpdate(newValue);
                         }}>
 
                         <img
@@ -82,7 +81,6 @@ export default function FormEntry({ title, description, logo, type, onUpdate }: 
                         <Button isIconOnly className="rounded-full mx-2" onPress={() =>{
                             const newCount = counting + 1;
                             setCounting(newCount);
-                            onUpdate(newCount);
                         }}>
 
                             <img

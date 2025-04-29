@@ -18,8 +18,20 @@
         "title": "Nombre de chambres",
         "description": "Supérieur à 9m²"
       },
+      "bedrooms-surface": {
+        "title": "Surface de la chambre",
+        "description": "Supérieur à 9m²"
+      },
+      "furnished": {
+        "title": "Meublé",
+        "description": "Supérieur à 9m²"
+      },
       "bathrooms-number": {
-        "title": "Nombre de salles de bain",
+        "title": "Nombre de salles de bains",
+        "description": "Supérieur à 9m²"
+      },
+      "showers-rooms-number": {
+        "title": "Nombre de salle d'eau",
         "description": "Supérieur à 9m²"
       },
       "floor-number": {
@@ -30,6 +42,15 @@
         "title": "Espaces partagés",
         "description": "Supérieur à 9m²"
       }
+    },
+    "dpeEntry" : {
+      "blank" : "DPE Vierge : Mon DPE n'indique aucun classement énergétique",
+      "result" : "Résultat du DPE*",
+      "leastEfficient" : "Efficent énergétiquement",
+      "mostEfficient" : "Peu efficient énergétiquement",
+      "gaz" : "Emissions de Gaz à Effet de Serre (GES)*",
+      "leastGaz" : "Peu d'émissions",
+      "mostGaz" : "Fortes émissions"
     },
     "stepOne": {
       "stepOne-subOneLogement": {
@@ -45,10 +66,14 @@
         "question": "Où est situé votre logement ?",
         "subtitle": "Votre adresse"
       },
-        "stepOne-subThree": {
+      "stepOne-subThree": {
             "title": "Etape 1 - Information sur le bien",
             "question": "Donner les informations principales concernant votre bien"
         },
+      "stepOne-subFour": {
+        "title": "Etape 1 - Diagnostic",
+        "question": "Indiquer le DPE de votre bien"
+      },
       "content": {
         "title": "Type de biens",
         "propertyType": {
@@ -94,5 +119,8 @@
         "help-button": "Nous Contacter"
       }
     }
+  },
+  "AddressMap": {
+    "inputPlaceholder": "Entrez une adresse"
   }
 }
