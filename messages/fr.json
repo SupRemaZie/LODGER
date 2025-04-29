@@ -32,13 +32,18 @@
       }
     },
     "stepOne": {
-      "stepOne-subOne": {
+      "stepOne-subOneLogement": {
         "title": "Etape 1 - Type de biens",
         "question": "Quel type de bien louez-vous ?"
       },
-      "stepOne-subTwo": {
+      "stepOne-subOneBiens": {
         "title": "Etape1 - Type de biens",
         "question": "Quel type de logement sera à la disposition des locataires ?"
+      },
+      "stepOne-subTwo": {
+        "title": "Etape1 - Localisation",
+        "question": "Où est situé votre logement ?",
+        "subtitle": "Votre adresse"
       },
         "stepOne-subThree": {
             "title": "Etape 1 - Information sur le bien",

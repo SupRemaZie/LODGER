@@ -39,7 +39,7 @@ export default function Page() {
     return (
         <div className="w-full">
             <div className="font-[500] flex flex-col  min-h-content p-12 scrollbar-hide">
-                <Header title={trans("stepOne.stepOne-subOne.title")} question={trans("stepOne.stepOne-subOne.title")} />
+                <Header title={trans("stepOne.stepOne-subOneLogement.title")} question={trans("stepOne.stepOne-subOneLogement.title")} />
                 <section id="content" className="pt-8 text-[#02504D]">
                 <span className="font-[700] text-sm">
                     {trans('stepOne.content.title')}
