@@ -18,8 +18,20 @@
         "title": "Nombre de chambres",
         "description": "Supérieur à 9m²"
       },
+      "bedrooms-surface": {
+        "title": "Surface de la chambre",
+        "description": "Supérieur à 9m²"
+      },
+      "furnished": {
+        "title": "Meublé",
+        "description": "Supérieur à 9m²"
+      },
       "bathrooms-number": {
-        "title": "Nombre de salles de bain",
+        "title": "Nombre de salles de bains",
+        "description": "Supérieur à 9m²"
+      },
+      "showers-rooms-number": {
+        "title": "Nombre de salle d'eau",
         "description": "Supérieur à 9m²"
       },
       "floor-number": {
