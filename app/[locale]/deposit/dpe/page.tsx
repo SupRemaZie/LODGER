@@ -16,7 +16,7 @@ export default function Page() {
   };
 
   const handleNext = () => {
-    router.push(`summary`);
+    router.push(`features`);
   };
 
   const handleUpdate = (key: string, value: any) => {
@@ -41,6 +41,7 @@ export default function Page() {
             requiredField={formData.kWhEP}
             onNext={handleNext}
             onPrevious={handlePrevious}
+            step={1}
           />
     </>
   );
