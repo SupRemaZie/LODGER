@@ -19,6 +19,7 @@ import LodgerButton from "./LodgerButton";
 import { Accordion, AccordionItem } from "@heroui/react";
 import { Link as HeroLink } from "@heroui/react";
 import { useRouter, usePathname } from "next/navigation";
+import path from "path";
 import { useRef } from "react";
 
 export default function SideNav() {
@@ -26,7 +27,7 @@ export default function SideNav() {
   const router = useRouter();
   const pathname = usePathname();
   const trans = useTranslations("PropertydepositPage");
-  
+  const [currentLanguage, setCurrentLanguage] = useState("fr"); // État pour la langue actuelle
   const validatedSubSteps = [
     { step: "home", values: [0, 0, 0, 0] },
     { step: "apartment", values: [0, 0, 0, 0] },
@@ -55,6 +56,29 @@ export default function SideNav() {
     setDisabledKeys(otherSteps());
   }, [pathname]);
 
+  // fonction pour changer la langue
+  const changeLanguage = (lang: string) => {
+    setCurrentLanguage(lang);
+    // Mettre à jour la langue dans le contexte ou le stockage local si nécessaire
+    if (pathname.split("/").length > 2) {
+      router.push(
+        `/${lang}${pathname.substring(pathname.indexOf("/", 1))}`
+      );
+    }
+  };
+
+  useEffect(() => {
+    // Vérifier la langue actuelle à partir de l'URL ou du stockage local
+    const segments = pathname.split("/");
+    const lang = segments[1]; // Supposons que la langue soit le premier segment de l'URL
+    if (lang === "fr" || lang === "en") {
+      setCurrentLanguage(lang);
+    } else {
+      setCurrentLanguage("fr"); // Langue par défaut
+    }
+  }
+  , [pathname]); // Dépendance sur pathname pour mettre à jour la langue lorsque l'URL change
+
   return (
     <div className="hidden md:flex flex-col h-full">
       <div className="flex h-full flex-col m-4 md:px-2">
@@ -78,8 +102,8 @@ export default function SideNav() {
         <div className="pt-5">
           <Accordion
             variant="splitted"
-            selectedKeys={selectedKeys} // Utilisation des clés contrôlées
-            disabledKeys={disabledKeys} // Utilisation des clés contrôlées
+            defaultSelectedKeys={actualStep()}
+            disabledKeys={otherSteps()}
           >
             <AccordionItem
               key="1"
@@ -141,16 +165,106 @@ export default function SideNav() {
           </Accordion>
         </div>
       </div>
+      <div
+        id="down-sidebar"
+        className="flex flex-col h-full px-6 justify-end py-10"
+      >
+        <Dropdown>
+          <DropdownTrigger>
+            <Button
+              variant="shadow"
+              className="text-primary-100 font-semibold bg-white border-1 border-gray-200"
+            >
+              <Image
+                src={"/icons/flag_" + currentLanguage + ".svg"}
+                alt="Current Flag"
+                width={20}
+                height={15}
+                className="inline-block mr-2  "
+              />
+              {trans("sidebar.languageSelect." + currentLanguage)}
+              <Image
+                src="/icons/next-icon.svg"
+                alt="Arrow Down"
+                width={20}
+                height={15}
+                className="inline-block ml-2"
+              />
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu>
+            <DropdownItem key="fr" onPress={() => changeLanguage("fr")}>
+              <Image
+                src="/icons/flag_fr.svg"
+                alt="French Flag"
+                width={20}
+                height={15}
+                className="inline-block mr-2"
+              />
+              {trans("sidebar.languageSelect.fr")}
+            </DropdownItem>
+            <DropdownItem key="en" onPress={() => changeLanguage("en")}>
+              <Image
+                src="/icons/flag_en.svg"
+                alt="English Flag"
+                width={20}
+                height={15}
+                className="inline-block mr-2"
+              />
+              {trans("sidebar.languageSelect.en")}
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        <div className="mt-4 flex flex-col">
+          <Divider className="" />
+          <div className="flex flex-col items-left mt-4 gap-y-2">
+            <Image
+              src="/icons/support-icon.svg"
+              width={40}
+              height={40}
+              alt="Footer Logo"
+              className="mb-2"
+            />
+            <p
+              className={`${albert_sans.className} text-md font-semibold text-gray-700`}
+            >
+              {trans("sidebar.footer.title")}
+            </p>
+            <p
+              className={`${albert_sans.className} text-xs text-gray-500 text-left mt-1`}
+            >
+              {trans("sidebar.footer.description")}
+            </p>
+            <LodgerButton
+              type="no-border"
+              className="m-2 w-4/5"
+              label={trans("sidebar.footer.help-button")}
+            ></LodgerButton>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
-export function ValidateSubstep({ isValid, label, isDisabled }: { isValid?: boolean, label?: string, isDisabled?: boolean }) {
+export function ValidateSubstep({
+  isValid,
+  label,
+  isDisabled,
+}: {
+  isValid?: boolean;
+  label?: string;
+  isDisabled?: boolean;
+}) {
   return (
     <>
       <HeroLink isDisabled={isDisabled} className="text-primary-100">
         <Image
-          src={"/icons/" + (isValid || false ? "filled" : "empty") + "-circle-icon.svg"}
+          src={
+            "/icons/" +
+            (isValid || false ? "filled" : "empty") +
+            "-circle-icon.svg"
+          }
           width={16}
           height={16}
           className="mr-1"
