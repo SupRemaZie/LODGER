@@ -65,7 +65,8 @@
     "stepTwo": {
       "stepTwo-subOne": {
         "title": "Step 2 - Features",
-        "question": "Indicate the features of your property"
+        "question": "Indicate the features of your property",
+        "text": "Developed by another group"
       }
     },
     "sidebar": {
