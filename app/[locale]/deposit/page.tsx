@@ -1,114 +1,76 @@
 "use client";
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import Image from "next/image";
-import { Button } from "@heroui/react";
 import FormEntry from "@/app/ui/components/FormEntry";
 import LodgerButton from "@/app/ui/components/LodgerButton";
-import AddressMap from "@/app/ui/components/AddressMap";
+import {useTranslations} from "next-intl";
+import {Button} from "@heroui/react";
+import Footer from "@/app/ui/components/Footer";
+import Header from "@/app/ui/components/Header";
+import { useFormData } from '../../context/FormDataContext';
+import {usePathname, useRouter} from "next/navigation";
 
 export default function Page() {
-  const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    count: 0,
-    number: 0,
-    dropdown: new Set<string>(),
-    yesno: null,
-  });
+    const trans = useTranslations('PropertydepositPage')
+    const router = useRouter();
+    const pathname = usePathname();
+    const {formData, setFormData} = useFormData()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // ici on va recupérer les données dont on a besoin
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setLoading(false);
-      } catch (error) {
-        console.error("Erreur lors du chargement:", error);
-        setLoading(false);
-      }
+
+
+    const handleUpdate = (key: string, value: any) => {
+        setFormData((prev) => ({...prev, [key]: value}));
     };
-    fetchData();
-  }, []);
+    const handlePrevious = () =>{
+        router.push(`${pathname}`)
+    }
+    const handleNext = () => {
 
-  const handleUpdate = (key: string, value: any) => {
-    setFormData((prev) => ({ ...prev, [key]: value }));
-  };
+        if(formData.typeOfLogement == "MAISON"){
+            router.push(`${pathname}/localisation`);
+        }
+        else {
+            router.push(`${pathname}/apartment`);
+        }
+        console.log(formData)
+    };
 
-  const handleSubmit = () => {
-    console.log("Form Data:", formData);
-    // Vous pouvez envoyer les données au serveur ici
-    // fais un mock de l'envoi de données en affichant les données dans la console
-    alert("Données envoyées avec succès !");
-    console.log("Données envoyées:", formData);
-  };
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      {loading ? (
-        // Logo scintillant (loader)
-        <div className={"flex flex-col loader-animation text-center"}>
-          <Image
-            src="/logo_lodger.png"
-            width={147}
-            height={32}
-            className=""
-            alt="lodger logo"
-          />
-          <p>Loading ... </p>
-        </div>
-      ) : (
-        // Contenu final après chargement
-        <>
-          <div className="text-center w-full flex flex-col">
-            <h1 className="text-2xl font-bold">Bienvenue sur Lodger !</h1>
-            <p className="text-gray-600">Le contenu est maintenant affiché.</p>
-            <AddressMap/>
-            <FormEntry
-              title="Nombre de chambres"
-              description="Renseigner le nombre de chambres :"
-              logo="/icons/bed-icon.svg"
-              type="count"
-              onUpdate={(value) => handleUpdate("count", value)}
-            />
-            <FormEntry
-              title="Superficie"
-              description="Renseigner la superficie de votre bien :"
-              logo="/icons/superficie-icon.svg"
-              type="number"
-              onUpdate={(value) => handleUpdate("number", value)}
-            />
-            <FormEntry
-              title="Espaces Partagés"
-              description="Sélectionner les espaces partagés :"
-              logo="/icons/matter-icon.svg"
-              type="dropdown"
-              onUpdate={(value) => handleUpdate("dropdown", value)}
-            />
-            <FormEntry
-              title="Meublé"
-              description="Le bien est-il meublé ?"
-              logo="/icons/sofa-icon.svg"
-              type="yesno"
-              onUpdate={(value) => handleUpdate("yesno", value)}
-            />
-          </div>
-          <div className="flex flex-row justify-center space-x-3 mt-4 self-end">
-          <LodgerButton
-              onPress={handleSubmit}
-              className="mt-4"
-              label="Soumettre"
-              type="full-success"
-            />
-          </div>
-          <div
-              id="button-mock"
-              className="flex flex-row justify-center space-x-3 mt-4"
-            >
-              <LodgerButton type="default" label="Enregistrer et Quitter" />
-              <LodgerButton type="full-success" label="Suivant" />
-              <LodgerButton type="no-border" label="Retour" />
+    return (
+        <div className="w-full">
+            <div className="font-[500] flex flex-col  min-h-content p-12 scrollbar-hide">
+                <Header title={trans("stepOne.header.title")} question={trans("stepOne.header.question")} />
+                <section id="content" className="pt-8 text-[#02504D]">
+                <span className="font-[700] text-sm">
+                    {trans('stepOne.content.title')}
+                </span>
+                    <div className="flex flex-row gap-4 mt-4 font-[600] ">
+                        <Button onPress={() => handleUpdate("typeOfLogement", "APPARTEMENT")}
+                                variant="bordered" color="primary"
+                                className={`flex flex-col w-1/4 h-1/4 bg-white text-[#02504D]  ${
+                                    formData.typeOfLogement === "APPARTEMENT" ? "border-2 border-[#02DB82]" : ""
+                                }`}>
+                            <Image src="/images/appartment_choice_picture.png" alt="appartment choice" width={174} height={174}
+                                   className="w-2/3"/>
+                            <span className="text-[#02504D] font-bold text-base mb-6 ">
+                            {trans('stepOne.content.propertyType.apartment')}
+                        </span>
+                        </Button>
+                        <Button onPress={() => handleUpdate("typeOfLogement", "MAISON")} variant="bordered" color="primary"
+                                className={`flex flex-col w-1/4 h-1/4 bg-white text-[#02504D] ${formData.typeOfLogement === "MAISON" ? "border-2 border-[#02DB82]" : ""}`}>
+
+                            <Image src="/images/house_choice_picture.png" alt="house choice" width={174} height={174}
+                                   className="w-2/3"/>
+                            <span className="text-[#02504D] font-bold text-base mb-6">
+                            {trans('stepOne.content.propertyType.house')}
+                        </span>
+                        </Button>
+                    </div>
+                </section>
             </div>
-        </>
-      )}
-    </div>
-  );
+        <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfLogement} />
+        </div>
+
+
+    );
 }
