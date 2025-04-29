@@ -41,12 +41,12 @@ export default function Page() {
 
             // Cas spécial : adapter taille d’un tableau à un nombre (ex: nombre de chambres)
             if (key === 'bedroomNumber') {
-                const currentSurfaces = Array.isArray(prev['bedroom-surface']) ? prev['bedroom-surface'] : [];
+                const currentSurfaces = Array.isArray(prev['roomAreas']) ? prev['roomAreas'] : [];
                 const resizedSurfaces = currentSurfaces.slice(0, value);
                 return {
                     ...prev,
                     bedroomNumber: value,
-                    'bedroom-surface': resizedSurfaces,
+                    'roomAreas': resizedSurfaces,
                 };
             }
             if (key === 'spaceShare' && Array.isArray(value)) {
@@ -83,7 +83,7 @@ export default function Page() {
                                    description={trans('formEntry.bedrooms-surface.description')}
                                    logo="/icons/superficie-icon.svg"
                                    type="number"
-                                   onUpdate={(value)=>(handleUpdate('bedroom-surface', value))}
+                                   onUpdate={(value)=>(handleUpdate('roomAreas', value))}
                         />
                     )}
                     <FormEntry title={trans("formEntry.rooms-number.title")} description={trans('formEntry.rooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=>(handleUpdate('roomNumber', value))}/>
@@ -106,7 +106,7 @@ export default function Page() {
                                     logo="/icons/superficie-icon.svg"
                                     type="number"
                                     onUpdate={(value: number) => {
-                                        handleUpdate('bedroom-surface', { index, value })
+                                        handleUpdate('roomAreas', { index, value })
                                     }}
                                 />
                             ))}
