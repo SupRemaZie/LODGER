@@ -16,11 +16,11 @@ export interface LogementData {
     roomNumber: string;
     bedroomNumber: string;
     furnished: boolean;
-    bathRoomSpace: bigint;
-    powderRoomSpace: bigint;
-    appartmentFloor: bigint;
-    kWhEP: bigint;
-    kgCO2: bigint;
-    roomAreas: { area: number }[];
+    bathRoomSpace: string;
+    powderRoomSpace: string;
+    appartmentFloor: string;
+    kWhEP: string;
+    kgCO2: string;
+    roomAreas: { area: string }[];
     spaceShare: { type: string }[];
 }
