@@ -18,7 +18,7 @@ export default function Page() {
         console.log(formData)
     }
     const handlePrevious=()=>{
-        router.push(`/`)
+        router.push(`localisation`)
     }
     const handleUpdate = (key: string, value: any) => {
         setFormData((prev) => ({...prev, [key]: value}));

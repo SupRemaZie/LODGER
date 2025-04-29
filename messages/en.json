@@ -5,16 +5,60 @@
       "back": "Back",
       "next": "Next"
     },
+    "formEntry": {
+      "surface": {
+        "title": "Surface area",
+        "description": "Please enter the surface area of your property in m²"
+      },
+      "rooms-number": {
+        "title": "Number of rooms",
+        "description": "Greater than 9m²"
+      },
+      "bedrooms-number": {
+        "title": "Number of bedrooms",
+        "description": "Greater than 9m²"
+      },
+      "bathrooms-number": {
+        "title": "Number of bathrooms",
+        "description": "Greater than 9m²"
+      },
+      "floor-number": {
+        "title": "Apartment floor number",
+        "description": "Greater than 9m²"
+      },
+      "shared-spaces": {
+        "title": "Shared spaces",
+        "description": "Greater than 9m²"
+      }
+    },
     "stepOne": {
-      "header": {
-        "title": "Step 1 - Property Type",
+      "stepOne-subOneLogement": {
+        "title": "Step 1 - Type of property",
         "question": "What type of property are you renting?"
       },
+      "stepOne-subOneBiens": {
+        "title": "Step 1 - Type of property",
+        "question": "What kind of accommodation will be available to tenants?"
+      },
+      "stepOne-subTwo": {
+        "title": "Step 1 - Location",
+        "question": "Where is your property located?",
+        "subtitle": "Your address"
+      },
+      "stepOne-subThree": {
+        "title": "Step 1 - Property information",
+        "question": "Provide the main information about your property"
+      },
       "content": {
-        "title": "Property Type",
+        "title": "Type of property",
         "propertyType": {
           "house": "House",
           "apartment": "Apartment"
+        },
+        "logementType": {
+          "full": "Entire accommodation",
+          "shared": "Shared room",
+          "room-apart": "Room in a private home"
         }
       }
     },
@@ -22,10 +66,10 @@
       "title": "LIST YOUR PROPERTY",
       "steps": {
         "stepOne": "Step 1",
-        "stepOneSubOne": "Property Type",
+        "stepOneSubOne": "Type of property",
         "stepOneSubTwo": "Location",
-        "stepOneSubThree": "Property Information",
-        "stepOneSubFour": "Diagnostic",
+        "stepOneSubThree": "Property information",
+        "stepOneSubFour": "Diagnostics",
         "stepTwo": "Step 2",
         "stepThree": "Step 3"
       },

@@ -11,14 +11,16 @@ export default function Page() {
     const trans = useTranslations('PropertydepositPage')
     const {formData, setFormData} = useFormData()
     const router = useRouter()
-    const pathName = usePathname()
 
     const handleNext =() =>{
-        //router.push(`${pathName}/localisation`)
-        console.log(formData)
+        router.push(`information`)
     }
     const handlePrevious=()=>{
-        router.push(`/`)
+        if (formData.typeOfLogement === 'MAISON') {
+            router.push(`/`)
+        } else {
+            router.push(`apartment`)
+        }
     }
     const handleUpdate = (key: string, value: any) => {
         setFormData((prev) => ({...prev, [key]: value}));
