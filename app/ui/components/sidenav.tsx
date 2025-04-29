@@ -27,15 +27,13 @@ export default function SideNav() {
   const pathname = usePathname();
   const trans = useTranslations("PropertydepositPage");
 
-  const validatedSteps = [
+  const validatedSubSteps = [
     { step: "home", values: [0, 0, 0, 0] },
     { step: "apartment", values: [0, 0, 0, 0] },
     { step: "localisation", values: [1, 0, 0, 0] },
     { step: "information", values: [1, 1, 0, 0] },
-    { step: "dpe", values: [1, 1, 1, 0] },
+    { step: "dpe", values: [1, 1, 1, 0] }
   ]
-
-
 
   const setLanguage = (locale: string) => {
     const segments = pathname.split("/");
@@ -55,6 +53,25 @@ export default function SideNav() {
       return segments[1]; // La langue est le premier segment après le "/"
     }
 
+  };
+
+  // fonction pour l'étape sélectionnée
+  const actualStep = () => {
+    var segments = pathname.split("/");
+    // on vérifie si le dernier segment est /feature et si oui, on retourne ["2"] sinon on retourne ["1"]
+    if (segments[segments.length - 1] === "features") {
+      return ["2"];
+    } else {
+      return ["1"];
+    }
+  };
+
+  // fonction pour lock les autres étapes
+  const otherSteps = () => {
+    var steps = ["1", "2", "3"];
+    var currentStep = actualStep();
+    var otherSteps = steps.filter((step) => !currentStep.includes(step));
+    return otherSteps;
   };
 
   return (
@@ -78,10 +95,10 @@ export default function SideNav() {
         </p>
 
         <div className="pt-5">
-          <Accordion variant="splitted" defaultSelectedKeys={["1"]} disabledKeys={["2", "3"]}>
+          <Accordion variant="splitted" defaultSelectedKeys={actualStep()} disabledKeys={otherSteps()}>
             <AccordionItem key="1" aria-label="Accordion 1" title={trans("sidebar.steps.stepOne")} startContent={<HiOutlineHome />} classNames={{base: "bg-green-50 border-1 border-green-400", title: "text-primary-100 font-semibold"}}>
                 <div className="flex flex-col gap-2">
-                  {validatedSteps.map((step) => {
+                  {validatedSubSteps.map((step) => {
                   const segments = pathname.split("/");
                   const lastSegment = segments[segments.length - 1];
                   if (lastSegment === step.step) {
