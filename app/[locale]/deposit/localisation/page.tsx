@@ -33,7 +33,7 @@ export default function Page() {
                     <span className="font-[700] text-sm">
                         {trans('stepOne.stepOne-subTwo.subtitle')}
                     </span>
-                    <AddressMap/>
+                    <AddressMap title="" description="" targetInputIds={{city: "", postcode: "", street: ""}}/>
                 </section>
             </div>
             <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfProperty} step={1}/>

@@ -3,10 +3,19 @@
 import React, {useEffect, useRef, useState} from "react";
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import {formatSelectedAddress} from '@/app/tools/AddressFormatter';
+import {formatSelectedAddress, getFullStreetName} from '@/app/tools/AddressFormatter';
+import {useTranslations} from "next-intl";
 
 
-const AddressMap = () => {
+const AddressMap = ({ title, description, targetInputIds }: {
+    title: string,
+    description: string,
+    targetInputIds: {
+        city: string,
+        postcode: string,
+        street: string,
+    },
+}) => {
 
     const mapContainerRef = useRef<HTMLDivElement | null>(null);
     const [map, setMap] = useState<maplibregl.Map | null>(null);
@@ -14,6 +23,7 @@ const AddressMap = () => {
     const [suggestions, setSuggestions]: any[] = useState([]);
     const [query, setQuery] = useState('');
     const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout>();
+    const trans = useTranslations('AddressMap')
 
     useEffect(() => {
         if (mapContainerRef.current) {
@@ -56,38 +66,76 @@ const AddressMap = () => {
         setDebounceTimeout(timeout);
     };
 
-    const handleSelect = (feature: any) => {
-        const [lng, lat] = feature.geometry.coordinates;
+    const handleSelect = (addressData: any) => {
+        const [lng, lat] = addressData.geometry.coordinates;
         if (map && markerRef) {
             map.flyTo({ center: [lng, lat], zoom: 15 });
             markerRef.current.setLngLat([lng, lat]);
-            setQuery(formatSelectedAddress(feature));
+            setQuery(formatSelectedAddress(addressData));
+            updateTargetInputs(addressData);
             setSuggestions([]);
         }
     };
 
+    const getFieldValueFromAddressData = (fieldName: string, addressData: any): string => {
+
+        switch (fieldName)
+        {
+            case "city":
+                return addressData.properties.city ?? "";
+            case "postcode":
+                return addressData.properties.postcode ?? "";
+            case "street":
+                return getFullStreetName(addressData);
+            default:
+                return "";
+        }
+    }
+
+    const updateTargetInputs = (addressData: any): void => {
+
+        Object.entries(targetInputIds).forEach(([field, elementId]) => {
+                const value: string = getFieldValueFromAddressData(field, addressData);
+                const element = document.getElementById(elementId) as HTMLInputElement;
+
+                if (value && element) {
+                    element.value = value;
+                    element.dispatchEvent(new Event("input", {bubbles: true}));
+                }
+            }
+        )
+    }
+
     return (
-        <div>
-            <input
-                value={query}
-                onChange={handleInput}
-                placeholder="Entrez une adresse"
-                className="p-2 border rounded w-full max-w-md"
-            />
-            {suggestions.length > 0 && (
-                <div className="border rounded shadow bg-white max-w-md absolute z-50">
-                    {suggestions.map((s: any, i: any) => (
-                        <div
-                            key={i}
-                            onClick={() => handleSelect(s)}
-                            className="p-2 hover:bg-gray-100 cursor-pointer"
-                        >
-                            {formatSelectedAddress(s)}
+        <div className="mt-4 mb-4 w-3/5">
+            <div className="text-primary-100 font-bold">
+                {title}
+            </div>
+            <div className="text-gray-600 ml-4">{description}</div>
+            <div className="flex flex-col content-center relative">
+                <div ref={mapContainerRef} className="mt-4 rounded-xl" style={{height: '300px'}}/>
+                <div className="absolute z-40 w-3/5 top-8 left-10">
+                    <input
+                        value={query}
+                        onChange={handleInput}
+                        placeholder={trans("inputPlaceholder")}
+                        className="p-2 border rounded-xl w-full"
+                    />
+                    {suggestions.length > 0 && (
+                        <div className="border rounded-xl shadow bg-white w-full">
+                            {suggestions.map((addressData: any, index: number) => (
+                                <div
+                                    key={index}
+                                    onClick={() => handleSelect(addressData)}
+                                    className="p-2 hover:bg-gray-100 cursor-pointer"
+                                >
+                                    {formatSelectedAddress(addressData)}
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    )}
                 </div>
-            )}
-            <div ref={mapContainerRef} className="mt-4" style={{ height: '400px' }} />
+            </div>
         </div>
     );
 }
