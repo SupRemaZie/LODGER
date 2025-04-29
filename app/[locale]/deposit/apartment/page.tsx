@@ -13,10 +13,10 @@ export default function Page() {
     const pathName = usePathname()
 
     const handleNext =() =>{
-        router.push(`/deposit/localisation`)
+        router.push(`localisation`)
     }
     const handlePrevious=()=>{
-        router.push(`/`)
+        router.push(`home`)
     }
     const handleUpdate = (key: string, value: any) => {
         setFormData((prev) => ({...prev, [key]: value}));

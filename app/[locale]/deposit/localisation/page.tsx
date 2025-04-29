@@ -17,7 +17,7 @@ export default function Page() {
     }
     const handlePrevious=()=>{
         if (formData.typeOfLogement === 'MAISON') {
-            router.push(`/`)
+            router.push(`home`)
         } else {
             router.push(`apartment`)
         }

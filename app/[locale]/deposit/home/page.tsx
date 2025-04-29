@@ -7,7 +7,7 @@ import {useTranslations} from "next-intl";
 import {Button} from "@heroui/react";
 import Footer from "@/app/ui/components/Footer";
 import Header from "@/app/ui/components/Header";
-import { useFormData } from '../../context/FormDataContext';
+import { useFormData } from '@/app/context/FormDataContext';
 import {usePathname, useRouter} from "next/navigation";
 
 export default function Page() {
@@ -27,10 +27,10 @@ export default function Page() {
     const handleNext = () => {
 
         if(formData.typeOfLogement == "MAISON"){
-            router.push(`${pathname}/localisation`);
+            router.push(`localisation`);
         }
         else {
-            router.push(`${pathname}/apartment`);
+            router.push(`apartment`);
         }
         console.log(formData)
     };
