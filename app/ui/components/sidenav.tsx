@@ -82,7 +82,9 @@ export default function SideNav() {
             <AccordionItem key="1" aria-label="Accordion 1" title={trans("sidebar.steps.stepOne")} startContent={<HiOutlineHome />} classNames={{base: "bg-green-50 border-1 border-green-400", title: "text-primary-100 font-semibold"}}>
                 <div className="flex flex-col gap-2">
                   {validatedSteps.map((step) => {
-                  if (pathname.endsWith(step.step)) {
+                  const segments = pathname.split("/");
+                  const lastSegment = segments[segments.length - 1];
+                  if (lastSegment === step.step) {
                     return step.values.map((value, index) => (
                     <ValidateSubstep
                       key={index}
