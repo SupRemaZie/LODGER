@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { NumberInput } from "@heroui/react";
 import { motion } from "framer-motion";
+import { Button } from "@heroui/react";
 
 const energyThresholds = [50, 90, 150, 230, 330, 450]; // seuils entre A-G
 const emissionThresholds = [5, 10, 20, 35, 55, 80]; // seuils pour CO₂
 
 const gradeVariants = {
   initial: { scale: 1 },
-  hover: { scale: 1.1, boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)" },
+  hover: { scale: 1.2, boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)" },
   tap: { scale: 0.95 },
 };
 
@@ -15,24 +16,36 @@ const GradeBar = ({
   labels,
   colors,
   activeIndex,
+  leastString,
+  mostString,
 }: {
   labels: string[];
   colors: string[];
   activeIndex: number;
+  leastString?: string;
+  mostString?: string;
 }) => {
   return (
-    <div className="flex gap-3 items-center mt-4">
-      {labels.map((label, idx) => (
-        <motion.div
-          variants={gradeVariants}
-          key={label}
-          animate={activeIndex === idx ? "hover" : "initial"}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className={`w-20 h-12 rounded-2xl text-white font-bold flex items-center justify-center cursor-pointer ${colors[idx]}`}
-        >
-          {label}
-        </motion.div>
-      ))}
+    <div className="flex flex-col max-w-2xl">
+      <div className="flex gap-3 mt-4 justify-center">
+        {labels.map((label, idx) => (
+          <motion.div
+            variants={gradeVariants}
+            key={label}
+            animate={activeIndex === idx ? "hover" : "initial"}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className={`w-20 h-12 rounded-2xl text-white font-bold flex items-center justify-center cursor-pointer ${colors[idx]}`}
+          >
+            {label}
+          </motion.div>
+        ))}
+      </div>
+      <div>
+        <div className="flex justify-between mt-2 text-xs text-gray-500 mt-6">
+          {leastString && <span>{leastString}</span>}
+          {mostString && <span>{mostString}</span>}
+        </div>
+      </div>
     </div>
   );
 };
@@ -45,6 +58,9 @@ const DPEInput = ({
   labels,
   colors,
   unit,
+  className,
+  leastString,
+  mostString,
 }: {
   value: number;
   setValue: (value: number) => void;
@@ -53,6 +69,9 @@ const DPEInput = ({
   labels: string[];
   colors: string[];
   unit: string;
+  className?: string;
+  leastString?: string;
+  mostString?: string;
 }) => {
   const getGradeIndex = (value: number, thresholds: number[]) => {
     for (let i = 0; i < thresholds.length; i++) {
@@ -62,7 +81,7 @@ const DPEInput = ({
   };
 
   return (
-    <div>
+    <div className={`flex flex-col ${className}`}>
       <NumberInput
         value={value}
         onValueChange={(value: number) => {
@@ -76,18 +95,54 @@ const DPEInput = ({
         endContent={
           <span className="text-primary-100 font-medium">{unit}</span>
         }
-        classNames={{input: "mr-4"}}
+        classNames={{
+          input: "mr-4",
+          mainWrapper: "flex items-center gap-2",
+          inputWrapper: "bg-white border-2 border-gray-300 rounded-2xl p-2",
+        }}
+        className="w-1/3 my-2"
       />
-      <GradeBar labels={labels} colors={colors} activeIndex={getGradeIndex(value, thresholds)} />
+      <GradeBar
+        labels={labels}
+        colors={colors}
+        activeIndex={getGradeIndex(value, thresholds)}
+        leastString={leastString}
+        mostString={mostString}
+      />
     </div>
   );
 };
 
-const DPESelector = () => {
+const DPESelector = ({handleUpdate}:{handleUpdate?:any}) => {
   const [energyValue, setEnergyValue] = useState(0);
   const [co2Value, setCo2Value] = useState(0);
   const [energyGrade, setEnergyGrade] = useState(0);
   const [co2Grade, setCo2Grade] = useState(0);
+  const [noDPE, setNoDPE] = useState(false);
+
+  const toggleNoDPE = () => {
+    setNoDPE(!noDPE);
+    if (noDPE) {
+      setEnergyValue(0);
+      setCo2Value(0);
+      setEnergyGrade(0);
+      setCo2Grade(0);
+    }
+    handleUpdate("kWhEP", noDPE ? 0 : energyValue);
+    handleUpdate("kgCO2", noDPE ? 0 : co2Value);
+  }
+
+  const handleEnergyValueChange = (value: number) => {
+    setEnergyValue(value);
+    handleUpdate("kWhEP", value);
+    if(noDPE) toggleNoDPE();
+  }
+
+  const handleCo2ValueChange = (value: number) => {
+    setCo2Value(value);
+    handleUpdate("kgCO2", value);
+    if(noDPE) toggleNoDPE();
+  };
 
   const energyLabels = ["A", "B", "C", "D", "E", "F", "G"];
   const energyColors = [
@@ -110,28 +165,48 @@ const DPESelector = () => {
     "bg-purple-700",
   ];
 
+  const uncheckIcon = () => (
+    <img src="/icons/empty-circle-icon.svg" alt="Uncheck Icon" width={32} height={32} />
+  );
+
+  const checkIcon = () => (
+    <img src="/icons/filled-circle-icon.svg" alt="Check Icon" width={32} height={32} />
+  );
+
   return (
-    <div className="mx-auto p-4 flex flex-col gap-4 rounded-lg">
-      <h2 className="text-lg font-semibold mb-4 text-primary-100">
+    <div className="flex flex-col w-full h-full p-4 rounded-lg shadow-md">
+      <Button startContent={noDPE ? checkIcon() : uncheckIcon()} className="w-auto justify-start bg-transparent font-semibold text-primary-100 mb-4" onPress={toggleNoDPE} disableAnimation>
+        DPE Vierge : Mon DPE n'indique aucun classement énergétique
+      </Button>
+      <h2 className="text-lg font-semibold text-primary-100">
         Résultat du DPE*
       </h2>
       <DPEInput
         value={energyValue}
-        setValue={setEnergyValue}
+        setValue={handleEnergyValueChange}
         setGrade={setEnergyGrade}
         thresholds={energyThresholds}
         labels={energyLabels}
         colors={energyColors}
         unit="kWhEP/m²/an"
+        className="mb-10"
+        leastString="Efficent énergétiquement"
+        mostString="Peu efficient énergétiquement"
       />
+      <h2 className="text-lg font-semibold text-primary-100">
+        Emissions de Gaz à Effet de Serre (GES)*
+      </h2>
       <DPEInput
         value={co2Value}
-        setValue={setCo2Value}
+        setValue={handleCo2ValueChange}
         setGrade={setCo2Grade}
         thresholds={emissionThresholds}
         labels={energyLabels}
         colors={co2Colors}
         unit="kgCO²/m²/an"
+        className="mb-4"
+        leastString="Peu d'émissions"
+        mostString="Fortes émissions"
       />
     </div>
   );
