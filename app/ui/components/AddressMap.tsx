@@ -23,6 +23,7 @@ const AddressMap = ({ title, description, targetInputIds }: {
     const [suggestions, setSuggestions]: any[] = useState([]);
     const [query, setQuery] = useState('');
     const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout>();
+    const trans = useTranslations('AddressMap')
 
     useEffect(() => {
         if (mapContainerRef.current) {
@@ -117,7 +118,7 @@ const AddressMap = ({ title, description, targetInputIds }: {
                     <input
                         value={query}
                         onChange={handleInput}
-                        placeholder="Entrez une adresse"
+                        placeholder={trans("inputPlaceholder")}
                         className="p-2 border rounded-xl w-full"
                     />
                     {suggestions.length > 0 && (
