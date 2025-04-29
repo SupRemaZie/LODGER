@@ -50,7 +50,7 @@ export default function SideNav() {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="hidden md:flex flex-col h-full">
       <div className="flex h-full flex-col m-4  md:px-2">
         <Link
           className="flex flex-col h-fit items-start pt-8 pb-4 rounded-md   "
