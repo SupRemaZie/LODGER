@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NumberInput } from "@heroui/react";
 import { motion } from "framer-motion";
 import { Button } from "@heroui/react";
+import {useTranslations} from "next-intl";
 
 const energyThresholds = [50, 90, 150, 230, 330, 450]; // seuils entre A-G
 const emissionThresholds = [5, 10, 20, 35, 55, 80]; // seuils pour CO₂
@@ -114,6 +115,8 @@ const DPEInput = ({
 };
 
 const DPESelector = ({handleUpdate}:{handleUpdate?:any}) => {
+  const trans = useTranslations('PropertydepositPage')
+
   const [energyValue, setEnergyValue] = useState(0);
   const [co2Value, setCo2Value] = useState(0);
   const [energyGrade, setEnergyGrade] = useState(0);
@@ -177,10 +180,10 @@ const DPESelector = ({handleUpdate}:{handleUpdate?:any}) => {
   return (
     <div className="flex flex-col w-full h-full p-4 rounded-lg shadow-md">
       <Button startContent={noDPE ? checkIcon() : uncheckIcon()} className="w-auto justify-start bg-transparent font-semibold text-primary-100 mb-4" onPress={toggleNoDPE} disableAnimation>
-        DPE Vierge : Mon DPE n'indique aucun classement énergétique
+        {trans("dpeEntry.blank")}
       </Button>
       <h2 className="text-lg font-semibold text-primary-100">
-        Résultat du DPE*
+        {trans("dpeEntry.result")}
       </h2>
       <DPEInput
         value={energyValue}
@@ -191,11 +194,11 @@ const DPESelector = ({handleUpdate}:{handleUpdate?:any}) => {
         colors={energyColors}
         unit="kWhEP/m²/an"
         className="mb-10"
-        leastString="Efficent énergétiquement"
-        mostString="Peu efficient énergétiquement"
+        leastString={trans("dpeEntry.leastEfficient")}
+        mostString={trans("dpeEntry.mostEfficient")}
       />
       <h2 className="text-lg font-semibold text-primary-100">
-        Emissions de Gaz à Effet de Serre (GES)*
+        {trans("dpeEntry.gaz")}
       </h2>
       <DPEInput
         value={co2Value}
@@ -206,8 +209,8 @@ const DPESelector = ({handleUpdate}:{handleUpdate?:any}) => {
         colors={co2Colors}
         unit="kgCO²/m²/an"
         className="mb-4"
-        leastString="Peu d'émissions"
-        mostString="Fortes émissions"
+        leastString={trans("dpeEntry.leastGaz")}
+        mostString={trans("dpeEntry.mostGaz")}
       />
     </div>
   );
