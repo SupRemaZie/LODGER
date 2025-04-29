@@ -3,10 +3,18 @@
 import React, {useEffect, useRef, useState} from "react";
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import {formatSelectedAddress} from '@/app/tools/AddressFormatter';
+import {formatSelectedAddress, getFullStreetName} from '@/app/tools/AddressFormatter';
 
 
-const AddressMap = () => {
+const AddressMap = ({ title, description, targetInputIds }: {
+    title: string,
+    description: string,
+    targetInputIds: {
+        city: string,
+        postcode: string,
+        street: string,
+    },
+}) => {
 
     const mapContainerRef = useRef<HTMLDivElement | null>(null);
     const [map, setMap] = useState<maplibregl.Map | null>(null);
@@ -56,18 +64,22 @@ const AddressMap = () => {
         setDebounceTimeout(timeout);
     };
 
-    const handleSelect = (feature: any) => {
-        const [lng, lat] = feature.geometry.coordinates;
+    const handleSelect = (addressData: any) => {
+        const [lng, lat] = addressData.geometry.coordinates;
         if (map && markerRef) {
             map.flyTo({ center: [lng, lat], zoom: 15 });
             markerRef.current.setLngLat([lng, lat]);
-            setQuery(formatSelectedAddress(feature));
+            setQuery(formatSelectedAddress(addressData));
             setSuggestions([]);
         }
     };
 
     return (
         <div>
+            <div className="text-primary-100 font-bold text-center">
+                {title}
+            </div>
+            <div className="text-gray-600 ml-4 text-center">{description}</div>
             <input
                 value={query}
                 onChange={handleInput}
@@ -76,18 +88,18 @@ const AddressMap = () => {
             />
             {suggestions.length > 0 && (
                 <div className="border rounded shadow bg-white max-w-md absolute z-50">
-                    {suggestions.map((s: any, i: any) => (
+                    {suggestions.map((addressData: any, index: number) => (
                         <div
-                            key={i}
-                            onClick={() => handleSelect(s)}
+                            key={index}
+                            onClick={() => handleSelect(addressData)}
                             className="p-2 hover:bg-gray-100 cursor-pointer"
                         >
-                            {formatSelectedAddress(s)}
+                            {formatSelectedAddress(addressData)}
                         </div>
                     ))}
                 </div>
             )}
-            <div ref={mapContainerRef} className="mt-4" style={{ height: '400px' }} />
+            <div ref={mapContainerRef} className="mt-4" style={{height: '400px'}}/>
         </div>
     );
 }
