@@ -70,9 +70,42 @@ const AddressMap = ({ title, description, targetInputIds }: {
             map.flyTo({ center: [lng, lat], zoom: 15 });
             markerRef.current.setLngLat([lng, lat]);
             setQuery(formatSelectedAddress(addressData));
+            updateTargetInputs(addressData);
             setSuggestions([]);
         }
     };
+
+    const getFieldValueFromAddressData = (fieldName: string, addressData: any): string => {
+
+        switch (fieldName)
+        {
+            case "city":
+                return addressData.properties.city ?? "";
+
+            case "postcode":
+                return addressData.properties.postcode ?? "";
+
+            case "street":
+                return getFullStreetName(addressData);
+
+            default:
+                return "";
+        }
+    }
+
+    const updateTargetInputs = (addressData: any): void => {
+
+        Object.entries(targetInputIds).forEach(([field, elementId]) => {
+                const value: string = getFieldValueFromAddressData(field, addressData);
+                const element = document.getElementById(elementId) as HTMLInputElement;
+
+                if (value && element) {
+                    element.value = value;
+                    element.dispatchEvent(new Event("input", {bubbles: true}));
+                }
+            }
+        )
+    }
 
     return (
         <div>
