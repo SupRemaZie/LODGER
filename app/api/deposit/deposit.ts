@@ -47,7 +47,7 @@ class Deposit {
 
             const roomAreas = data.roomAreas && data.roomAreas.length > 0 ? {
                 create: data.roomAreas.map((roomArea) => ({
-                    area: roomArea.area,
+                    area: roomArea,
                 })),
             } : undefined;
 
