@@ -33,7 +33,7 @@ const formatters: Record<AddressType, (data: AddressData) => string> = {
     house: (data) =>
         [
             data.properties.housenumber ?? '',
-            data.properties.street ? data.properties.street : '',
+            data.properties.street ?? '',
             data.properties.postcode ?? '',
             data.properties.city,
         ]
@@ -66,4 +66,10 @@ export const formatSelectedAddress = (data: AddressData): string => {
         return "Error";
     }
     return formatter(data);
+}
+
+export const getFullStreetName = (data: AddressData): string => {
+    let fullName = data.properties.housenumber ? data.properties.housenumber + " " : "";
+    fullName += data.properties.street ?? "" + data.properties.name ?? "";
+    return fullName;
 }

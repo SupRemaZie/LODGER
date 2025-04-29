@@ -3,8 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Divider } from "@heroui/divider";
 import { albert_sans } from "app/ui/fonts";
-import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineHome } from "react-icons/hi2";
 import { LuBookmark } from "react-icons/lu";
 import { useBreadcrumb } from "app/context/BreadcrumbContext"; // Importer le contexte
@@ -21,40 +20,41 @@ import { Accordion, AccordionItem } from "@heroui/react";
 import { Link as HeroLink } from "@heroui/react";
 import { useRouter, usePathname } from "next/navigation";
 import path from "path";
+import { useRef } from "react";
 
 export default function SideNav() {
-  const { currentStep, setCurrentStep } = useBreadcrumb(); // Utiliser le contexte
+  const { currentStep, setCurrentStep } = useBreadcrumb();
   const router = useRouter();
   const pathname = usePathname();
   const trans = useTranslations("PropertydepositPage");
   const [currentLanguage, setCurrentLanguage] = useState("fr"); // État pour la langue actuelle
-
   const validatedSubSteps = [
     { step: "home", values: [0, 0, 0, 0] },
     { step: "apartment", values: [0, 0, 0, 0] },
     { step: "localisation", values: [1, 0, 0, 0] },
     { step: "information", values: [1, 1, 0, 0] },
-    { step: "dpe", values: [1, 1, 1, 0] },
-  ];
+    { step: "dpe", values: [1, 1, 1, 0] }
+  ]
 
-  // fonction pour l'étape sélectionnée
   const actualStep = () => {
-    var segments = pathname.split("/");
-    // on vérifie si le dernier segment est /feature et si oui, on retourne ["2"] sinon on retourne ["1"]
-    if (segments[segments.length - 1] === "features") {
-      return ["2"];
-    } else {
-      return ["1"];
-    }
+    const segments = pathname.split("/");
+    return segments[segments.length - 1] === "features" ? ["2"] : ["1"];
   };
 
-  // fonction pour lock les autres étapes
   const otherSteps = () => {
-    var steps = ["1", "2", "3"];
-    var currentStep = actualStep();
-    var otherSteps = steps.filter((step) => !currentStep.includes(step));
-    return otherSteps;
+    const steps = ["1", "2", "3"];
+    const currentStep = actualStep();
+    return steps.filter((step) => !currentStep.includes(step));
   };
+
+  const [selectedKeys, setSelectedKeys] = useState<string[]>(actualStep());
+  const [disabledKeys, setDisabledKeys] = useState<string[]>(otherSteps());
+
+  // Mettre à jour les clés sélectionnées et désactivées lorsque le chemin change
+  useEffect(() => {
+    setSelectedKeys(actualStep());
+    setDisabledKeys(otherSteps());
+  }, [pathname]);
 
   // fonction pour changer la langue
   const changeLanguage = (lang: string) => {
@@ -81,9 +81,9 @@ export default function SideNav() {
 
   return (
     <div className="hidden md:flex flex-col h-full">
-      <div className="flex h-full flex-col m-4  md:px-2">
+      <div className="flex h-full flex-col m-4 md:px-2">
         <Link
-          className="flex flex-col h-fit items-start pt-8 pb-4 rounded-md   "
+          className="flex flex-col h-fit items-start pt-8 pb-4 rounded-md"
           href="/"
         >
           <Image
