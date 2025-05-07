@@ -26,16 +26,16 @@ export default function Page() {
         setFormData((prev) => ({...prev, [key]: value}));
     };
     return (
-        <div className="w-full">
-            <div className="font-[500] flex flex-col  min-h-screen p-12 scrollbar-hide">
-                <Header title={trans("stepOne.stepOne-subTwo.title")} question={trans("stepOne.stepOne-subTwo.question")} />
-                <section id="content" className="pt-8 text-[#02504D]">
+        <div className="flex flex-col min-h-screen w-full">
+            <Header title={trans("stepOne.stepOne-subTwo.title")} question={trans("stepOne.stepOne-subTwo.question")} />
+            <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
+                <section id="content" className="text-[#02504D]">
                     <span className="font-[700] text-sm">
                         {trans('stepOne.stepOne-subTwo.subtitle')}
                     </span>
                     <AddressMap title="" description="" targetInputIds={{city: "", postcode: "", street: ""}}/>
                 </section>
-            </div>
+            </main>
             <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfProperty} step={1}/>
 
         </div>

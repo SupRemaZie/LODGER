@@ -178,7 +178,7 @@ const DPESelector = ({handleUpdate}:{handleUpdate?:any}) => {
   );
 
   return (
-    <div className="flex flex-col w-full h-full p-4 rounded-lg shadow-md">
+    <div className="flex flex-col w-full h-full  rounded-lg shadow-md">
       <Button startContent={noDPE ? checkIcon() : uncheckIcon()} className="w-auto justify-start bg-transparent font-semibold text-primary-100 mb-4" onPress={toggleNoDPE} disableAnimation>
         {trans("dpeEntry.blank")}
       </Button>
