@@ -29,23 +29,24 @@ export default function Page() {
 
   return (
     <>
-      <div className="w-full">
-        <div className="font-[500] flex flex-col min-h-screen p-12 scrollbar-hide">
-          <Header
+      <div className="flex flex-col min-h-screen w-full">
+        <Header
             question={trans("stepOne.stepOne-subFour.question")}
             title={trans("stepOne.stepOne-subFour.title")}
-          />
+        />
+        <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
           <section className="flex flex-col pt-8 text-[#02504D] overflow-y-auto w-full">
             <DPESelector handleUpdate={handleUpdate} />
           </section>
-        </div>
+        </main>
+
+        <Footer
+              requiredField={formData.kWhEP}
+              onNext={handleNext}
+              onPrevious={handlePrevious}
+              step={1}
+            />
       </div>
-      <Footer
-            requiredField={formData.kWhEP}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            step={1}
-          />
     </>
   );
 }
