@@ -25,13 +25,13 @@ export default function Page() {
     };
 
     return (
-        <div className="w-full">
-            <div className="font-[500] flex flex-col  min-h-screen p-12 scrollbar-hide">
-                <Header title={trans("stepTwo.stepTwo-subOne.title")} question={trans("stepTwo.stepTwo-subOne.question")} />
-                <section id="content" className="flex justify-center items-center text-[#02504D] min-h-screen">
+        <div className="flex flex-col min-h-screen w-full">
+            <Header title={trans("stepTwo.stepTwo-subOne.title")} question={trans("stepTwo.stepTwo-subOne.question")} />
+            <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
+                <section id="content" className="">
                     <h1 className="text-4xl font-bold">{trans("stepTwo.stepTwo-subOne.text")}</h1>
                 </section>
-            </div>
+            </main>
             <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfProperty} step={2}/>
         </div>
     )

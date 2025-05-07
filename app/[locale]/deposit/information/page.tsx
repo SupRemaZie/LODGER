@@ -73,55 +73,52 @@ export default function Page() {
     }
 
     return (
-        <div className="w-full">
-            <div className="font-[500] flex flex-col  min-h-screen p-12 scrollbar-hide">
-                <Header title={trans("stepOne.stepOne-subThree.title")} question={trans("stepOne.stepOne-subThree.question")} />
-                <section id="content" className="flex flex-col pt-8 gap-2 text-[#02504D] overflow-y-auto h-96">
-                    <FormEntry title={trans("formEntry.surface.title")} description={trans('formEntry.surface.description')} logo="/icons/superficie-icon.svg" type="number" onUpdate={(value : number)=>handleUpdate('superficie',value )}/>
-                    {formData.typeOfProperty == "HABITANT" && (
-                        <FormEntry title={trans("formEntry.bedrooms-surface.title")}
-                                   description={trans('formEntry.bedrooms-surface.description')}
-                                   logo="/icons/superficie-icon.svg"
-                                   type="number"
-                                   onUpdate={(value)=>(handleUpdate('roomAreas', value))}
-                        />
-                    )}
-                    <FormEntry title={trans("formEntry.rooms-number.title")} description={trans('formEntry.rooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=>(handleUpdate('roomNumber', value))}/>
-                    {formData.typeOfProperty == "HABITANT" && (
-                        <FormEntry title={trans("formEntry.shared-spaces.title")}
-                                   description={trans('formEntry.shared-spaces.description')}
-                                   logo="/icons/superficie-icon.svg"
-                                   type="dropdown"
-                                   onUpdate={(values: string[] ) => (handleUpdate('spaceShare',  values) )}
-                        />
-                    )}
-                    {formData.typeOfProperty != "HABITANT" && (
-                        <>
-                            <FormEntry title={trans("formEntry.bedrooms-number.title")} description={trans('formEntry.bedrooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value :number)=>(handleUpdate('bedroomNumber', value))}/>
-                            {Array.from({ length: Number(formData.bedroomNumber) }).map((_, index) => (
-                                <FormEntry
-                                    key={`bedroom-surface-${index}`}
-                                    title={`${trans("formEntry.bedrooms-surface.title")} ${index + 1}`}
-                                    description={trans("formEntry.bedrooms-surface.description")}
-                                    logo="/icons/superficie-icon.svg"
-                                    type="number"
-                                    onUpdate={(value: number) => {
-                                        handleUpdate('roomAreas', { index, value })
-                                    }}
-                                />
-                            ))}
-                            <FormEntry title={trans("formEntry.furnished.title")} description={trans('formEntry.furnished.description')} logo="/icons/superficie-icon.svg" type="yesno" onUpdate={(value : number)=>(handleUpdate('furnished', value))}/>
-                        </>
-                    )}
+        <div className="flex flex-col min-h-screen w-full">
+            {/* Header */}
+            <Header title={trans("stepOne.stepOne-subThree.title")} question={trans("stepOne.stepOne-subThree.question")} />
 
-                    <FormEntry title={trans("formEntry.bathrooms-number.title")} description={trans('formEntry.bathrooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=>(handleUpdate('bathRoomSpace', value))}/>
-                    <FormEntry title={trans("formEntry.showers-rooms-number.title")} description={trans('formEntry.showers-rooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=>(handleUpdate('powderRoomSpace', value))}/>
-                    <FormEntry title={trans("formEntry.floor-number.title")} description={trans('formEntry.floor-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=> (handleUpdate('appartmentFloor', value))}/>
+            {/* Contenu principal qui pousse le footer vers le bas */}
+            <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
+                <FormEntry title={trans("formEntry.surface.title")} description={trans('formEntry.surface.description')} logo="/icons/superficie-icon.svg" type="number" onUpdate={(value : number)=>handleUpdate('superficie',value )}/>
+                {formData.typeOfProperty == "HABITANT" && (
+                    <FormEntry title={trans("formEntry.bedrooms-surface.title")}
+                               description={trans('formEntry.bedrooms-surface.description')}
+                               logo="/icons/superficie-icon.svg"
+                               type="number"
+                               onUpdate={(value)=>(handleUpdate('roomAreas', value))}/>
+                )}
+                <FormEntry title={trans("formEntry.rooms-number.title")} description={trans('formEntry.rooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=>(handleUpdate('roomNumber', value))}/>
+                {formData.typeOfProperty == "HABITANT" && (
+                    <FormEntry title={trans("formEntry.shared-spaces.title")}
+                               description={trans('formEntry.shared-spaces.description')}
+                               logo="/icons/superficie-icon.svg"
+                               type="dropdown"
+                               onUpdate={(values: string[] ) => (handleUpdate('spaceShare',  values))}/>
+                )}
+                {formData.typeOfProperty != "HABITANT" && (
+                    <>
+                        <FormEntry title={trans("formEntry.bedrooms-number.title")} description={trans('formEntry.bedrooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value :number)=>(handleUpdate('bedroomNumber', value))}/>
+                        {Array.from({ length: Number(formData.bedroomNumber) }).map((_, index) => (
+                            <FormEntry
+                                key={`bedroom-surface-${index}`}
+                                title={`${trans("formEntry.bedrooms-surface.title")} ${index + 1}`}
+                                description={trans("formEntry.bedrooms-surface.description")}
+                                logo="/icons/superficie-icon.svg"
+                                type="number"
+                                onUpdate={(value: number) => {
+                                    handleUpdate('roomAreas', { index, value })
+                                }}
+                            />
+                        ))}
+                        <FormEntry title={trans("formEntry.furnished.title")} description={trans('formEntry.furnished.description')} logo="/icons/superficie-icon.svg" type="yesno" onUpdate={(value : number)=>(handleUpdate('furnished', value))}/>
+                    </>
+                )}
+                <FormEntry title={trans("formEntry.bathrooms-number.title")} description={trans('formEntry.bathrooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=>(handleUpdate('bathRoomSpace', value))}/>
+                <FormEntry title={trans("formEntry.showers-rooms-number.title")} description={trans('formEntry.showers-rooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=>(handleUpdate('powderRoomSpace', value))}/>
+                <FormEntry title={trans("formEntry.floor-number.title")} description={trans('formEntry.floor-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=> (handleUpdate('appartmentFloor', value))}/>
+            </main>
 
-                </section>
-            </div>
             <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfProperty} step={1}/>
-
         </div>
     )
 }

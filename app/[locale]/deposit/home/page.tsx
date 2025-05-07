@@ -37,9 +37,10 @@ export default function Page() {
 
 
     return (
-        <div className="w-full">
-            <div className="font-[500] flex flex-col  min-h-content p-12 scrollbar-hide">
-                <Header title={trans("stepOne.stepOne-subOneLogement.title")} question={trans("stepOne.stepOne-subOneLogement.title")} />
+        <div className="flex flex-col min-h-screen w-full">
+            <Header title={trans("stepOne.stepOne-subOneLogement.title")} question={trans("stepOne.stepOne-subOneLogement.title")} />
+            <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
+
                 <section id="content" className="pt-8 text-[#02504D]">
                 <span className="font-[700] text-sm">
                     {trans('stepOne.content.title')}
@@ -67,8 +68,8 @@ export default function Page() {
                         </Button>
                     </div>
                 </section>
-            </div>
-        <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfLogement} step={1}/>
+            </main>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfLogement} step={1}/>
         </div>
 
 

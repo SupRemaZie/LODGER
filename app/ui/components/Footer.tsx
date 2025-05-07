@@ -12,7 +12,7 @@ export default function Footer({onPrevious,onNext, requiredField, step}:{
     const trans = useTranslations('PropertydepositPage')
 
     return(
-        <footer className=" fixed bottom-0 w-4/5 bg-white ">
+        <footer className="w-full bg-white ">
             <div className="flex flex-row items-center gap-x-2">
                 {Array.from({ length: 3 }).map((_, index) => (
                     <Image
