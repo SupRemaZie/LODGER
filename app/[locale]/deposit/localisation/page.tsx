@@ -9,7 +9,7 @@ import AddressMap from "@/app/ui/components/AddressMap";
 import Text from "@/app/ui/components/Text";
 
 export default function Page() {
-    const trans = useTranslations('PropertydepositPage')
+    const trans = useTranslations('PropertydepositPage.stepOne.stepOne-subTwo')
     const {formData, setFormData} = useFormData()
     const router = useRouter()
 
@@ -28,11 +28,11 @@ export default function Page() {
     };
     return (
         <div className="flex flex-col min-h-screen w-full">
-            <Header title={trans("stepOne.stepOne-subTwo.title")} question={trans("stepOne.stepOne-subTwo.question")} />
+            <Header title={trans("title")} question={trans("question")} />
             <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
                 <section id="content" className="text-[#02504D] flex flex-col">
                     <AddressMap
-                        title={trans('stepOne.stepOne-subTwo.subtitle')}
+                        title={trans('fieldTitles.addressMap')}
                         description=""
                         targetInputIds={{city: "cityField", postcode: "postcodeField", street: "streetField"}}
                         onAddressSelected={(address) => {
@@ -43,30 +43,31 @@ export default function Page() {
                     />
                     <Text
                         id="cityField"
-                        title="Ville"
+                        title={trans('fieldTitles.cityField')}
                         description=""
-                        placeholder="Paris"
+                        placeholder={trans('fieldPlaceholder.cityField')}
                         value={formData.city}
                         onChange={(value) => handleUpdate('city', value)}/>
                     <Text
                         id="postcodeField"
-                        title="Code Postal"
+                        title={trans('fieldTitles.postalCodeField')}
                         description=""
-                        placeholder="75009"
+                        placeholder={trans('fieldPlaceholder.postalCodeField')}
                         value={formData.postalCode}
                         onChange={(value) => handleUpdate('postalCode', value)}/>
                     <Text
                         id="streetField"
-                        title="Numéro et nom de voie"
+                        title={trans('fieldTitles.streetField')}
                         description=""
-                        placeholder="1 Avenue des Champs-Elysée"
+                        placeholder={trans('fieldPlaceholder.streetField')}
                         value={formData.street}
                         onChange={(value) => handleUpdate('street', value)}/>
                     <Text
                         id="detailsField"
-                        title="Bâtiment, appartement, résidence, étage"
+                        title={trans('fieldTitles.addressDetailsField')}
                         description=""
-                        placeholder="1er étage"/>
+                        placeholder={trans('fieldPlaceholder.addressDetailsField')}
+                    />
                 </section>
             </main>
             <Footer
