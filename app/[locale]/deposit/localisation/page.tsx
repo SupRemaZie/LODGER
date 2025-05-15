@@ -31,7 +31,16 @@ export default function Page() {
             <Header title={trans("stepOne.stepOne-subTwo.title")} question={trans("stepOne.stepOne-subTwo.question")} />
             <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
                 <section id="content" className="text-[#02504D] flex flex-col">
-                    <AddressMap title={trans('stepOne.stepOne-subTwo.subtitle')} description="" targetInputIds={{city: "cityField", postcode: "postcodeField", street: "streetField"}}/>
+                    <AddressMap
+                        title={trans('stepOne.stepOne-subTwo.subtitle')}
+                        description=""
+                        targetInputIds={{city: "cityField", postcode: "postcodeField", street: "streetField"}}
+                        onAddressSelected={(address) => {
+                            handleUpdate('city', address.city);
+                            handleUpdate('postalCode', address.postcode);
+                            handleUpdate('street', address.street);
+                        }}
+                    />
                     <Text
                         id="cityField"
                         title="Ville"
