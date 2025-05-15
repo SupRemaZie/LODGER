@@ -8,8 +8,6 @@ interface FormDataContextType {
     setFormData: React.Dispatch<React.SetStateAction<LogementData>>;
 }
 
-const FormDataContext = createContext<FormDataContextType | undefined>(undefined);
-
 const defaultFormData: LogementData = {
     email: "",
     typeOfLogement: "",
@@ -37,6 +35,11 @@ const defaultFormData: LogementData = {
     spaceShare: [],
 };
 
+const FormDataContext = createContext<FormDataContextType>({
+    formData: defaultFormData,
+    setFormData: () => {},
+});
+
 // 🔥 Serialize safely BigInt
 function safeStringify(obj: any) {
     return JSON.stringify(obj, (_, value) =>
@@ -59,30 +62,33 @@ function safeParse(str: string) {
 }
 
 export const FormDataProvider = ({ children }: { children: ReactNode }) => {
-    const [formData, setFormData] = useState<LogementData>(() => {
-        if (typeof window !== "undefined") {
-            const stored = localStorage.getItem("formData");
-            if (stored) {
-                try {
-                    const parsed = safeParse(stored);
-                    return {
-                        ...defaultFormData,
-                        ...parsed,
-                    };
-                } catch (e) {
-                    console.error("Erreur parsing formData:", e);
-                    return defaultFormData;
-                }
-            }
-        }
-        return defaultFormData;
-    });
+    const [formData, setFormData] = useState<LogementData>(defaultFormData);
+    const [isHydrated, setIsHydrated] = useState(false);
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
+        if (typeof window === "undefined") return
+
+        try {
+            const stored = localStorage.getItem("formData");
+            if (stored) {
+                const parsed = safeParse(stored);
+                setFormData({...defaultFormData, ...parsed});
+            }
+        } catch (e) {
+            console.error("Erreur parsing formData:", e);
+        } finally {
+            setIsHydrated(true);
+        }
+        setIsHydrated(true);
+    }, []);
+
+    useEffect(() => {
+        if (isHydrated) {
             localStorage.setItem("formData", safeStringify(formData));
         }
-    }, [formData]);
+    }, [formData, isHydrated]);
+
+    if (!isHydrated) return null;
 
     return (
         <FormDataContext.Provider value={{ formData, setFormData }}>
