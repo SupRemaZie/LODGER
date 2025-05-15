@@ -41,7 +41,7 @@ export default function Page() {
         </main>
 
         <Footer
-              requiredField={formData.kWhEP}
+              requiredField={['kWhEP']}
               onNext={handleNext}
               onPrevious={handlePrevious}
               step={1}

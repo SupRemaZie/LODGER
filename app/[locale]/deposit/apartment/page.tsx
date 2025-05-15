@@ -37,7 +37,7 @@ export default function Page() {
                     </div>
                 </section>
             </div>
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfProperty} step={1}/>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['typeOfProperty']} step={1}/>
         </div>
     )
 }

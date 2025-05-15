@@ -32,7 +32,7 @@ export default function Page() {
                     <h1 className="text-4xl font-bold">{trans("stepTwo.stepTwo-subOne.text")}</h1>
                 </section>
             </main>
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfProperty} step={2}/>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={[]} step={2}/>
         </div>
     )
 }
