@@ -36,7 +36,7 @@ export default function Page() {
                     <AddressMap title="" description="" targetInputIds={{city: "", postcode: "", street: ""}}/>
                 </section>
             </main>
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfProperty} step={1}/>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['city', 'postalCode', 'street']} step={1}/>
 
         </div>
     )
