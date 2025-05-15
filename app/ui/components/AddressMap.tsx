@@ -19,13 +19,15 @@ const AddressMap = ({ title, description, targetInputIds }: {
 
     const mapContainerRef = useRef<HTMLDivElement | null>(null);
     const [map, setMap] = useState<maplibregl.Map | null>(null);
-    const markerRef = useRef<maplibregl.Marker>(new maplibregl.Marker());
+    const markerRef = useRef<maplibregl.Marker | null>(null);
     const [suggestions, setSuggestions]: any[] = useState([]);
     const [query, setQuery] = useState('');
     const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout>();
     const trans = useTranslations('AddressMap')
 
     useEffect(() => {
+        markerRef.current = new maplibregl.Marker();
+
         if (mapContainerRef.current) {
             const initMap = new maplibregl.Map({
                 container: mapContainerRef.current,
@@ -70,7 +72,7 @@ const AddressMap = ({ title, description, targetInputIds }: {
         const [lng, lat] = addressData.geometry.coordinates;
         if (map && markerRef) {
             map.flyTo({ center: [lng, lat], zoom: 15 });
-            markerRef.current.setLngLat([lng, lat]);
+            markerRef.current?.setLngLat([lng, lat]);
             setQuery(formatSelectedAddress(addressData));
             updateTargetInputs(addressData);
             setSuggestions([]);
