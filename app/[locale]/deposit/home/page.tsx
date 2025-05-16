@@ -69,7 +69,7 @@ export default function Page() {
                     </div>
                 </section>
             </main>
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={formData.typeOfLogement} step={1}/>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['typeOfLogement']} step={1}/>
         </div>
 
 
