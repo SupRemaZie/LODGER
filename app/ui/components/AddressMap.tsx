@@ -7,7 +7,7 @@ import {formatSelectedAddress, getFullStreetName} from '@/app/tools/AddressForma
 import {useTranslations} from "next-intl";
 
 
-const AddressMap = ({ title, description, targetInputIds }: {
+const AddressMap = ({ title, description, targetInputIds, onAddressSelected }: {
     title: string,
     description: string,
     targetInputIds: {
@@ -15,17 +15,25 @@ const AddressMap = ({ title, description, targetInputIds }: {
         postcode: string,
         street: string,
     },
+    onAddressSelected?: (addressData: {
+        city: string,
+        postcode: string,
+        street: string}
+    ) => void
 }) => {
 
     const mapContainerRef = useRef<HTMLDivElement | null>(null);
     const [map, setMap] = useState<maplibregl.Map | null>(null);
-    const markerRef = useRef<maplibregl.Marker>(new maplibregl.Marker());
+    const markerRef = useRef<maplibregl.Marker | null>(null);
     const [suggestions, setSuggestions]: any[] = useState([]);
     const [query, setQuery] = useState('');
     const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout>();
     const trans = useTranslations('AddressMap')
 
     useEffect(() => {
+        if (typeof window === 'undefined') return;
+        markerRef.current = new maplibregl.Marker();
+
         if (mapContainerRef.current) {
             const initMap = new maplibregl.Map({
                 container: mapContainerRef.current,
@@ -70,9 +78,14 @@ const AddressMap = ({ title, description, targetInputIds }: {
         const [lng, lat] = addressData.geometry.coordinates;
         if (map && markerRef) {
             map.flyTo({ center: [lng, lat], zoom: 15 });
-            markerRef.current.setLngLat([lng, lat]);
+            markerRef.current?.setLngLat([lng, lat]);
             setQuery(formatSelectedAddress(addressData));
-            updateTargetInputs(addressData);
+            const extracted = {
+                city: getFieldValueFromAddressData("city", addressData),
+                postcode: getFieldValueFromAddressData("postcode", addressData),
+                street: getFieldValueFromAddressData("street", addressData)
+            }
+            onAddressSelected?.(extracted);
             setSuggestions([]);
         }
     };

@@ -52,7 +52,19 @@
       "stepOne-subTwo": {
         "title": "Step 1 - Location",
         "question": "Where is your property located?",
-        "subtitle": "Your address"
+        "fieldTitles": {
+          "addressMap": "Your address",
+          "cityField": "City",
+          "postalCodeField": "Postal Code",
+          "streetField": "Street number and name",
+          "addressDetailsField": "Building, apartment, residency, floor"
+        },
+        "fieldPlaceholder": {
+          "cityField": "Paris",
+          "postalCodeField": "75000",
+          "streetField": "1 Avenue des Champs-Elysée",
+          "addressDetailsField": "1st floor"
+        }
       },
       "stepOne-subThree": {
         "title": "Step 1 - Property information",
