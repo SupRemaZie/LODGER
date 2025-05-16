@@ -7,7 +7,7 @@ import {formatSelectedAddress, getFullStreetName} from '@/app/tools/AddressForma
 import {useTranslations} from "next-intl";
 
 
-const AddressMap = ({ title, description, targetInputIds }: {
+const AddressMap = ({ title, description, targetInputIds, onAddressSelected }: {
     title: string,
     description: string,
     targetInputIds: {
@@ -15,6 +15,11 @@ const AddressMap = ({ title, description, targetInputIds }: {
         postcode: string,
         street: string,
     },
+    onAddressSelected?: (addressData: {
+        city: string,
+        postcode: string,
+        street: string}
+    ) => void
 }) => {
 
     const mapContainerRef = useRef<HTMLDivElement | null>(null);
@@ -74,7 +79,12 @@ const AddressMap = ({ title, description, targetInputIds }: {
             map.flyTo({ center: [lng, lat], zoom: 15 });
             markerRef.current?.setLngLat([lng, lat]);
             setQuery(formatSelectedAddress(addressData));
-            updateTargetInputs(addressData);
+            const extracted = {
+                city: getFieldValueFromAddressData("city", addressData),
+                postcode: getFieldValueFromAddressData("postcode", addressData),
+                street: getFieldValueFromAddressData("street", addressData)
+            }
+            onAddressSelected?.(extracted);
             setSuggestions([]);
         }
     };

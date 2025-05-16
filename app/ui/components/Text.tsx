@@ -1,20 +1,15 @@
 "use client";
 
-import React, {useState} from "react";
+import React from "react";
 
-const Text = ({id, title, description, placeholder}: {
+const Text = ({id, title, description, placeholder, value, onChange}: {
     id: string,
     title: string,
     description: string,
-    placeholder: string
+    placeholder: string,
+    value?: string,
+    onChange?: (value: string) => void;
 }) => {
-
-    const [query, setQuery] = useState('');
-
-    const handleInput = async (e: any) => {
-        const value = e.target.value;
-        setQuery(value);
-    }
 
     return (
         <div className="w-3/5 mb-4 mt-4">
@@ -26,8 +21,8 @@ const Text = ({id, title, description, placeholder}: {
             </div>
             <input
                 id={id}
-                value={query}
-                onChange={handleInput}
+                value={value || ''}
+                onChange={(e) => onChange?.(e.target.value)}
                 placeholder={placeholder}
                 className="p-2 shadow rounded-xl w-full"
                 style={{ border: '1px solid lightgray'}}
