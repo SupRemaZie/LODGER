@@ -31,7 +31,6 @@ const AddressMap = ({ title, description, targetInputIds, onAddressSelected }: {
     const trans = useTranslations('AddressMap')
 
     useEffect(() => {
-        if (typeof window === 'undefined') return;
         markerRef.current = new maplibregl.Marker();
 
         if (mapContainerRef.current) {

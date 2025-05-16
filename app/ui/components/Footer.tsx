@@ -1,15 +1,24 @@
 import Image from "next/image";
 import LodgerButton from "@/app/ui/components/LodgerButton";
 import {useTranslations} from "next-intl";
-import {useState} from "react";
+import {useMemo, useState} from "react";
+import {useFormData} from "@/app/context/FormDataContext";
 
 export default function Footer({onPrevious,onNext, requiredField, step}:{
     onPrevious: ()=> void
     onNext: () => void
-    requiredField: string
+    requiredField: string[]
     step : number
 }) {
     const trans = useTranslations('PropertydepositPage')
+    const {formData} = useFormData();
+
+    const isNextDisabled =  useMemo(() => {
+        return requiredField.some((field) => {
+            const value = formData[field as keyof typeof formData];
+            return !value || value.toString().trim() === '';
+        });
+    }, [formData, requiredField]);
 
     return(
         <footer className="w-full bg-white ">
@@ -36,7 +45,7 @@ export default function Footer({onPrevious,onNext, requiredField, step}:{
 
                 <LodgerButton
                     onPress={() => onNext()}
-                    isDisabled={!requiredField}
+                    isDisabled={isNextDisabled}
                     label={trans("actions.next")}
                     className="text-white bg-[#02DB82] stroke-1 stroke-[#CAC6C6] font-[700]"
                     type="full-success"
