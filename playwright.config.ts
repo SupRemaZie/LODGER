@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
-    reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }]],
+    reporter: 'html',
     use: {
         actionTimeout: 0,
         trace: 'on-first-retry',
@@ -12,5 +12,17 @@ export default defineConfig({
     },
     testDir: './tests',
     testMatch: '**/*.spec.ts',
+    timeout: 30000,
+    retries: 1,
+    projects: [
+        {
+            name: 'chromium',
+            use: { browserName: 'chromium' },
+        },
+        {
+            name: 'firefox',
+            use: { browserName: 'firefox' },
+        },
+    ],
 });
 
