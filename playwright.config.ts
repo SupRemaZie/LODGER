@@ -12,5 +12,17 @@ export default defineConfig({
     },
     testDir: './tests',
     testMatch: '**/*.spec.ts',
+    timeout: 30000,
+    retries: 1,
+    projects: [
+        {
+            name: 'chromium',
+            use: { browserName: 'chromium' },
+        },
+        {
+            name: 'firefox',
+            use: { browserName: 'firefox' },
+        },
+    ],
 });
 
