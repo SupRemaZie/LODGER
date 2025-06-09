@@ -15,10 +15,10 @@ test.describe('Tous les tests en lien avec la sidebar', async () => {
         const sidebar = page.locator('#sidebar');
         const sidebarDiv = sidebar.locator('>div');
 
-        const logo = sidebarDiv.locator('img');
+        const logo = sidebarDiv.locator('>a>img');
         await expect(logo, 'Le logo du site est bien visible').toBeVisible();
 
-        const title = sidebarDiv.locator('p');
+        const title = sidebarDiv.locator('>p');
         await expect(title, 'Le titre du site est bien visible').toBeVisible();
         await expect(title, 'Le titre du site possède bien du texte').toHaveText(/./);
     });
