@@ -118,7 +118,7 @@ export default function Page() {
                 <FormEntry title={trans("formEntry.floor-number.title")} description={trans('formEntry.floor-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=> (handleUpdate('appartmentFloor', value))}/>
             </main>
 
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['typeOfProperty']} step={1}/>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={[]} step={1}/>
         </div>
     )
 }

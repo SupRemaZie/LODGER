@@ -18,8 +18,24 @@ export default function Page() {
     router.push(`information`);
   };
 
-  const handleNext = () => {
-    router.push(`features`);
+  const handleNext = async () => {
+    try {
+      const response = await fetch('/api/deposit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.status === 200) {
+        router.push(`features`);
+      } else {
+        alert('Erreur lors de l\'envoi des données. Veuillez vérifier les champs requis.');
+      }
+    } catch (error) {
+      alert('Erreur réseau. Veuillez réessayer.');
+    }
   };
 
   const handleUpdate = (key: string, value: any) => {

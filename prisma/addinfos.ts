@@ -6,9 +6,9 @@ async function main() {
   try {
     const newAccount = await prisma.account.create({
       data: {
-        firstName: 'Cyprien',
-        lastName: 'GAUDIN',
-        email: 'cyprien.gaudin@gmail.com',
+        firstName: 'Jean',
+        lastName: 'DUPONT',
+        email: 'test@gmail.com',
       },
     });
 

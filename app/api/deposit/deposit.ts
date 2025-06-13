@@ -17,6 +17,8 @@ class Deposit {
 
     async saveData(data: LogementData) {
         try {
+            let property = null;
+
             if (!data.email) {
                 throw new CustomError("Email requis.", "EMAIL_REQUIRED");
             }
@@ -37,12 +39,14 @@ class Deposit {
                 throw new CustomError("Type de logement invalide.", "INVALID_LOGEMENT_TYPE");
             }
 
-            const property = await prisma.propertyType.findUnique({
-                where: { type: data.typeOfProperty },
-            });
+            if (!data.typeOfLogement.toLowerCase().includes('maison')){
+                property = await prisma.propertyType.findUnique({
+                    where: { type: data.typeOfProperty },
+                });
 
-            if (!property) {
-                throw new CustomError("Type de propriété invalide.", "INVALID_PROPERTY_TYPE");
+                if (!property) {
+                    throw new CustomError("Type de propriété invalide.", "INVALID_PROPERTY_TYPE");
+                }
             }
 
             const roomAreas = data.roomAreas && data.roomAreas.length > 0 ? {
@@ -78,7 +82,7 @@ class Deposit {
                     kgCO2: Number(data.kgCO2),
                     accountId: account.id,
                     logementTypeId: logement.id,
-                    propertyTypeId: property.id,
+                    propertyTypeId: property != null ? property.id : null,
                     roomAreas: roomAreas,
                     spaceShares: spaceShares,
                 },
