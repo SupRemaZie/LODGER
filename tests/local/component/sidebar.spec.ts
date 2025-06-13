@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import {isSidebarVisible} from "@/tests/utils/global-ui";
 
 let page: Page;
 
@@ -66,10 +67,3 @@ test.describe('Tous les tests en lien avec la sidebar', async () => {
         await expect(helpDivHelpButton, "Le bouton de l'espace d'aide possède bien du texte").toHaveText(/./);
     });
 });
-
-async function isSidebarVisible(page: Page) {
-    await expect(page.locator('#sidebar'), 'La sidebar est bien visible').toBeVisible();
-}
-
-export { isSidebarVisible };
-

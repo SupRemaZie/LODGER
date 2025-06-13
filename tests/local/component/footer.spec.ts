@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import {isFooterVisible} from "@/tests/utils/global-ui";
 
 let page: Page;
 
@@ -42,10 +43,3 @@ test.describe('Tous les tests en lien avec le footer', async () => {
         await expect(validateButton, 'Le bouton de validation possède du texte').toHaveText(/./);
     });
 });
-
-async function isFooterVisible(page: Page) {
-    await expect(page.locator('footer'), 'Le footer est bien visible').toBeVisible();
-}
-
-export { isFooterVisible };
-
