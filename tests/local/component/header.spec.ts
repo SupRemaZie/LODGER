@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import {isHeaderVisible} from "@/tests/utils/global-ui";
 
 let page: Page;
 
@@ -34,14 +35,3 @@ test.describe('Tous les tests en lien avec le header', async () => {
         await expect(button, 'le bouton du header possède bien du texte pour informer ce qu\'il fait').toHaveText(/./);
     });
 });
-
-async function isHeaderVisible(page: Page) {
-    await expect(page.locator('#header'), 'Le header est bien visible').toBeVisible();
-}
-
-async function isHeaderWithTitleMessage(page: Page, titleMessage: string) {
-    await expect(page.locator('#page-title'), 'Le titre du header possède bien le message ' + titleMessage).toHaveText(titleMessage);
-}
-
-export { isHeaderVisible, isHeaderWithTitleMessage };
-
