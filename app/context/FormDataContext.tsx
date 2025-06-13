@@ -9,7 +9,7 @@ interface FormDataContextType {
 }
 
 const defaultFormData: LogementData = {
-    email: "",
+    email: "test@gmail.com", // Defailt email, keep it with the user connected but not implement by us
     typeOfLogement: "",
     typeOfProperty: "",
     draft: false,
