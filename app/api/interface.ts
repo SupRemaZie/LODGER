@@ -8,6 +8,7 @@ export interface LogementData {
     propertyType: string;
     displayPreciseAddress: boolean;
     postalCode: string;
+    showAddress: boolean;
     city: string;
     street: string;
     numero: string;
