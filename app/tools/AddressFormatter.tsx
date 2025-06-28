@@ -68,8 +68,10 @@ export const formatSelectedAddress = (data: AddressData): string => {
     return formatter(data);
 }
 
-export const getFullStreetName = (data: AddressData): string => {
-    let fullName = data.properties.housenumber ? data.properties.housenumber + " " : "";
-    fullName += data.properties.street ?? "" + data.properties.name ?? "";
-    return fullName;
+export const getStreetName = (data: AddressData): string => {
+    return data.properties.street ?? "" + data.properties.name ?? "";
+}
+
+export const getStreetNumber = (data: AddressData): string => {
+    return data.properties.housenumber ?? "";
 }
