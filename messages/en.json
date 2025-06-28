@@ -54,6 +54,7 @@
         "question": "Where is your property located?",
         "fieldTitles": {
           "addressMap": "Your address",
+          "showAdress": "Show the precise location of your property",
           "cityField": "City",
           "postalCodeField": "Postal Code",
           "streetField": "Street number and name",
