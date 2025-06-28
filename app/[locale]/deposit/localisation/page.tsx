@@ -3,11 +3,9 @@ import {useFormData} from "@/app/context/FormDataContext";
 import Header from "@/app/ui/components/Header";
 import {useTranslations} from "next-intl";
 import Footer from "@/app/ui/components/Footer";
-import {usePathname, useRouter} from "next/navigation";
-import LodgerButton from "@/app/ui/components/LodgerButton";
+import {useRouter} from "next/navigation";
 import AddressMap from "@/app/ui/components/AddressMap";
 import Text from "@/app/ui/components/Text";
-// import Toggle from "@/app/ui/components/Toggle";
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage.stepOne.stepOne-subTwo')
@@ -84,11 +82,3 @@ export default function Page() {
         </div>
     )
 }
-
-/*
-<Toggle
-                        title={trans('fieldTitles.showAdress')}
-                        value={formData.showAddress}
-                        onChange={(value) => handleUpdate('showAddress', value)}
-                    />
- */
