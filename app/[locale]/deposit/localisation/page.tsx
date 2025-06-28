@@ -7,6 +7,7 @@ import {usePathname, useRouter} from "next/navigation";
 import LodgerButton from "@/app/ui/components/LodgerButton";
 import AddressMap from "@/app/ui/components/AddressMap";
 import Text from "@/app/ui/components/Text";
+// import Toggle from "@/app/ui/components/Toggle";
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage.stepOne.stepOne-subTwo')
@@ -56,12 +57,19 @@ export default function Page() {
                         value={formData.postalCode}
                         onChange={(value) => handleUpdate('postalCode', value)}/>
                     <Text
-                        id="streetField"
-                        title={trans('fieldTitles.streetField')}
+                        id="streetNumber"
+                        title={trans('fieldTitles.streetNumber')}
                         description=""
-                        placeholder={trans('fieldPlaceholder.streetField')}
-                        value={formData.street}
-                        onChange={(value) => handleUpdate('street', value)}/>
+                        placeholder={trans('fieldPlaceholder.streetNumber')}
+                        value={formData.streetNumber}
+                        onChange={(value) => handleUpdate('streetNumber', value)}/>
+                    <Text
+                        id="streetName"
+                        title={trans('fieldTitles.streetName')}
+                        description=""
+                        placeholder={trans('fieldPlaceholder.streetName')}
+                        value={formData.streetName}
+                        onChange={(value) => handleUpdate('streetName', value)}/>
                     <Text
                         id="detailsField"
                         title={trans('fieldTitles.addressDetailsField')}
@@ -70,8 +78,16 @@ export default function Page() {
                     />
                 </section>
             </main>
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['city', 'postalCode', 'street']} step={1}/>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['city', 'postalCode', 'streetNumber', 'streetName']} step={1}/>
 
         </div>
     )
 }
+
+/*
+<Toggle
+                        title={trans('fieldTitles.showAdress')}
+                        value={formData.showAddress}
+                        onChange={(value) => handleUpdate('showAddress', value)}
+                    />
+ */
