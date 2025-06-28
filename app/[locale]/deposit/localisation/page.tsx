@@ -35,11 +35,12 @@ export default function Page() {
                     <AddressMap
                         title={trans('fieldTitles.addressMap')}
                         description=""
-                        targetInputIds={{city: "cityField", postcode: "postcodeField", street: "streetField"}}
+                        targetInputIds={{city: "cityField", postcode: "postcodeField", streetNumber: "streetNumber", streetName: "streetName"}}
                         onAddressSelected={(address) => {
                             handleUpdate('city', address.city);
                             handleUpdate('postalCode', address.postcode);
-                            handleUpdate('street', address.street);
+                            handleUpdate('streetNumber', address.streetNumber);
+                            handleUpdate('streetName', address.streetName);
                         }}
                     />
                     <Text
