@@ -56,13 +56,15 @@
           "addressMap": "Your address",
           "cityField": "City",
           "postalCodeField": "Postal Code",
-          "streetField": "Street number and name",
+          "streetNumber": "Street number",
+          "streetName": "Street name",
           "addressDetailsField": "Building, apartment, residency, floor"
         },
         "fieldPlaceholder": {
           "cityField": "Paris",
           "postalCodeField": "75000",
-          "streetField": "1 Avenue des Champs-Elysée",
+          "streetNumber": "1",
+          "streetName": "Avenue des Champs-Elysée",
           "addressDetailsField": "1st floor"
         }
       },
