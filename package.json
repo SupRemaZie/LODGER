@@ -12,6 +12,7 @@
     "@heroui/card": "^2.2.15",
     "@heroui/divider": "^2.2.11",
     "@heroui/react": "^2.7.5",
+    "@heroui/switch": "^2.2.20",
     "@heroui/system": "^2.4.12",
     "@heroui/theme": "^2.4.12",
     "@heroui/toast": "^2.0.6",

@@ -66,6 +66,7 @@
         "question": "Où est situé votre logement ?",
         "fieldTitles": {
           "addressMap": "Votre adresse",
+          "showAdress": "Afficher l'emplacement précis de votre logement",
           "cityField": "Ville",
           "postalCodeField": "Code Postal",
           "streetField": "Numéro et nom de voie",
