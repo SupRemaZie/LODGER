@@ -18,6 +18,7 @@ const defaultFormData: LogementData = {
     propertyType: "",
     displayPreciseAddress: false,
     postalCode: "",
+    showAddress: false,
     city: "",
     streetNumber: "",
     streetName: "",
