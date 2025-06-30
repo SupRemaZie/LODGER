@@ -33,7 +33,8 @@ model Logement {
   displayPreciseAddress Boolean?
   postalCode    Int?
   city String?
-  street  String?
+  streetNumber String?
+  streetName String?
   numero Int?
   addressComplement String?
   stopProcess          String?

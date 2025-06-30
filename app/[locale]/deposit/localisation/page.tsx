@@ -3,8 +3,7 @@ import {useFormData} from "@/app/context/FormDataContext";
 import Header from "@/app/ui/components/Header";
 import {useTranslations} from "next-intl";
 import Footer from "@/app/ui/components/Footer";
-import {usePathname, useRouter} from "next/navigation";
-import LodgerButton from "@/app/ui/components/LodgerButton";
+import {useRouter} from "next/navigation";
 import AddressMap from "@/app/ui/components/AddressMap";
 import Text from "@/app/ui/components/Text";
 
@@ -34,11 +33,12 @@ export default function Page() {
                     <AddressMap
                         title={trans('fieldTitles.addressMap')}
                         description=""
-                        targetInputIds={{city: "cityField", postcode: "postcodeField", street: "streetField"}}
+                        targetInputIds={{city: "cityField", postcode: "postcodeField", streetNumber: "streetNumber", streetName: "streetName"}}
                         onAddressSelected={(address) => {
                             handleUpdate('city', address.city);
                             handleUpdate('postalCode', address.postcode);
-                            handleUpdate('street', address.street);
+                            handleUpdate('streetNumber', address.streetNumber);
+                            handleUpdate('streetName', address.streetName);
                         }}
                     />
                     <Text
@@ -56,12 +56,19 @@ export default function Page() {
                         value={formData.postalCode}
                         onChange={(value) => handleUpdate('postalCode', value)}/>
                     <Text
-                        id="streetField"
-                        title={trans('fieldTitles.streetField')}
+                        id="streetNumber"
+                        title={trans('fieldTitles.streetNumber')}
                         description=""
-                        placeholder={trans('fieldPlaceholder.streetField')}
-                        value={formData.street}
-                        onChange={(value) => handleUpdate('street', value)}/>
+                        placeholder={trans('fieldPlaceholder.streetNumber')}
+                        value={formData.streetNumber}
+                        onChange={(value) => handleUpdate('streetNumber', value)}/>
+                    <Text
+                        id="streetName"
+                        title={trans('fieldTitles.streetName')}
+                        description=""
+                        placeholder={trans('fieldPlaceholder.streetName')}
+                        value={formData.streetName}
+                        onChange={(value) => handleUpdate('streetName', value)}/>
                     <Text
                         id="detailsField"
                         title={trans('fieldTitles.addressDetailsField')}
@@ -70,7 +77,7 @@ export default function Page() {
                     />
                 </section>
             </main>
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['city', 'postalCode', 'street']} step={1}/>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['city', 'postalCode', 'streetNumber', 'streetName']} step={1}/>
 
         </div>
     )
