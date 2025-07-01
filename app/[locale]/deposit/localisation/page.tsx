@@ -6,6 +6,7 @@ import Footer from "@/app/ui/components/Footer";
 import {useRouter} from "next/navigation";
 import AddressMap from "@/app/ui/components/AddressMap";
 import Text from "@/app/ui/components/Text";
+import Toggle from "@/app/ui/components/Toggle";
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage.stepOne.stepOne-subTwo')
@@ -41,6 +42,10 @@ export default function Page() {
                             handleUpdate('streetName', address.streetName);
                         }}
                     />
+                    <Toggle
+                        title={trans('fieldTitles.showAdress')}
+                        value={formData.showAddress}
+                        onChange={(value) => handleUpdate('', value)}/>
                     <Text
                         id="cityField"
                         title={trans('fieldTitles.cityField')}
