@@ -4,7 +4,10 @@
     "build": "next build",
     "doc": "npx typedoc",
     "dev": "next dev --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "test:unit": "jest",
+    "test:e2e": "playwright test",
+    "test": "npm run test:unit && npm run test:e2e"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
