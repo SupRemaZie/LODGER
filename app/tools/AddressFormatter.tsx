@@ -69,7 +69,7 @@ export const formatSelectedAddress = (data: AddressData): string => {
 }
 
 export const getStreetName = (data: AddressData): string => {
-    return data.properties.street ?? "" + data.properties.name ?? "";
+    return (data.properties.street ?? "") + (data.properties.name ?? "");
 }
 
 export const getStreetNumber = (data: AddressData): string => {
