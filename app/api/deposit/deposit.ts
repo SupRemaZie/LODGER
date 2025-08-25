@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/prisma/Prisma";
 import { LogementData } from "@/app/api/interface";
-
-const prisma = new PrismaClient();
 
 class CustomError extends Error {
     code: string;
