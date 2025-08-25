@@ -30,9 +30,6 @@ jobs:
       - name: Install prisma
         run: npx prisma generate
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
   test-unit:
     name: Run Unit Tests on Jest
     needs: install-dependencies
@@ -62,6 +59,9 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
       - name: Build Next.js app
         run: npm run build
