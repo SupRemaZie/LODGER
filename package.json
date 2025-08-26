@@ -4,7 +4,10 @@
     "build": "next build",
     "doc": "npx typedoc",
     "dev": "next dev --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "test:unit": "jest",
+    "test:e2e": "playwright test",
+    "test": "npm run test:unit && npm run test:e2e"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -39,11 +42,14 @@
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@types/bcrypt": "^5.0.2",
+    "@types/jest": "^30.0.0",
     "@types/node": "22.10.7",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
     "grunt": "^1.6.1",
+    "jest": "^30.0.5",
     "lint-staged": "^15.5.0",
+    "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.3",
     "typescript": "^5.8.3"
