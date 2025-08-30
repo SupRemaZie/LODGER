@@ -27,10 +27,10 @@ export default function Page() {
             <div className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
 
                 <section id="content" className="pt-8 text-[#02504D]">
-                    <span className="font-[700] text-sm">
+                    <span className="font-bold text-sm">
                         {trans('stepOne.content.title')}
                     </span>
-                    <div className="flex flex-col gap-4 mt-4 font-[600] min-h-full ">
+                    <div className="flex flex-col gap-4 mt-4 font-semibold min-h-full ">
                         <LodgerButton onPress={() =>handleUpdate("typeOfProperty", "ENTIER")} className={`w-1/3 h-24 ${formData.typeOfProperty === "ENTIER" ? "border-2 border-[#02DB82]" : ""}`} label={trans("stepOne.content.logementType.full")}/>
                         <LodgerButton onPress={() =>handleUpdate("typeOfProperty", "COLOCATION")} className={`w-1/3 h-24 ${formData.typeOfProperty === "COLOCATION" ? "border-2 border-[#02DB82]" : ""}`} label={trans("stepOne.content.logementType.shared")}/>
                         <LodgerButton onPress={() =>handleUpdate("typeOfProperty", "HABITANT")} className={`w-1/3 h-24 ${formData.typeOfProperty === "HABITANT" ? "border-2 border-[#02DB82]" : ""}`} label={trans("stepOne.content.logementType.room-apart")}/>
