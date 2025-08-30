@@ -17,21 +17,20 @@ export default function Page() {
 
     const handleNext =() =>{
         router.push(`dpe`)
-        console.log(formData)
     }
     const handlePrevious=()=>{
         router.push(`localisation`)
     }
     const handleUpdate = (key: string, value: any) => {
         setFormData((prev) => {
-            // Cas: mise à jour d'un tableau avec index (ex: { index: 1, value: 20 })
+
             if (typeof value === 'object' && value !== null && 'index' in value && 'value' in value) {
                 const currentArray = Array.isArray((prev as Record<string, any>)[key])
                     ? [...(prev as Record<string, any>)[key]]
                     : [];
 
                 const val = Number(value.value);
-                if (isNaN(val)) return prev; // ignore les valeurs non numériques
+                if (isNaN(val)) return prev;
                 currentArray[value.index] = val;
                 return {
                     ...prev,
@@ -39,7 +38,6 @@ export default function Page() {
                 };
             }
 
-            // Cas spécial : adapter taille d’un tableau à un nombre (ex: nombre de chambres)
             if (key === 'bedroomNumber') {
                 const currentSurfaces = Array.isArray(prev['roomAreas']) ? prev['roomAreas'] : [];
                 const resizedSurfaces = currentSurfaces.slice(0, value);
@@ -56,28 +54,19 @@ export default function Page() {
                 };
             }
 
-            // Cas simple : champ de base
             return {
                 ...prev,
                 [key]: value,
             };
         });
-        console.log(formData)
     };
 
-
-
-
-    const test = (key: string, value: number) => {
-        handleUpdate(key, value);
-    }
 
     return (
         <div className="flex flex-col min-h-screen w-full">
             {/* Header */}
             <Header title={trans("stepOne.stepOne-subThree.title")} question={trans("stepOne.stepOne-subThree.question")} />
 
-            {/* Contenu principal qui pousse le footer vers le bas */}
             <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
                 <FormEntry title={trans("formEntry.surface.title")} description={trans('formEntry.surface.description')} logo="/icons/superficie-icon.svg" type="number" onUpdate={(value : number)=>handleUpdate('superficie',value )}/>
                 {formData.typeOfProperty == "HABITANT" && (
@@ -115,10 +104,14 @@ export default function Page() {
                 )}
                 <FormEntry title={trans("formEntry.bathrooms-number.title")} description={trans('formEntry.bathrooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=>(handleUpdate('bathRoomSpace', value))}/>
                 <FormEntry title={trans("formEntry.showers-rooms-number.title")} description={trans('formEntry.showers-rooms-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=>(handleUpdate('powderRoomSpace', value))}/>
-                <FormEntry title={trans("formEntry.floor-number.title")} description={trans('formEntry.floor-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=> (handleUpdate('appartmentFloor', value))}/>
+                {formData.typeOfLogement == "APPARTMENT" &&(
+                    <>
+                     <FormEntry title={trans("formEntry.floor-number.title")} description={trans('formEntry.floor-number.description')} logo="/icons/superficie-icon.svg" type="count" onUpdate={(value : number)=> (handleUpdate('appartmentFloor', value))}/>
+                     </>
+                )}
             </main>
 
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={[]} step={1}/>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['superficie','furnished']} step={1}/>
         </div>
     )
 }

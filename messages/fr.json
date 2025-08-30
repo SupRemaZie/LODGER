@@ -36,7 +36,7 @@
       },
       "floor-number": {
         "title": "Étage de l'appartement",
-        "description": "Supérieur à 9m²"
+        "description": ""
       },
       "shared-spaces": {
         "title": "Espaces partagés",

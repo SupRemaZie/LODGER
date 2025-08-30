@@ -24,7 +24,7 @@
       },
       "floor-number": {
         "title": "Apartment floor",
-        "description": "Greater than 9m²"
+        "description": ""
       },
       "shared-spaces": {
         "title": "Shared spaces",
