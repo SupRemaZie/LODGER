@@ -39,7 +39,7 @@ export default function Footer({onPrevious,onNext, requiredField, step}:{
                 <LodgerButton
                     onPress={() => onPrevious()}
                     label={trans("actions.back")}
-                    className="text-[#02504D] bg-white stroke-1 stroke-[#CAC6C6] font-[700]"
+                    className="text-[#02504D] bg-white stroke-1 stroke-[#CAC6C6] font-bold"
                     type="no-border"
                 />
 
@@ -47,7 +47,7 @@ export default function Footer({onPrevious,onNext, requiredField, step}:{
                     onPress={() => onNext()}
                     isDisabled={isNextDisabled}
                     label={trans("actions.next")}
-                    className="text-white bg-[#02DB82] stroke-1 stroke-[#CAC6C6] font-[700]"
+                    className="text-white bg-[#02DB82] stroke-1 stroke-[#CAC6C6] font-bold"
                     type="full-success"
                 />
             </div>

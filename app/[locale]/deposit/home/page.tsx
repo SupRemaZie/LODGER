@@ -42,10 +42,10 @@ export default function Page() {
             <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
 
                 <section id="content" className="pt-8 text-[#02504D]">
-                <span className="font-[700] text-sm">
+                <span className="font-bold text-sm">
                     {trans('stepOne.content.title')}
                 </span>
-                    <div className="flex flex-row gap-4 mt-4 font-[600] ">
+                    <div className="flex flex-row gap-4 mt-4 font-semibold ">
                         <Button onPress={() => handleUpdate("typeOfLogement", "APPARTEMENT")}
                                 variant="bordered" color="primary"
                                 className={`flex flex-col w-1/4 h-1/4 bg-white text-[#02504D]  ${

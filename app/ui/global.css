@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*global css /app/ui/global.css */
+
+@import 'tailwindcss';
+@config '../../tailwind.config.ts';
+
+
 
 input[type='number'] {
   -moz-appearance: textfield;
