@@ -1,5 +1,7 @@
-import {logementRequest} from "../types/logementRequest";
-import {DepositService} from "../services/depositService";
+import {DepositService} from '../services/depositService';
+import {logementRequest} from "@/app/api/deposit/types/logementRequest";
+import {errorResponse} from "@/app/api/deposit/types/errorResponse";
+import {NextRequest, NextResponse} from "next/server";
 
 export class DepositController {
     private depositService: DepositService;
@@ -8,37 +10,63 @@ export class DepositController {
         this.depositService = new DepositService();
     }
 
-    async handleDeposit(data: logementRequest) {
+    private createResponse(data: any, status: number): NextResponse {
+        return new NextResponse(JSON.stringify(data), {
+            status,
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-store'
+            }
+        });
+    }
+
+    private validateRequest(data: logementRequest): boolean {
+        return !!(data.email && data.typeOfLogement && data.superficie);
+    }
+
+    async handleDeposit(request: NextRequest): Promise<NextResponse> {
         try {
+            // Validation de la requête
+            if (!request.body) {
+                return this.createResponse(
+                    new errorResponse('Corps de la requête manquant', 400),
+                    400
+                );
+            }
+
+            // Parsing des données
+            const data: logementRequest = await request.json();
+
             // Validation des données
-            this.validateDepositData(data);
+            if (!this.validateRequest(data)) {
+                return this.createResponse(
+                    new errorResponse('Données invalides', 400),
+                    400
+                );
+            }
 
-            // Traitement via le service
-            return await this.depositService.saveData(data);
-        } catch (error: any) {
-            return {
-                status: 'ERROR',
-                message: error.message || 'Une erreur est survenue lors du traitement',
-                code: error.code || 'PROCESSING_ERROR'
-            };
+            // Traitement
+            const result = await this.depositService.saveData(data);
+
+            // Réponse
+            return this.createResponse(
+                result,
+                result.status === 'SUCCESS' ? 201 : 400
+            );
+
+        } catch (error) {
+            console.error('Erreur dans DepositController:', error);
+            return this.createResponse(
+                new errorResponse('Une erreur est survenue lors du traitement', 500),
+                500
+            );
         }
     }
+}
 
-    private validateDepositData(data: logementRequest) {
-        if (!data.email) {
-            throw { code: 'VALIDATION_ERROR', message: 'Email requis' };
-        }
+// Point d'entrée de l'API
+const depositController = new DepositController();
 
-        if (!data.city || !data.postalCode) {
-            throw { code: 'VALIDATION_ERROR', message: 'Adresse incomplète' };
-        }
-
-        if (!data.typeOfLogement) {
-            throw { code: 'VALIDATION_ERROR', message: 'Type de logement requis' };
-        }
-
-        if (Number(data.superficie) <= 0) {
-            throw { code: 'VALIDATION_ERROR', message: 'Superficie invalide' };
-        }
-    }
+export async function POST(request: NextRequest): Promise<NextResponse> {
+    return depositController.handleDeposit(request);
 }
