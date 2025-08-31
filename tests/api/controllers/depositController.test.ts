@@ -1,7 +1,9 @@
-import { DepositService } from "../../../app/api/deposit/services";
+import { DepositController } from "@/app/api/deposit/controllers/depositController";
+import { DepositService } from "@/app/api/deposit/services/depositService";
+import { NextRequest } from "next/server";
 
-// Mock du DepositService
-jest.mock("../../../../app/api/deposit/services/depositService");
+// Mock de DepositService
+jest.mock("../../../app/api/deposit/services/depositService");
 
 describe('DepositController', () => {
     let controller: DepositController;
@@ -17,59 +19,81 @@ describe('DepositController', () => {
         controller = new DepositController();
     });
 
-    const validData = {
+    const validRequestData = {
         email: "test@example.com",
-        draft: true,
-        displayPreciseAddress: true,
-        postalCode: "75001",
-        city: "Paris",
-        streetNumber: "1",
-        streetName: "Rue Test",
-        numero: "1",
+        typeOfLogement: "Appartement",
         superficie: "50",
-        roomNumber: "3",
-        bedroomNumber: "2",
-        furnished: true,
-        bathRoomSpace: "1",
-        powderRoomSpace: "1",
-        appartmentFloor: "2",
-        kWhEP: "200",
-        kgCO2: "10",
-        typeOfLogement: "Appartement"
+        city: "Paris",
+        postalCode: "75001"
     };
 
-    test('devrait valider et sauvegarder des données valides', async () => {
+    const createMockRequest = (data: any): NextRequest => {
+        return {
+            json: () => Promise.resolve(data),
+            body: true
+        } as unknown as NextRequest;
+    };
+
+    test('devrait traiter une requête valide avec succès', async () => {
+        const mockRequest = createMockRequest(validRequestData);
         mockSaveData.mockResolvedValue({ status: 'SUCCESS' });
-        const result = await controller.handleDeposit(validData);
+
+        const response = await controller.handleDeposit(mockRequest);
+        const result = await response.json();
+
+        expect(response.status).toBe(201);
         expect(result.status).toBe('SUCCESS');
-        expect(mockSaveData).toHaveBeenCalledWith(validData);
+        expect(mockSaveData).toHaveBeenCalledWith(validRequestData);
     });
 
-    test('devrait rejeter des données sans email', async () => {
-        const invalidData = { ...validData, email: '' };
-        const result = await controller.handleDeposit(invalidData);
-        expect(result.status).toBe('ERROR');
-        expect(result.code).toBe('VALIDATION_ERROR');
+    test('devrait rejeter une requête sans corps', async () => {
+        const mockRequest = {
+            body: null
+        } as unknown as NextRequest;
+
+        const response = await controller.handleDeposit(mockRequest);
+        const result = await response.json();
+
+        expect(response.status).toBe(400);
+        expect(result.message).toBe('Corps de la requête manquant');
     });
 
-    test('devrait rejeter des données sans ville', async () => {
-        const invalidData = { ...validData, city: '' };
-        const result = await controller.handleDeposit(invalidData);
-        expect(result.status).toBe('ERROR');
-        expect(result.code).toBe('VALIDATION_ERROR');
-    });
+    test('devrait rejeter des données invalides', async () => {
+        const invalidData = { ...validRequestData, email: '' };
+        const mockRequest = createMockRequest(invalidData);
 
-    test('devrait rejeter une superficie invalide', async () => {
-        const invalidData = { ...validData, superficie: "0" };
-        const result = await controller.handleDeposit(invalidData);
-        expect(result.status).toBe('ERROR');
-        expect(result.code).toBe('VALIDATION_ERROR');
+        const response = await controller.handleDeposit(mockRequest);
+        const result = await response.json();
+
+        expect(response.status).toBe(400);
+        expect(result.message).toBe('Données invalides');
     });
 
     test('devrait gérer les erreurs du service', async () => {
+        const mockRequest = createMockRequest(validRequestData);
         mockSaveData.mockRejectedValue(new Error('Erreur service'));
-        const result = await controller.handleDeposit(validData);
-        expect(result.status).toBe('ERROR');
-        expect(result.code).toBe('PROCESSING_ERROR');
+
+        const response = await controller.handleDeposit(mockRequest);
+        const result = await response.json();
+
+        expect(response.status).toBe(500);
+        expect(result.message).toBe('Une erreur est survenue lors du traitement');
+    });
+
+    test('devrait valider correctement les données requises', async () => {
+        const testCases = [
+            { ...validRequestData, email: '' },
+            { ...validRequestData, typeOfLogement: '' },
+            { ...validRequestData, superficie: '' }
+        ];
+
+        for (const testCase of testCases) {
+            const mockRequest = createMockRequest(testCase);
+            const response = await controller.handleDeposit(mockRequest);
+            const result = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(result.message).toBe('Données invalides');
+        }
     });
 });
