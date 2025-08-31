@@ -11,5 +11,5 @@ echo "Database is ready!"
 # En prod, on utilise deploy (idempotent) et pas 'migrate dev'
 npx prisma migrate deploy
 
-# Seed (exécute 'tsx prisma/addinfos.ts' via la config Prisma)
-npx tsx prisma/addinfos.ts
+# Seed (exécute 'tsx prisma/seed.ts' via la config Prisma)
+npx tsx prisma/seed.ts

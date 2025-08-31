@@ -1,6 +1,5 @@
 import { prisma } from './Prisma';
 
-
 async function main() {
   try {
     const newAccount = await prisma.account.create({
@@ -30,7 +29,7 @@ async function main() {
   const propertyType = await prisma.propertyType.createMany({
     data: [
       { type: 'ENTIER' },
-      { type: 'APPARTEMENT' },
+      { type: 'COLOCATION' },
       { type: 'HABITANT' },
     ],
     skipDuplicates: true,
