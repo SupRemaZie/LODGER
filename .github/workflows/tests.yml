@@ -15,7 +15,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'          # cache npm basé sur package-lock.json
       - name: Clean install
         run: npm install
       - name: Generate Prisma client
@@ -30,7 +29,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
       - name: Clean install
         run: npm install
       - name: Generate Prisma client
