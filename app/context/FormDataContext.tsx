@@ -1,41 +1,15 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { LogementData } from "@/app/api/interface";
+import { LogementRequest } from "@/app/api/deposit/types/logementRequest";
+import {generateDefaultLogementRequest} from "@/app/api/deposit/generate/logementRequest";
 
 interface FormDataContextType {
-    formData: LogementData;
-    setFormData: React.Dispatch<React.SetStateAction<LogementData>>;
+    formData: LogementRequest;
+    setFormData: React.Dispatch<React.SetStateAction<LogementRequest>>;
 }
 
-const defaultFormData: LogementData = {
-    email: "test@gmail.com", // Default email, keep it with the user connected but not implement by us
-    typeOfLogement: "",
-    typeOfProperty: "",
-    draft: false,
-    stopProcess: "",
-    logementType: "",
-    propertyType: "",
-    displayPreciseAddress: false,
-    postalCode: "",
-    showAddress: false,
-    city: "",
-    streetNumber: "",
-    streetName: "",
-    numero: "",
-    addressComplement: "",
-    superficie: "",
-    roomNumber: "",
-    bedroomNumber: "",
-    furnished: false,
-    bathRoomSpace: "",
-    powderRoomSpace: "",
-    appartmentFloor: "",
-    kWhEP: "",
-    kgCO2: "",
-    roomAreas: [],
-    spaceShare: [],
-};
+const defaultFormData: LogementRequest = generateDefaultLogementRequest();
 
 const FormDataContext = createContext<FormDataContextType>({
     formData: defaultFormData,
@@ -64,7 +38,7 @@ function safeParse(str: string) {
 }
 
 export const FormDataProvider = ({ children }: { children: ReactNode }) => {
-    const [formData, setFormData] = useState<LogementData>(defaultFormData);
+    const [formData, setFormData] = useState<LogementRequest>(defaultFormData);
     const [isHydrated, setIsHydrated] = useState(false);
 
     useEffect(() => {

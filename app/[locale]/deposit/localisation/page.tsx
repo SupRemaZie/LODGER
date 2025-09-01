@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 import AddressMap from "@/app/ui/components/AddressMap";
 import Text from "@/app/ui/components/Text";
 import Toggle from "@/app/ui/components/Toggle";
+import {LogementRequest} from "@/app/api/deposit/types/logementRequest";
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage.stepOne.stepOne-subTwo')
@@ -24,11 +25,23 @@ export default function Page() {
         }
     }
     const handleUpdate = (key: string, value: any) => {
-        setFormData((prev) => ({...prev, [key]: value}));
+        setFormData((prev :LogementRequest) => ({...prev, [key]: value}));
     };
+
+    const handleSaveAndQuit = () => {
+        setFormData(prev => ({
+            ...prev,
+            stopProcess: "Localisation",
+        }));
+    };
+
     return (
         <div className="flex flex-col min-h-screen w-full">
-            <Header title={trans("title")} question={trans("question")} />
+            <Header
+                title={trans("title")}
+                question={trans("question")}
+                onSaveAndQuit={handleSaveAndQuit}
+            />
             <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
                 <section id="content" className="text-[#02504D] flex flex-col">
                     <AddressMap
