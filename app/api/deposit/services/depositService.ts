@@ -1,10 +1,10 @@
 import {prisma} from "@/prisma/Prisma";
-import {logementRequest} from "../types/logementRequest";
+import {LogementRequest} from "../types/logementRequest";
 import {depositResponse} from "../types/depositResponse";
 import {errorResponse} from "@/app/api/deposit/types/errorResponse";
 
 export class DepositService {
-    async saveData(data: logementRequest): Promise<depositResponse | errorResponse> {
+    async saveData(data: LogementRequest): Promise<depositResponse | errorResponse> {
         try {
             let property = null;
 
@@ -49,7 +49,7 @@ export class DepositService {
         return property;
     }
 
-    private async createLogement(data: logementRequest, accountId: number, logementTypeId: number, propertyTypeId: number | undefined) : Promise<depositResponse | errorResponse> {
+    private async createLogement(data: LogementRequest, accountId: number, logementTypeId: number, propertyTypeId: number | undefined) : Promise<depositResponse | errorResponse> {
         try {
             await prisma.logement.create({
                 data: {

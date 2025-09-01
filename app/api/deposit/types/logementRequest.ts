@@ -1,4 +1,4 @@
-export interface logementRequest {
+export interface LogementRequest {
     email: string;
     typeOfLogement: string;
     typeOfProperty?: string;

@@ -1,5 +1,5 @@
 import {DepositService} from '../services/depositService';
-import {logementRequest} from "@/app/api/deposit/types/logementRequest";
+import {LogementRequest} from "@/app/api/deposit/types/logementRequest";
 import {errorResponse} from "@/app/api/deposit/types/errorResponse";
 import {NextRequest, NextResponse} from "next/server";
 
@@ -20,7 +20,7 @@ export class DepositController {
         });
     }
 
-    private validateRequest(data: logementRequest): boolean {
+    private validateRequest(data: LogementRequest): boolean {
         return !!(data.email && data.typeOfLogement && data.superficie);
     }
 
@@ -35,7 +35,7 @@ export class DepositController {
             }
 
             // Parsing des données
-            const data: logementRequest = await request.json();
+            const data: LogementRequest = await request.json();
 
             // Validation des données
             if (!this.validateRequest(data)) {

@@ -1,15 +1,15 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { logementRequest } from "@/app/api/deposit/types/logementRequest";
+import { LogementRequest } from "@/app/api/deposit/types/logementRequest";
 import {generateDefaultLogementRequest} from "@/app/api/deposit/generate/logementRequest";
 
 interface FormDataContextType {
-    formData: logementRequest;
-    setFormData: React.Dispatch<React.SetStateAction<logementRequest>>;
+    formData: LogementRequest;
+    setFormData: React.Dispatch<React.SetStateAction<LogementRequest>>;
 }
 
-const defaultFormData: logementRequest = generateDefaultLogementRequest();
+const defaultFormData: LogementRequest = generateDefaultLogementRequest();
 
 const FormDataContext = createContext<FormDataContextType>({
     formData: defaultFormData,
@@ -38,7 +38,7 @@ function safeParse(str: string) {
 }
 
 export const FormDataProvider = ({ children }: { children: ReactNode }) => {
-    const [formData, setFormData] = useState<logementRequest>(defaultFormData);
+    const [formData, setFormData] = useState<LogementRequest>(defaultFormData);
     const [isHydrated, setIsHydrated] = useState(false);
 
     useEffect(() => {

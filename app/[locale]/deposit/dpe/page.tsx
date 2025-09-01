@@ -6,7 +6,7 @@ import Header from "@/app/ui/components/Header";
 import {useRouter} from "next/navigation";
 import React from "react";
 import {useTranslations} from "next-intl";
-import {logementRequest} from "@/app/api/deposit/types/logementRequest";
+import {LogementRequest} from "@/app/api/deposit/types/logementRequest";
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage')
@@ -41,7 +41,7 @@ export default function Page() {
     };
 
     const handleUpdate = (key: string, value: any) => {
-        setFormData((prev: logementRequest) => ({...prev, [key]: value}));
+        setFormData((prev: LogementRequest) => ({...prev, [key]: value}));
     };
 
     const handleSaveAndQuit = () => {

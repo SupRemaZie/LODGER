@@ -6,7 +6,7 @@ import Footer from "@/app/ui/components/Footer";
 import Header from "@/app/ui/components/Header";
 import {useFormData} from '@/app/context/FormDataContext';
 import {usePathname, useRouter} from "next/navigation";
-import {logementRequest} from "@/app/api/deposit/types/logementRequest";
+import {LogementRequest} from "@/app/api/deposit/types/logementRequest";
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage')
@@ -15,8 +15,7 @@ export default function Page() {
     const {formData, setFormData} = useFormData()
 
     const handleUpdate = (key: string, value: any) => {
-        console.log(formData)
-        setFormData((prev: logementRequest) => ({...prev, [key]: value}));
+        setFormData((prev: LogementRequest) => ({...prev, [key]: value}));
     };
     const handlePrevious = () => {
         router.push(`${pathname}`)
@@ -31,7 +30,6 @@ export default function Page() {
     };
 
     const handleSaveAndQuit = () => {
-        console.log(formData)
         setFormData(prev => ({
             ...prev,
             stopProcess: "TypeOfLogement",

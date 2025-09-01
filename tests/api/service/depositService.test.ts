@@ -2,7 +2,7 @@ import { DepositService } from "@/app/api/deposit/services/depositService";
 import { prisma } from "@/prisma/Prisma";
 import { errorResponse } from "@/app/api/deposit/types/errorResponse";
 import { depositResponse } from "@/app/api/deposit/types/depositResponse";
-import {logementRequest} from "@/app/api/deposit/types/logementRequest";
+import {LogementRequest} from "@/app/api/deposit/types/logementRequest";
 
 jest.mock("@/prisma/Prisma", () => ({
     prisma: {
@@ -29,7 +29,7 @@ describe('DepositService', () => {
         service = new DepositService();
     });
 
-    const mockValidData : logementRequest = {
+    const mockValidData : LogementRequest = {
         email: "test@example.com",
         typeOfLogement: "Appartement",
         typeOfProperty: "T2",

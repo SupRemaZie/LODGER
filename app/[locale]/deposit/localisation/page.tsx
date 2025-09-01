@@ -7,7 +7,7 @@ import {useRouter} from "next/navigation";
 import AddressMap from "@/app/ui/components/AddressMap";
 import Text from "@/app/ui/components/Text";
 import Toggle from "@/app/ui/components/Toggle";
-import {logementRequest} from "@/app/api/deposit/types/logementRequest";
+import {LogementRequest} from "@/app/api/deposit/types/logementRequest";
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage.stepOne.stepOne-subTwo')
@@ -25,7 +25,7 @@ export default function Page() {
         }
     }
     const handleUpdate = (key: string, value: any) => {
-        setFormData((prev :logementRequest) => ({...prev, [key]: value}));
+        setFormData((prev :LogementRequest) => ({...prev, [key]: value}));
     };
 
     const handleSaveAndQuit = () => {

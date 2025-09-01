@@ -5,7 +5,7 @@ import {useTranslations} from "next-intl";
 import Footer from "@/app/ui/components/Footer";
 import {useRouter} from "next/navigation";
 import FormEntry from "@/app/ui/components/FormEntry";
-import {logementRequest} from "@/app/api/deposit/types/logementRequest";
+import {LogementRequest} from "@/app/api/deposit/types/logementRequest";
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage')
@@ -19,7 +19,7 @@ export default function Page() {
         router.push(`localisation`)
     }
     const handleUpdate = (key: string, value: any) => {
-        setFormData((prev: logementRequest) => {
+        setFormData((prev: LogementRequest) => {
 
             if (typeof value === 'object' && value !== null && 'index' in value && 'value' in value) {
                 const currentArray = Array.isArray((prev as Record<string, any>)[key])

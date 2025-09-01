@@ -1,6 +1,6 @@
-import {logementRequest} from "@/app/api/deposit/types/logementRequest";
+import {LogementRequest} from "@/app/api/deposit/types/logementRequest";
 
-export function generateDefaultLogementRequest(): logementRequest {
+export function generateDefaultLogementRequest(): LogementRequest {
     return {
         email: "test@gmail.com",
         typeOfLogement: "",
