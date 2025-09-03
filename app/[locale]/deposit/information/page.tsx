@@ -138,7 +138,7 @@ export default function Page() {
                 )}
             </main>
 
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['superficie', 'furnished']}
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['superficie']}
                     step={1}/>
         </div>
     )
