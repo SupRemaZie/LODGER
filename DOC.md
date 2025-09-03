@@ -58,9 +58,3 @@ Les commits doivent suivre cette structure :
 2. **Services**
   - Implémentation de la logique métier
   - Orchestration des opérations
-  - Utilisation des repositories
-
-3. **Repositories**
-  - Opérations CRUD
-  - Requêtes Prisma
-  - Pas de logique métier
