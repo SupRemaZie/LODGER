@@ -128,7 +128,7 @@ export default function FormEntry({ title, description, logo, type, onUpdate }: 
                 )}
                 {type === "yesno" && (
                     <div className="flex flex-row justify-end w-full max-w-lg self-center">
-                        <RadioGroup orientation="horizontal">
+                        <RadioGroup orientation="horizontal" defaultValue="no">
                             <CustomRadio
                                 value="yes"
                                 className="data-[selected=true]:border-success"

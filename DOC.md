@@ -1,49 +1,60 @@
 # Documentation
 
-## Technologies utilisés
+## Technologies utilisées
 
-- On utilise comme technologie principale **NextJS** pour le back et le front.
-- Pour la base, on utilise PostGreSQL et on la connecte à **NextJS** avec **Prisma**.
-- Pour les tests de régression **PlayWright**.
-- Pour la traduction anglais / français, on utilise la librairie **i18n**.
-- Pour les composants, on utilise la librairie **HeroUI**.
-- Pour le déploiement, on utilise **Vercel**.
-- Pour la documentation, on utilise **TypeDoc**.
+- **NextJS** (v14.x) : Framework React pour le développement full-stack
+    - Front-end : Composants React, Routing, API Routes
+    - Back-end : API Routes, Middleware
+- **PostgreSQL** : Base de données relationnelle
+- **Prisma** (v5.x) : ORM pour la gestion de la base de données
+- **PlayWright** : Framework de tests end-to-end et tests de régression
+- **i18n** : Internationalisation pour la gestion multilingue (FR/EN)
+- **HeroUI** : Bibliothèque de composants UI modernes
+- **Docker** : Pour le déploiement et la gestion des environnements
+- **TypeDoc** : Générateur de documentation pour TypeScript
 
-## Nom des branches
+## Gestion des branches
 
-Dans notre projet, nous avons plusieurs branches ayant différents usages :
+Notre workflow Git s'organise autour de quatre types de branches :
 
-- Branche de **Feature** : branche unique créée pour une nouvelle fonctionnalité à développer.
-- Branche de **Fix** : branche unique créée pour corriger un nouveau bug.
-- Branche de **Dev** : branche regoupant toutes les branches features et bugs développées et pas encore livrés.
-- Branche **Main** : branche principale permettant de livrer les versions de l'application.
+- Branche de **Feature** : `feature/[numéro-ticket]-[description]`
+    - Exemple : `feature/147-ajout-authentification`
+    - Usage : Développement de nouvelles fonctionnalités
 
-## Nom des commits
+- Branche de **Fix** : `fix/[numéro-ticket]-[description]`
+    - Exemple : `fix/123-correction-formulaire`
+    - Usage : Corrections de bugs
 
-Les commits doivent respecter les normes suivantes :
+- Branche de **Dev** : `dev`
+    - Usage : Intégration des features et fixes
+    - Environnement de pré-production
 
-- La description doit comporter un changelog avec ce que le commit ajoute ou corrige.
+- Branche **Main** : `main`
+    - Usage : Code en production
+    - Version stable de l'application
 
-## Commentaires en code
+## Convention de nommage des commits
 
-Réaliser les commentaires de génération de documentation automatisée.
+Les commits doivent suivre cette structure :
 
-Ex :
+## Convention de Nommage
 
-```node
-/**
- * \file main.c
- * \brief Programme de tests.
- * \author Franck.H
- * \version 0.1
- * \date 11 septembre 2007
- *
- * Programme de test pour l'objet de gestion des chaines de *caractères Str_t.
- *
- */
-```
 
-## Nom des fonctions
+- **Services** : `[nom]Service.ts`
+  - Exemple : `userService.ts`, `authService.ts`
+  - Responsabilité : Logique métier
 
-Le nom des fonction doit être explicite et en **camelCase**.
+- **Request/Response** : `[nom].Request.ts` et `[nom].Response.ts`
+  - Exemple : `userRequest.ts`, `userResponse.ts`
+  - Responsabilité : Types pour les données entrantes/sortantes des API
+
+### Séparation des Responsabilités
+
+1. **API Routes** (Controllers)
+  - Validation des requêtes
+  - Gestion des réponses HTTP
+  - Appel des services appropriés
+
+2. **Services**
+  - Implémentation de la logique métier
+  - Orchestration des opérations
