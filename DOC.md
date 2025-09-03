@@ -21,7 +21,7 @@ Dans notre projet, nous avons plusieurs branches ayant différents usages :
 
 ## Nom des commits
 
-Les commits doivent respecter les normes suivantes : 
+Les commits doivent respecter les normes suivantes :
 
 - La description doit comporter un changelog avec ce que le commit ajoute ou corrige.
 
@@ -29,7 +29,8 @@ Les commits doivent respecter les normes suivantes :
 
 Réaliser les commentaires de génération de documentation automatisée.
 
-Ex : 
+Ex :
+
 ```node
 /**
  * \file main.c

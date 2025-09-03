@@ -96,7 +96,19 @@ export default function FormEntry({ title, description, logo, type, onUpdate }: 
                     <div className="flex flex-row justify-end w-full max-w-lg self-center">
                         <Dropdown>
                             <DropdownTrigger>
-                                <Button variant="bordered">Choisir une / des pièces</Button>
+                                <Button variant="bordered">
+                                    {Array.from(selectedKeys).filter((k) => k).length > 0
+                                        ? Array.from(selectedKeys)
+                                            .filter((k) => k)
+                                            .map((k) => {
+                                                if (k === "salon") return "Salon";
+                                                if (k === "cuisine") return "Cuisine";
+                                                if (k === "salledebain") return "Salle de bain";
+                                                return k;
+                                            })
+                                            .join(", ")
+                                        : "Choisir une / des pièces"}
+                                </Button>
                             </DropdownTrigger>
                             <DropdownMenu
                                 disallowEmptySelection
