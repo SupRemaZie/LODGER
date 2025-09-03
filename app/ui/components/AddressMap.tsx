@@ -3,7 +3,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import {formatSelectedAddress, getFullStreetName} from '@/app/tools/AddressFormatter';
+import {formatSelectedAddress, getStreetName, getStreetNumber} from '@/app/tools/AddressFormatter';
 import {useTranslations} from "next-intl";
 
 
@@ -13,12 +13,14 @@ const AddressMap = ({ title, description, targetInputIds, onAddressSelected }: {
     targetInputIds: {
         city: string,
         postcode: string,
-        street: string,
+        streetNumber: string,
+        streetName: string
     },
     onAddressSelected?: (addressData: {
         city: string,
         postcode: string,
-        street: string}
+        streetNumber: string,
+        streetName: string}
     ) => void
 }) => {
 
@@ -82,7 +84,9 @@ const AddressMap = ({ title, description, targetInputIds, onAddressSelected }: {
             const extracted = {
                 city: getFieldValueFromAddressData("city", addressData),
                 postcode: getFieldValueFromAddressData("postcode", addressData),
-                street: getFieldValueFromAddressData("street", addressData)
+                street: getFieldValueFromAddressData("street", addressData),
+                streetNumber: getFieldValueFromAddressData("streetNumber", addressData),
+                streetName: getFieldValueFromAddressData("streetName", addressData),
             }
             onAddressSelected?.(extracted);
             setSuggestions([]);
@@ -97,8 +101,10 @@ const AddressMap = ({ title, description, targetInputIds, onAddressSelected }: {
                 return addressData.properties.city ?? "";
             case "postcode":
                 return addressData.properties.postcode ?? "";
-            case "street":
-                return getFullStreetName(addressData);
+            case "streetNumber":
+                return getStreetNumber(addressData);
+            case "streetName":
+                return getStreetName(addressData);
             default:
                 return "";
         }

@@ -80,7 +80,7 @@ export default function SideNav() {
   , [pathname]); // Dépendance sur pathname pour mettre à jour la langue lorsque l'URL change
 
   return (
-    <div className="hidden md:flex flex-col h-full">
+    <div id="sidebar" className="hidden md:flex flex-col h-full">
       <div className="flex h-full flex-col m-4 md:px-2">
         <Link
           className="flex flex-col h-fit items-start pt-8 pb-4 rounded-md"
@@ -99,7 +99,7 @@ export default function SideNav() {
           {trans("sidebar.title")}
         </p>
 
-        <div className="pt-5">
+        <div id="steps" className="pt-5">
           <Accordion
             variant="splitted"
             selectedKeys={selectedKeys} // Utilisation des clés contrôlées

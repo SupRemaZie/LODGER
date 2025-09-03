@@ -1,14 +1,12 @@
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
+import { prisma } from './Prisma';
 
 async function main() {
   try {
     const newAccount = await prisma.account.create({
       data: {
-        firstName: 'Cyprien',
-        lastName: 'GAUDIN',
-        email: 'cyprien.gaudin@gmail.com',
+        firstName: 'Jean',
+        lastName: 'DUPONT',
+        email: 'test@gmail.com',
       },
     });
 
@@ -31,7 +29,7 @@ async function main() {
   const propertyType = await prisma.propertyType.createMany({
     data: [
       { type: 'ENTIER' },
-      { type: 'APPARTEMENT' },
+      { type: 'COLOCATION' },
       { type: 'HABITANT' },
     ],
     skipDuplicates: true,

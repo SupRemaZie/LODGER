@@ -7,66 +7,67 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Account {
+model account {
   id      Int      @id @default(autoincrement())
   firstName String?
   lastName  String?
   email String   @unique
-  logements Logement[]
+  logements logement[]
 }
 
-model PropertyType {
+model propertyType {
   id   Int    @id @default(autoincrement())
   type String @unique
-  logements   Logement[]
+  logements   logement[]
 }
 
-model LogementType {
+model logementType {
   id   Int    @id @default(autoincrement())
   type String @unique
-  logements   Logement[]
+  logements   logement[]
 }
 
-model Logement {
+model logement {
   id                   Int          @id @default(autoincrement())
-  draft                Boolean?
-  displayPreciseAddress Boolean?
-  postalCode    Int?
-  city String?
-  street  String?
-  numero Int?
-  addressComplement String?
-  stopProcess          String?
-  superficie           Int?
-  roomNumber           Int?
-  bedroomNumber        Int?
-  furnished            Boolean?
-  bathRoomSpace        Int?
-  powderRoomSpace      Int?
-  appartmentFloor      Int?
-  kWhEP                Int?
-  kgCO2                Int?
-  accountId            Int?
+  accountId            Int
+  logementTypeId       Int
   propertyTypeId       Int?
-  logementTypeId       Int?
-  account              Account?     @relation(fields: [accountId], references: [id])
-  propertyType         PropertyType? @relation(fields: [propertyTypeId], references: [id])
-  logementType         LogementType? @relation(fields: [logementTypeId], references: [id])
-  roomAreas            RoomArea[]
-  spaceShares          SpaceShare[]
+  showAddress Boolean
+  streetNumber String
+  streetName String
+  city String
+  postalCode    Int
+  addressComplement String?
+
+  superficie           Int
+  roomNumber           Int
+  bedroomNumber        Int
+  roomAreas            roomArea[]
+  furnished            Boolean
+  bathRoomSpace        Int
+  powderRoomSpace      Int
+  floorNumber      Int?
+  spaceShares          spaceShare[]
+  kWhEP                Int
+  kgCO2                Int
+  draft                Boolean @default(false)
+  stopProcess          String?
+  account              account?     @relation(fields: [accountId], references: [id])
+  propertyType         propertyType? @relation(fields: [propertyTypeId], references: [id])
+  logementType         logementType? @relation(fields: [logementTypeId], references: [id])
 }
 
-model RoomArea {
+model roomArea {
   id        Int       @id @default(autoincrement())
   area      Int?
-  logement  Logement? @relation(fields: [logementId], references: [id])
+  logement  logement? @relation(fields: [logementId], references: [id])
   logementId Int?
 }
 
-model SpaceShare {
+model spaceShare {
   id        Int       @id @default(autoincrement())
   type      String?
-  logement  Logement? @relation(fields: [logementId], references: [id])
+  logement  logement? @relation(fields: [logementId], references: [id])
   logementId Int?
 }
 

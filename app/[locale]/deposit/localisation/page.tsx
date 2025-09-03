@@ -3,10 +3,11 @@ import {useFormData} from "@/app/context/FormDataContext";
 import Header from "@/app/ui/components/Header";
 import {useTranslations} from "next-intl";
 import Footer from "@/app/ui/components/Footer";
-import {usePathname, useRouter} from "next/navigation";
-import LodgerButton from "@/app/ui/components/LodgerButton";
+import {useRouter} from "next/navigation";
 import AddressMap from "@/app/ui/components/AddressMap";
 import Text from "@/app/ui/components/Text";
+import Toggle from "@/app/ui/components/Toggle";
+import {LogementRequest} from "@/app/api/deposit/types/logementRequest";
 
 export default function Page() {
     const trans = useTranslations('PropertydepositPage.stepOne.stepOne-subTwo')
@@ -24,23 +25,40 @@ export default function Page() {
         }
     }
     const handleUpdate = (key: string, value: any) => {
-        setFormData((prev) => ({...prev, [key]: value}));
+        setFormData((prev :LogementRequest) => ({...prev, [key]: value}));
     };
+
+    const handleSaveAndQuit = () => {
+        setFormData(prev => ({
+            ...prev,
+            stopProcess: "Localisation",
+        }));
+    };
+
     return (
         <div className="flex flex-col min-h-screen w-full">
-            <Header title={trans("title")} question={trans("question")} />
+            <Header
+                title={trans("title")}
+                question={trans("question")}
+                onSaveAndQuit={handleSaveAndQuit}
+            />
             <main className="flex-1 px-16 pt-8 pb-8 overflow-y-auto text-[#02504D]">
                 <section id="content" className="text-[#02504D] flex flex-col">
                     <AddressMap
                         title={trans('fieldTitles.addressMap')}
                         description=""
-                        targetInputIds={{city: "cityField", postcode: "postcodeField", street: "streetField"}}
+                        targetInputIds={{city: "cityField", postcode: "postcodeField", streetNumber: "streetNumber", streetName: "streetName"}}
                         onAddressSelected={(address) => {
                             handleUpdate('city', address.city);
                             handleUpdate('postalCode', address.postcode);
-                            handleUpdate('street', address.street);
+                            handleUpdate('streetNumber', address.streetNumber);
+                            handleUpdate('streetName', address.streetName);
                         }}
                     />
+                    <Toggle
+                        title={trans('fieldTitles.showAdress')}
+                        value={formData.showAddress}
+                        onChange={(value) => handleUpdate('', value)}/>
                     <Text
                         id="cityField"
                         title={trans('fieldTitles.cityField')}
@@ -56,12 +74,19 @@ export default function Page() {
                         value={formData.postalCode}
                         onChange={(value) => handleUpdate('postalCode', value)}/>
                     <Text
-                        id="streetField"
-                        title={trans('fieldTitles.streetField')}
+                        id="streetNumber"
+                        title={trans('fieldTitles.streetNumber')}
                         description=""
-                        placeholder={trans('fieldPlaceholder.streetField')}
-                        value={formData.street}
-                        onChange={(value) => handleUpdate('street', value)}/>
+                        placeholder={trans('fieldPlaceholder.streetNumber')}
+                        value={formData.streetNumber}
+                        onChange={(value) => handleUpdate('streetNumber', value)}/>
+                    <Text
+                        id="streetName"
+                        title={trans('fieldTitles.streetName')}
+                        description=""
+                        placeholder={trans('fieldPlaceholder.streetName')}
+                        value={formData.streetName}
+                        onChange={(value) => handleUpdate('streetName', value)}/>
                     <Text
                         id="detailsField"
                         title={trans('fieldTitles.addressDetailsField')}
@@ -70,7 +95,7 @@ export default function Page() {
                     />
                 </section>
             </main>
-            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['city', 'postalCode', 'street']} step={1}/>
+            <Footer onPrevious={handlePrevious} onNext={handleNext} requiredField={['city', 'postalCode', 'streetNumber', 'streetName']} step={1}/>
 
         </div>
     )

@@ -7,39 +7,46 @@ on:
     branches: [dev]
 
 jobs:
-  test:
-    name: Run Playwright Tests on Next.js
+  test-unit:
+    name: Run Unit Tests on Jest
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
-
-      - name: Install dependencies
+          node-version: '20'
+      - name: Clean install
         run: npm install
-
-      - name: Install prisma
+      - name: Generate Prisma client
         run: npx prisma generate
+      - run: npm run test:unit
 
-      - name: Build Next.js app
-        run: npm run build
-
+  test-e2e:
+    name: Run Playwright Tests on Next.js
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Clean install
+        run: npm install
+      - name: Generate Prisma client
+        run: npx prisma generate
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
-
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
       - name: Start Next.js server
         run: npm run start &
         env:
           NODE_ENV: production
-
       - name: Wait for server to be ready
         run: npx wait-on http://localhost:3000
-
       - name: Run Playwright tests
-        run: npx playwright test
-
+        run: npm run test:e2e
       - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v4

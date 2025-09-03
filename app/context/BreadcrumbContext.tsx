@@ -8,7 +8,6 @@ interface BreadcrumbContextType {
 // Créer le contexte
 const BreadcrumbContext = createContext<BreadcrumbContextType | undefined>(undefined);
 
-// Fournisseur du contexte (à utiliser dans _app.js ou layout.tsx)
 export const BreadcrumbProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentStep, setCurrentStep] = useState("Etape1");
 
@@ -19,7 +18,6 @@ export const BreadcrumbProvider = ({ children }: { children: React.ReactNode }) 
   );
 };
 
-// Hook personnalisé pour utiliser le contexte
 export const useBreadcrumb = (): BreadcrumbContextType => {
   const context = useContext(BreadcrumbContext);
   if (!context) {

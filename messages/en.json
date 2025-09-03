@@ -24,7 +24,7 @@
       },
       "floor-number": {
         "title": "Apartment floor",
-        "description": "Greater than 9m²"
+        "description": ""
       },
       "shared-spaces": {
         "title": "Shared spaces",
@@ -54,15 +54,18 @@
         "question": "Where is your property located?",
         "fieldTitles": {
           "addressMap": "Your address",
+          "showAdress": "Show the precise location of your property",
           "cityField": "City",
           "postalCodeField": "Postal Code",
-          "streetField": "Street number and name",
+          "streetNumber": "Street number",
+          "streetName": "Street name",
           "addressDetailsField": "Building, apartment, residency, floor"
         },
         "fieldPlaceholder": {
           "cityField": "Paris",
           "postalCodeField": "75000",
-          "streetField": "1 Avenue des Champs-Elysée",
+          "streetNumber": "1",
+          "streetName": "Avenue des Champs-Elysée",
           "addressDetailsField": "1st floor"
         }
       },

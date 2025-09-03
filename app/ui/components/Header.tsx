@@ -1,11 +1,13 @@
 import LodgerButton from "@/app/ui/components/LodgerButton";
 import {useTranslations} from "next-intl";
 
-export default function Header({title , question} : {
+export default function Header({title, question, onSaveAndQuit} : {
     title: string,
-    question: string
+    question: string,
+    onSaveAndQuit: () => void
 }) {
     const trans = useTranslations('PropertydepositPage')
+
     return(
         <div id="header" className="w-full px-16 pt-12 flex flex-row justify-between  items-center">
             <div className="flex flex-col">
@@ -16,7 +18,11 @@ export default function Header({title , question} : {
                      {question}
                    </span>
             </div>
-            <LodgerButton type="default" label={trans("actions.saveAndQuit")}></LodgerButton>
+            <LodgerButton
+                type="default"
+                label={trans("actions.saveAndQuit")}
+                onPress={onSaveAndQuit}
+            />
         </div>
     )
 }
