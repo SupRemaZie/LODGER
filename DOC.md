@@ -43,17 +43,9 @@ Les commits doivent suivre cette structure :
   - Exemple : `userService.ts`, `authService.ts`
   - Responsabilité : Logique métier
 
-- **Repositories** : `[nom]Repository.ts`
-  - Exemple : `userRepository.ts`
-  - Responsabilité : Interactions avec la base de données
-
-- **Models** : `[nom].model.ts`
-  - Exemple : `user.model.ts`
-  - Responsabilité : Définition des types et interfaces
-
-- **Middlewares** : `[nom].middleware.ts`
-  - Exemple : `auth.middleware.ts`
-  - Responsabilité : Traitement des requêtes
+- **Request/Response** : `[nom].Request.ts` et `[nom].Response.ts`
+  - Exemple : `userRequest.ts`, `userResponse.ts`
+  - Responsabilité : Types pour les données entrantes/sortantes des API
 
 ### Séparation des Responsabilités
 
@@ -71,8 +63,3 @@ Les commits doivent suivre cette structure :
   - Opérations CRUD
   - Requêtes Prisma
   - Pas de logique métier
-
-4. **Middlewares**
-  - Authentification
-  - Validation
-  - Logging
